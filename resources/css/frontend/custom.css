@@ -1,0 +1,23 @@
+@media (min-width: 1200px) {
+    .container-fluid {
+        width: 90%;
+    }
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown > .dropdown-toggle:active {
+    /* do not respond to user interactions like clicks or hover */
+    pointer-events: none;
+}
+
+.trending-bar-dark .dropdown-menu .dropdown-item {
+    color: #dc3545;
+}
+.trending-bar-dark .dropdown-menu .dropdown-item:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
