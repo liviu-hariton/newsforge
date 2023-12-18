@@ -13,6 +13,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
 
+    <link href="{{ asset('backend/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/plugins/fontawesome/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/plugins/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/plugins/material/css/materialdesignicons.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/simplebar/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/nprogress/nprogress.css') }}" rel="stylesheet" />
@@ -47,8 +50,6 @@
     NProgress.start();
 </script>
 
-<div id="toaster"></div>
-
 <div class="wrapper">
     @include('backend.components.menu')
 
@@ -60,110 +61,6 @@
         </div>
 
         @include('backend.components.footer')
-    </div>
-</div>
-
-<!-- Card Offcanvas -->
-<div class="card card-offcanvas" id="contact-off" >
-    <div class="card-header">
-        <h2>Contacts</h2>
-        <a href="#" class="btn btn-primary btn-pill px-4">Add New</a>
-    </div>
-    <div class="card-body">
-
-        <div class="mb-4">
-            <input type="text" class="form-control form-control-lg form-control-secondary rounded-0" placeholder="Search contacts...">
-        </div>
-
-        <div class="media media-sm">
-            <div class="media-sm-wrapper">
-                <a href="user-profile.html">
-                    <img src="{{ asset('backend/images/user/user-sm-01.jpg') }}" alt="User Image">
-                    <span class="active bg-primary"></span>
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="user-profile.html">
-                    <span class="title">Selena Wagner</span>
-                    <span class="discribe">Designer</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="media media-sm">
-            <div class="media-sm-wrapper">
-                <a href="user-profile.html">
-                    <img src="{{ asset('backend/images/user/user-sm-02.jpg') }}" alt="User Image">
-                    <span class="active bg-primary"></span>
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="user-profile.html">
-                    <span class="title">Walter Reuter</span>
-                    <span>Developer</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="media media-sm">
-            <div class="media-sm-wrapper">
-                <a href="user-profile.html">
-                    <img src="{{ asset('backend/images/user/user-sm-03.jpg') }}" alt="User Image">
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="user-profile.html">
-                    <span class="title">Larissa Gebhardt</span>
-                    <span>Cyber Punk</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="media media-sm">
-            <div class="media-sm-wrapper">
-                <a href="user-profile.html">
-                    <img src="{{ asset('backend/images/user/user-sm-04.jpg') }}" alt="User Image">
-                </a>
-
-            </div>
-            <div class="media-body">
-                <a href="user-profile.html">
-                    <span class="title">Albrecht Straub</span>
-                    <span>Photographer</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="media media-sm">
-            <div class="media-sm-wrapper">
-                <a href="user-profile.html">
-                    <img src="{{ asset('backend/images/user/user-sm-05.jpg') }}" alt="User Image">
-                    <span class="active bg-danger"></span>
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="user-profile.html">
-                    <span class="title">Leopold Ebert</span>
-                    <span>Fashion Designer</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="media media-sm">
-            <div class="media-sm-wrapper">
-                <a href="user-profile.html">
-                    <img src="{{ asset('backend/images/user/user-sm-06.jpg') }}" alt="User Image">
-                    <span class="active bg-primary"></span>
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="user-profile.html">
-                    <span class="title">Selena Wagner</span>
-                    <span>Photographer</span>
-                </a>
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -181,26 +78,7 @@
 <script src="{{ asset('backend/plugins/daterangepicker/moment.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('backend/plugins/hotkeys-js/hotkeys.min.js') }}"></script>
-<script>
-    jQuery(document).ready(function() {
-        jQuery('input[name="dateRange"]').daterangepicker({
-            autoUpdateInput: false,
-            singleDatePicker: true,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-        jQuery('input[name="dateRange"]').on('apply.daterangepicker', function (ev, picker) {
-            jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
-        });
-        jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-            jQuery(this).val('');
-        });
-    });
-</script>
-
 <script src="{{ asset('backend/plugins/quill/quill.min.js') }}"></script>
-
 <script src="{{ asset('backend/plugins/toaster/toastr.min.js') }}"></script>
 
 <script src="{{ asset('backend/js/mono.js') }}"></script>

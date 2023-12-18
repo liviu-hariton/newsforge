@@ -39,12 +39,6 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <!-- Offcanvas -->
-                <li class="custom-dropdown">
-                    <a class="offcanvas-toggler active custom-dropdown-toggler" data-offcanvas="contact-off" href="javascript:" >
-                        <i class="mdi mdi-contacts icon"></i>
-                    </a>
-                </li>
                 <li class="custom-dropdown">
                     <button class="notify-toggler custom-dropdown-toggler">
                         <i class="mdi mdi-bell-outline icon"></i>
