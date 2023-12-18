@@ -11,6 +11,8 @@ export default defineConfig({
             input: [
                 'resources/js/frontend.js',
                 'resources/css/frontend.css',
+                'resources/js/backend.js',
+                'resources/css/backend.css',
             ],
             resolve: {
                 alias: {

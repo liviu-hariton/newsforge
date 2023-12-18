@@ -1,0 +1,13 @@
+@import '../sass/backend.scss';
+
+@import "../js/backend/plugins/material/css/materialdesignicons.min.css";
+@import "../js/backend/plugins/simplebar/simplebar.css";
+@import "../js/backend/plugins/nprogress/nprogress.css";
+@import "../js/backend/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css";
+@import "../js/backend/plugins/jvectormap/jquery-jvectormap-2.0.3.css";
+@import "../js/backend/plugins/daterangepicker/daterangepicker.css";
+@import "../js/backend/plugins/quill/quill.snow.css";
+@import "../js/backend/plugins/toaster/toastr.min.css";
+
+@import "./backend/style.css";
+@import "./backend/custom.css";

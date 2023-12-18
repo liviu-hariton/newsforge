@@ -318,7 +318,8 @@ $(document).ready(function () {
       showMethod: "fadeIn",
       hideMethod: "fadeOut",
     };
-    toastr.success("Welcome to Mono Dashboard", "Howdy!");
+
+    /*toastr.success("Welcome to Mono Dashboard", "Howdy!");*/
   }
 
   if (toaster.length != 0) {
