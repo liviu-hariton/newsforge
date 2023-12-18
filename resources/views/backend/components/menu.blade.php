@@ -173,6 +173,7 @@
                     <ul class="collapse" id="settings" data-parent="#sidebar-menu">
                         <div class="sub-menu">
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">General</span></a></li>
+                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">I18N</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">System emails</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Integrations</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">API</span></a></li>
