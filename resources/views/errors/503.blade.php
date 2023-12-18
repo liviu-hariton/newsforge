@@ -1,5 +1,3 @@
-@extends('layouts.frontend')
-
 @section('content')
     <section class="error-404 section-padding">
         <div class="container">
@@ -7,11 +5,11 @@
                 <div class="col-lg-6">
                     <div class="error-block ">
                         <div class="throw-code">
-                            <h2>404</h2>
+                            <h2>503</h2>
                         </div>
                         <div class="error-info">
-                            <h2 class="mb-2">Looks like you are lost!</h2>
-                            <p class="mb-5">The page is you are looking for is not available.</p>
+                            <h2 class="mb-2">Service Unavailable!</h2>
+                            <p class="mb-5">The server is currently not ready to handle the request (it may be down for maintenance or is overloaded).</p>
                             <a href="{{ route('home') }}">go back to Home <i class="fa fa-angle-double-right ml-2"></i></a>
                         </div>
                     </div>
