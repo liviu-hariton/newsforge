@@ -319,7 +319,7 @@ $(document).ready(function () {
       hideMethod: "fadeOut",
     };
 
-    /*toastr.success("Welcome to Mono Dashboard", "Howdy!");*/
+    toastr.success("Welcome to Mono Dashboard", "Howdy!");
   }
 
   if (toaster.length != 0) {
