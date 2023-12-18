@@ -1,3 +1,5 @@
+@extends('layouts.frontend')
+
 @section('content')
     <section class="error-404 section-padding">
         <div class="container">

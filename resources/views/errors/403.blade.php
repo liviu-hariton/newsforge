@@ -1,3 +1,5 @@
+@extends('layouts.frontend')
+
 @section('content')
     <section class="error-404 section-padding">
         <div class="container">
@@ -9,7 +11,7 @@
                         </div>
                         <div class="error-info">
                             <h2 class="mb-2">Forbidden!</h2>
-                            <p class="mb-5">{{ __($exception->getMessage() ?: 'The request has been rejected because the client does not have rights to access the content' }}</p>
+                            <p class="mb-5">{{ __($exception->getMessage() ?: 'The request has been rejected because the client does not have rights to access the content') }}</p>
                             <a href="{{ route('home') }}">go back to Home <i class="fa fa-angle-double-right ml-2"></i></a>
                         </div>
                     </div>
