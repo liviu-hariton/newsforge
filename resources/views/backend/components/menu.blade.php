@@ -143,8 +143,6 @@
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Accounts</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Roles</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Groups</span></a></li>
-                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">Online now</span></a></li>
-                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">In Newsletter</span></a></li>
                         </div>
                     </ul>
                 </li>
