@@ -2,7 +2,7 @@
     @csrf
     @method('PATCH')
 
-    <input type="hidden" name="group" id="mailing" value="mailing" />
+    <input type="hidden" name="group" id="group" value="mailing" />
 
     <h4 class="mb-2 text-primary">Sender details</h4>
 

@@ -30,7 +30,7 @@
                     <p>Banking</p>
                 </div>
                 <div class="tab-pane fade" id="social">
-                    <p>Social</p>
+                    @include('backend.settings.sections.social')
                 </div>
                 <div class="tab-pane fade" id="mailing">
                     @include('backend.settings.sections.mailing')

@@ -2,16 +2,53 @@
 
 namespace App\Http\Requests\Backend;
 
+use App\Models\Settings;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SettingsGeneralRequest extends FormRequest
 {
+    private Settings $settings;
+
+    public function __construct(Settings $settings)
+    {
+        parent::__construct();
+
+        $this->settings = $settings;
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
         return true;
+    }
+
+    private function socialNetworksValidationRules(): array
+    {
+        $socialNetworks = $this->settings->socialNetworks();
+
+        $rules = [];
+
+        foreach($socialNetworks as $socialNetwork) {
+            $rules[$socialNetwork['field']] = 'nullable|url|max:255';
+        }
+
+        return $rules;
+    }
+
+    private function socialNetworksValidationMessages(): array
+    {
+        $socialNetworks = $this->settings->socialNetworks();
+
+        $messages = [];
+
+        foreach($socialNetworks as $socialNetwork) {
+            $messages[$socialNetwork['field'].'.url'] = 'Enter a valid '.ucwords($socialNetwork['field']).' profile URL';
+            $messages[$socialNetwork['field'].'.max'] = 'The URL must not be longer than :max characters';
+        }
+
+        return $messages;
     }
 
     /**
@@ -23,10 +60,10 @@ class SettingsGeneralRequest extends FormRequest
     {
         return [
             'group' => 'required|string',
-            'from_address' => 'required|email',
-            'from_name' => 'required|string|max:255',
+            'from_address' => 'required_if:group,mailer|email',
+            'from_name' => 'required_if:group,mailer|string|max:255',
 
-            // Mailer
+            //-- Mailer --//
             'mailer_type' => 'string|max:255',
 
             // SMTP
@@ -58,6 +95,9 @@ class SettingsGeneralRequest extends FormRequest
 
             // MailerSend
             'mailersend_api_key' => 'required_if:mailer_type,mailersend|string|max:255',
+
+            //-- Social --//
+            ...$this->socialNetworksValidationRules(),
         ];
     }
 
@@ -74,7 +114,7 @@ class SettingsGeneralRequest extends FormRequest
             'from_name.required' => 'The sender\'s name is required',
             'from_name.max' => 'The sender name must not be longer than :max characters',
 
-            // Mailer
+            //-- Mailer --//
             // SMTP
             'smtp_host' => 'The SMTP host is required (usually <em class="text-black-50">smtp.example.com</em> or <em class="text-black-50">localhost</em>)',
             'smtp_port' => 'The SMTP port number is required<br />(usually <em class="text-black-50">587</em> or <em class="text-black-50">465</em>)',
@@ -100,6 +140,9 @@ class SettingsGeneralRequest extends FormRequest
 
             // MailerSend
             'mailersend_api_key' => 'The MailerSend API Token is required',
+
+            //-- Social --//
+            ...$this->socialNetworksValidationMessages(),
         ];
     }
 }

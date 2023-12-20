@@ -40,6 +40,67 @@ class Settings extends Model
         'tls' => 'TLS',
     ];
 
+    /**
+     * @todo Move this data to the database
+     */
+    protected array $socialNetworks = [
+        [
+            'field' => 'facebook',
+            'label' => 'Facebook&trade; page or profile',
+            'icon' => 'bi bi-facebook',
+        ],
+        [
+            'field' => 'instagram',
+            'label' => 'Instagram&trade; profile',
+            'icon' => 'bi bi-instagram',
+        ],
+        [
+            'field' => 'threads',
+            'label' => 'Threads&trade; profile',
+            'icon' => 'bi bi-threads',
+        ],
+        [
+            'field' => 'tiktok',
+            'label' => 'TikTok&trade; profile',
+            'icon' => 'bi bi-tiktok',
+        ],
+        [
+            'field' => 'linkedin',
+            'label' => 'Linkedin&trade; page or profile',
+            'icon' => 'bi bi-linkedin',
+        ],
+        [
+            'field' => 'twitterx',
+            'label' => 'X&trade; (Twitter&trade;) account',
+            'icon' => 'bi bi-twitter-x',
+        ],
+        [
+            'field' => 'pinterest',
+            'label' => 'Pinterest&trade; profile',
+            'icon' => 'bi bi-pinterest',
+        ],
+        [
+            'field' => 'vimeo',
+            'label' => 'Vimeo&trade; profile',
+            'icon' => 'bi bi-vimeo',
+        ],
+        [
+            'field' => 'youtube',
+            'label' => 'Youtube&trade; channel or profile',
+            'icon' => 'bi bi-youtube',
+        ],
+        [
+            'field' => 'reddit',
+            'label' => 'Reddit&trade; profile',
+            'icon' => 'bi bi-reddit',
+        ],
+        [
+            'field' => 'spotify',
+            'label' => 'Spotify&trade; profile',
+            'icon' => 'bi bi-spotify',
+        ],
+    ];
+
     public function groups(): array
     {
         return $this->groups;
@@ -58,5 +119,10 @@ class Settings extends Model
     public function mailersComposerPackages(): array
     {
         return $this->mailers_composer_packages;
+    }
+
+    public function socialNetworks(): array
+    {
+        return $this->socialNetworks;
     }
 }

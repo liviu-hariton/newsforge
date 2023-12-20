@@ -31,6 +31,7 @@ class SettingsGeneralController extends Controller
         return view('backend.settings.index', [
             'mailers' => $settings->mailers(),
             'selected_mailer' =>  $this->loadMailerFormFields($request, $settings),
+            'social_networks' => $settings->socialNetworks(),
         ]);
     }
 
@@ -78,10 +79,12 @@ class SettingsGeneralController extends Controller
         unset($validated['group']);
 
         foreach($validated as $key=>$value) {
-            $settings->updateOrCreate(
-                ['key' => $key, 'group' => $settings_group],
-                ['group' => $settings_group, 'value' => $value]
-            );
+            if($value) {
+                $settings->updateOrCreate(
+                    ['key' => $key, 'group' => $settings_group],
+                    ['group' => $settings_group, 'value' => $value]
+                );
+            }
         }
 
         // Clear the site specific settings cache
