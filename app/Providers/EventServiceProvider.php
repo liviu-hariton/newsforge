@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\SettingsUpdated;
+use App\Listeners\ClearSettingsCache;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +19,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        // Clear the site specific settings cache when the settings are updated
+        SettingsUpdated::class => [
+            ClearSettingsCache::class,
         ],
     ];
 

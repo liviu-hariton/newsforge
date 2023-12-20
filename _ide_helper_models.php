@@ -49,6 +49,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticleCategory> $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\ArticleType|null $type
+ * @property-read \App\Models\User|null $user
  * @method static \Database\Factories\ArticleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Article newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Article newQuery()
@@ -97,7 +98,7 @@ namespace App\Models{
  * App\Models\ArticleCategory
  *
  * @property int $id
- * @property int|null $parent_id
+ * @property int $parent_id
  * @property string $name
  * @property string|null $description
  * @property string|null $meta_title
@@ -151,6 +152,7 @@ namespace App\Models{
  * App\Models\ArticlePhotoGallery
  *
  * @property int $id
+ * @property int|null $user_id The user who created the gallery
  * @property string $name
  * @property string|null $description
  * @property string|null $meta_title
@@ -161,6 +163,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticlePhotoGalleryImage> $images
  * @property-read int|null $images_count
+ * @property-read \App\Models\User|null $user
  * @method static \Database\Factories\ArticlePhotoGalleryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGallery newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGallery newQuery()
@@ -174,6 +177,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGallery whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGallery whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGallery whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGallery whereUserId($value)
  */
 	class ArticlePhotoGallery extends \Eloquent {}
 }
@@ -183,6 +187,7 @@ namespace App\Models{
  * App\Models\ArticlePhotoGalleryImage
  *
  * @property int $id
+ * @property int|null $user_id The user who uploaded the image
  * @property string $file
  * @property string|null $title
  * @property string|null $alt
@@ -191,6 +196,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticlePhotoGallery> $galleries
  * @property-read int|null $galleries_count
+ * @property-read \App\Models\User|null $user
  * @method static \Database\Factories\ArticlePhotoGalleryImageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGalleryImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGalleryImage newQuery()
@@ -202,6 +208,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGalleryImage whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGalleryImage whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGalleryImage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ArticlePhotoGalleryImage whereUserId($value)
  */
 	class ArticlePhotoGalleryImage extends \Eloquent {}
 }
@@ -232,6 +239,27 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Settings
+ *
+ * @property int $id
+ * @property string $group
+ * @property string $key
+ * @property string $value
+ * @property string|null $comments
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereComments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereGroup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings whereValue($value)
+ */
+	class Settings extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -242,6 +270,10 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticlePhotoGallery> $articlePhotoGalleries
+ * @property-read int|null $article_photo_galleries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticlePhotoGalleryImage> $articlePhotoGalleryImages
+ * @property-read int|null $article_photo_gallery_images_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Article> $articles
  * @property-read int|null $articles_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications

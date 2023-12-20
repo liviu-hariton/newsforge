@@ -13,7 +13,6 @@
 
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
 
-    <link href="{{ asset('backend/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/fontawesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/plugins/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/plugins/material/css/materialdesignicons.min.css') }}" rel="stylesheet" />
@@ -23,7 +22,7 @@
     <link href="{{ asset('backend/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/quill/quill.snow.css') }}" rel="stylesheet" />
-    <link href="{{ asset('backend/plugins/toaster/toastr.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/plugins/toaster/toastr.css') }}" rel="stylesheet" />
 
     <link id="main-css-href" rel="stylesheet" href="{{ asset('backend/css/style.css') }}" />
     <link id="main-css-href" rel="stylesheet" href="{{ asset('backend/css/custom.css') }}" />
@@ -35,17 +34,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="{{ asset('backend/plugins/nprogress/nprogress.js') }}"></script>
-
     <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
 </head>
 
 <body class="navbar-fixed sidebar-fixed" id="body">
-
-<script>
-    NProgress.configure({ showSpinner: false });
-    NProgress.start();
-</script>
 
 <div id="toaster"></div>
 
@@ -56,7 +48,20 @@
         @include('backend.components.header')
 
         <div class="content-wrapper">
-            @yield('main-content')
+            <div class="content content-inner">
+
+                @if( session()->has('success') )
+                <div class="alert alert-success alert-dismissible fade show alert-icon">
+                    <i class="bi bi-check-square-fill"></i> {{ session('success') }}
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                @endif
+
+                @yield('main-content')
+            </div>
         </div>
 
         @include('backend.components.footer')
@@ -79,11 +84,10 @@
 <script src="{{ asset('backend/plugins/hotkeys-js/hotkeys.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/quill/quill.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/toaster/toastr.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/blockui/blockui.min.js') }}"></script>
 
-<script src="{{ asset('backend/js/mono.js') }}"></script>
-<script src="{{ asset('backend/js/chart.js') }}"></script>
-<script src="{{ asset('backend/js/map.js') }}"></script>
-<script src="{{ asset('backend/js/custom.js') }}"></script>
+<script src="{{ asset('backend/js/_tnr.js') }}"></script>
+<script src="{{ asset('backend/js/_tnr_xhr.js') }}"></script>
 
 </body>
 </html>

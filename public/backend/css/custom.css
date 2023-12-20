@@ -1,0 +1,8 @@
+.content {
+    background: #f0f1f5;
+    min-height: 100vh;
+}
+
+.alert-warning {
+    color: #856404;
+}

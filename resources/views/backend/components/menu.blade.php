@@ -10,14 +10,14 @@
 
         <div class="sidebar-left" data-simplebar style="height: 100%;">
             <ul class="nav sidebar-inner" id="sidebar-menu">
-                <li class="active">
+                <li class="{{ menuItemActive(['admin.dashboard']) ? 'active' : '' }}">
                     <a class="sidenav-item-link" href="{{ route('admin.dashboard') }}">
                         <i class="mdi mdi-briefcase-account-outline"></i>
                         <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
 
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#news" href="javascript:void(0)" data-toggle="collapse">
                         <i class="bi bi-newspaper"></i>
                         <span class="nav-text">The news</span>
@@ -30,10 +30,11 @@
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Categories</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Media center</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Authors</span></a></li>
+                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">Go-wto persons</span></a></li>
                         </div>
                     </ul>
                 </li>
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#extra" href="javascript:void(0)" data-toggle="collapse">
                         <i class="bi bi-braces-asterisk"></i>
                         <span class="nav-text">The extra</span>
@@ -48,7 +49,7 @@
                         </div>
                     </ul>
                 </li>
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#ads" href="javascript:void(0)" data-toggle="collapse">
                         <i class="bi bi-bullseye"></i>
                         <span class="nav-text">Ads</span>
@@ -61,7 +62,7 @@
                         </div>
                     </ul>
                 </li>
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#store" href="javascript:void(0)" data-toggle="collapse">
                         <i class="bi bi-cart2"></i>
                         <span class="nav-text">Store</span>
@@ -70,7 +71,7 @@
                     <ul class="collapse" id="store" data-parent="#sidebar-menu">
                         <div class="sub-menu">
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Subscriptions</span></a></li>
-                            <li class="has-sub" >
+                            <li class="has-sub">
                                 <a class="sidenav-item-link" data-target="#catalogue" href="javascript:void(0)" data-toggle="collapse">
                                     <span class="nav-text">Merch</span>
                                     <b class="caret"></b>
@@ -87,7 +88,7 @@
                     </ul>
                 </li>
 
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#content" href="javascript:void(0)" data-toggle="collapse">
                         <i class="bi bi-menu-button-wide"></i>
                         <span class="nav-text">Layout</span>
@@ -106,7 +107,7 @@
                         </div>
                     </ul>
                 </li>
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#seo" href="javascript:void(0)" data-toggle="collapse">
                         <i class="fas fa-rocket"></i>
                         <span class="nav-text">SEO</span>
@@ -132,7 +133,7 @@
                         <span class="nav-text">Reports</span>
                     </a>
                 </li>
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#users" href="javascript:void(0)" data-toggle="collapse">
                         <i class="bi bi-person-lines-fill"></i>
                         <span class="nav-text">Users</span>
@@ -162,15 +163,15 @@
 
                 <li class="section-title">Super admin</li>
 
-                <li class="has-sub" >
+                <li class="has-sub {{ menuItemActive(['admin.settings.*']) ? 'active expand' : '' }}">
                     <a class="sidenav-item-link" data-target="#settings" href="javascript:void(0)" data-toggle="collapse">
                         <i class="fas fa-cogs"></i>
                         <span class="nav-text">Settings</span>
                         <b class="caret"></b>
                     </a>
-                    <ul class="collapse" id="settings" data-parent="#sidebar-menu">
+                    <ul class="collapse {{ menuItemActive(['admin.settings.*']) ? 'show' : '' }}" id="settings" data-parent="#sidebar-menu">
                         <div class="sub-menu">
-                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">General</span></a></li>
+                            <li class="{{ menuItemActive(['admin.settings.general']) ? 'active' : '' }}"><a class="sidenav-item-link" href="{{ route('admin.settings.general') }}"><span class="nav-text">General</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">I18N</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">System emails</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Integrations</span></a></li>
@@ -179,7 +180,7 @@
                     </ul>
                 </li>
 
-                <li class="has-sub" >
+                <li class="has-sub">
                     <a class="sidenav-item-link" data-target="#logs" href="javascript:void(0)" data-toggle="collapse">
                         <i class="fas fa-history"></i>
                         <span class="nav-text">Logs</span>

@@ -23,7 +23,7 @@ class SettingsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Load all site specific settings from the database and cache them
-        $_tnr_settings = Cache::rememberForever('_tnrs', function () {
+        $_tnr_settings = (object) Cache::rememberForever('_tnrs', function () {
             return Settings::all()
                 ->keyBy('key')
                 ->transform(fn ($setting) => $setting->value)
