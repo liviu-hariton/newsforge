@@ -5064,7 +5064,7 @@ a.badge-smoke:focus, a.badge-smoke.focus {
     border-radius: 0;
 }
 
-.alert {
+/*.alert {
     position: relative;
     padding: 0.75rem 1.25rem;
     margin-bottom: 1rem;
@@ -5210,7 +5210,7 @@ a.badge-smoke:focus, a.badge-smoke.focus {
 }
 .alert-smoke .alert-link {
     color: #cdcfd3;
-}
+}*/
 
 @-webkit-keyframes progress-bar-stripes {
     from {
@@ -15151,7 +15151,7 @@ table.dataTable thead .sorting {
 }
 
 /*===== ALERT =====*/
-.alert.alert-icon {
+/*.alert.alert-icon {
     padding-left: 4.375rem;
     border: none;
 }
@@ -15171,7 +15171,7 @@ table.dataTable thead .sorting {
 .alert.alert-outlined {
     background-color: transparent;
     color: #31343d;
-}
+}*/
 
 /*===== BADGE =====*/
 .badge {

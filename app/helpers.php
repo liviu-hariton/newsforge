@@ -36,7 +36,9 @@ function menuItemActive(array $routes): bool
  * Return a formatted alert message
  *
  * @param string $message
- * @param string $type possible values: primary, secondary, success, danger, warning, info, light, dark
+ * @param string $type possible values:
+ *                     <br />[bootstrap standard]: primary, secondary, success, danger, warning, info, light
+ *                     <br />[custom]: dark, pink, purple, indigo, teal, yellow
  * @param string $icon icons from https://icons.getbootstrap.com/
  * @param bool $dismissible
  * @param bool $outlined
@@ -47,7 +49,8 @@ function tnrAlert(
     string $type = 'success',
     string $icon = 'bi-check-square-fill',
     bool $dismissible = false,
-    bool $outlined = false
+    bool $rounded = false,
+    bool $bordered = false
 ): \Illuminate\Contracts\View\View|Application|Factory|\Illuminate\Contracts\Foundation\Application
 {
     return view('backend.components.alert', [
@@ -55,6 +58,7 @@ function tnrAlert(
         'type' => $type,
         'icon' => $icon,
         'dismissible' => $dismissible,
-        'outlined' => $outlined,
+        'rounded' => $rounded,
+        'bordered' => $bordered,
     ]);
 }

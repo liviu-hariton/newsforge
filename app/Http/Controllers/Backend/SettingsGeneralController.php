@@ -47,7 +47,8 @@ class SettingsGeneralController extends Controller
                 $composer_package_warning = $this->checkComposerPackage($mailers_composer_packages[$request->mailer]) ? '' : tnrAlert(
                     message: 'The Composer package <strong>'.$mailers_composer_packages[$request->mailer].'</strong> is not installed. Please install it to use this mailer driver.',
                     type: 'warning',
-                    icon: 'bi-exclamation-triangle-fill'
+                    icon: 'bi-exclamation-triangle-fill',
+                    bordered: true,
                 );
             }
 
@@ -61,7 +62,7 @@ class SettingsGeneralController extends Controller
             message: 'There are no configuration options available for this mail sending method',
             type: 'info',
             icon: '',
-            outlined: true
+            bordered: true
         );
     }
 
