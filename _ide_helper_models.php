@@ -244,8 +244,9 @@ namespace App\Models{
  * @property int $id
  * @property string $group
  * @property string $key
- * @property string $value
+ * @property string|null $value
  * @property string|null $comments
+ * @method static \Illuminate\Database\Eloquent\Builder|Settings isMailer(string $group)
  * @method static \Illuminate\Database\Eloquent\Builder|Settings newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Settings newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Settings query()

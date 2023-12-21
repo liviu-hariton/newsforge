@@ -92,4 +92,16 @@ class SettingsGeneralController extends Controller
 
         return redirect()->route('admin.settings.general')->with('success', 'Settings updated successfully');
     }
+
+    public function reset(Request $request, Settings $settings)
+    {
+        $settings->where('group', $request->group)
+            ->isMailer($request->group)
+            ->update(['value' => null]);
+
+        // Clear the site specific settings cache
+        event(new SettingsUpdated($settings));
+
+        return redirect()->route('admin.settings.general')->with('warning', 'Settings reset successfully');
+    }
 }

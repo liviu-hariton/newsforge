@@ -32,4 +32,15 @@
     <button type="submit" class="btn btn-primary btn-pill mr-2 mt-5">
         Save <i class="fas fa-chevron-right"></i>
     </button>
+
+    <button type="submit" class="btn btn-danger btn-pill mr-2 mt-5 float-right" form="f-reset-social">
+        Reset all <i class="fas fa-redo"></i>
+    </button>
+</form>
+
+<form action="{{ route('admin.settings.general.reset') }}" method="post" name="f-reset-social" id="f-reset-social">
+    @csrf
+    @method('DELETE')
+
+    <input type="hidden" name="group" id="group-reset" value="social" />
 </form>

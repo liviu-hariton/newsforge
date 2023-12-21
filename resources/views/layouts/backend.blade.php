@@ -60,6 +60,16 @@
                 </div>
                 @endif
 
+                @if( session()->has('warning') )
+                    <div class="alert alert-warning alert-dismissible fade show alert-icon">
+                        <i class="bi bi-cone-striped"></i> {{ session('warning') }}
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
+
                 @yield('main-content')
             </div>
         </div>
@@ -85,6 +95,7 @@
 <script src="{{ asset('backend/plugins/quill/quill.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/toaster/toastr.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/blockui/blockui.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/bootbox/bootbox.all.min.js') }}"></script>
 
 <script src="{{ asset('backend/js/_tnr.js') }}"></script>
 <script src="{{ asset('backend/js/_tnr_xhr.js') }}"></script>

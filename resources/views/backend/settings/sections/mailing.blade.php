@@ -46,4 +46,15 @@
     <button type="submit" class="btn btn-primary btn-pill mr-2 mt-5">
         Save <i class="fas fa-chevron-right"></i>
     </button>
+
+    <button type="submit" class="btn btn-danger btn-pill mr-2 mt-5 float-right" form="f-reset-mailing">
+        Reset all <i class="fas fa-redo"></i>
+    </button>
+</form>
+
+<form action="{{ route('admin.settings.general.reset') }}" method="post" name="f-reset-mailing" id="f-reset-mailing">
+    @csrf
+    @method('DELETE')
+
+    <input type="hidden" name="group" id="group-reset" value="mailing" />
 </form>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
@@ -124,5 +125,21 @@ class Settings extends Model
     public function socialNetworks(): array
     {
         return $this->socialNetworks;
+    }
+
+    /**
+     * If the group is 'mailing', then we will reset only the current mailer settings
+     *
+     * @param Builder $query
+     * @param string $group
+     * @return Builder
+     */
+    public function scopeIsMailer(Builder $query, string $group): Builder
+    {
+        if($group === 'mailing') {
+            return $query->where('key', 'like', _tnrs('mailer_type').'_%');
+        }
+
+        return $query;
     }
 }
