@@ -97,6 +97,24 @@ class TnrXHR {
             }
         });
     }
+
+    saveContactOptionMap(id, latitude, longitude, route) {
+        Tnr.inlineStatusIcon('working', 'map_option_' + id);
+
+        $.ajax({
+            url: route,
+            type: 'PUT',
+            data: 'id=' + id + '&latitude=' + latitude + '&longitude=' + longitude,
+            success: function(response) {
+                Tnr.inlineStatusIcon('finished', 'map_option_' + id);
+            },
+            error: function(xhr, status, error) {
+                Tnr.unblock();
+
+                Tnr.errorAlert(xhr.responseJSON.message, error);
+            }
+        });
+    }
 }
 
 let _tnr_xhr  = new TnrXHR;

@@ -5,7 +5,7 @@
 @section('main-content')
     <div class="card card-default text-dark">
         <div class="card-body">
-            <ul class="nav nav-tabs nav-tabs-solid nav-tabs-solid-custom bg-primary mb-3">
+            <ul class="nav nav-tabs nav-tabs-solid nav-tabs-solid-custom bg-primary mb-3 settings-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="pill" href="#contact"><i class="bi bi-envelope"></i> Contact</a>
                 </li>

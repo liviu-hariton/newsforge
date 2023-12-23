@@ -68,105 +68,13 @@
                         <div class="form-group">
                             <label>Positioning on the map: <br /><small>(drag the marker on the map, in the desired location)</small></label>
 
-                            <div class="map-container" id="contact-map"></div>
-
-                            <script>
-                                var map;
-
-                                function initializeNew() {
-                                    var map_location = document.getElementById('contact-map');
-
-                                    var mapOptions = {
-                                        zoom: 12
-                                    };
-
-                                    var map = new google.maps.Map(map_location, mapOptions);
-
-                                    if(navigator.geolocation) {
-                                        navigator.geolocation.getCurrentPosition(function(position) {
-                                            @if(old('contact_option_type_id') !== '10')
-                                                const pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                                            @else
-                                                const pos = new google.maps.LatLng({{ old('latitude') }}, {{ old('longitude') }});
-                                            @endif
-
-                                            var infowindow = new google.maps.InfoWindow({
-                                                content: 'Position detected automatically'
-                                            });
-
-                                            var marker = new google.maps.Marker({
-                                                position: pos,
-                                                map: map,
-                                                title: 'Position detected automatically',
-                                                draggable: true
-                                            });
-
-                                            map.setCenter(pos);
-
-                                            google.maps.event.addListener(marker, 'click', function() {
-                                                infowindow.open(map, marker);
-                                            });
-
-                                            google.maps.event.addListener(marker, 'dragend', function(evt){
-                                                $('#latitude-new-method').val(evt.latLng.lat().toFixed(12));
-                                                $('#longitude-new-method').val(evt.latLng.lng().toFixed(12));
-                                            });
-                                        }, function() {
-                                            handleNoGeolocation(true);
-                                        });
-                                    }
-                                    else {
-                                        handleNoGeolocation(false);
-                                    }
-                                }
-
-                                function handleNoGeolocation(errorFlag) {
-                                    if(errorFlag) {
-                                        var content = 'Error: Geolocation failed.<br />Move the marker to the desired position.';
-                                    } else {
-                                        var content = 'Error: Your browser does not support geolocation.';
-                                    }
-
-                                    var map_location = document.getElementById('contact-map');
-
-                                    var mapOptions = {
-                                        zoom: 4
-                                    };
-
-                                    var map = new google.maps.Map(map_location, mapOptions);
-
-                                    var pos = new google.maps.LatLng({{ old('latitude', $_tnrs->latitude ?? '') }}, {{ old('longitude', $_tnrs->longitude ?? '') }});
-
-                                    var options = {
-                                        position: pos,
-                                        content: content
-                                    };
-
-                                    var infowindow = new google.maps.InfoWindow(options);
-
-                                    var marker = new google.maps.Marker({
-                                        position: pos,
-                                        map: map,
-                                        draggable: true,
-                                        title: 'Move the marker to the desired position'
-                                    });
-
-                                    map.setCenter(options.position);
-
-                                    google.maps.event.addListener(marker, 'click', function() {
-                                        infowindow.open(map, marker);
-                                    });
-
-                                    google.maps.event.addListener(marker, 'dragend', function(evt){
-                                        $('#latitude-new-method').val(evt.latLng.lat().toFixed(12));
-                                        $('#longitude-new-method').val(evt.latLng.lng().toFixed(12));
-                                    });
-                                }
-
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    google.maps.event.addDomListener(window, 'load', initializeNew);
-                                });
-                            </script>
+                            @if(isset($_tnrs->google_maps_api_key))
+                                @include('backend.settings.blocks.contact.contact-data-option-map-new')
+                            @else
+                                <div class="note note-warning">
+                                    You need to set the Google Maps API key in order to use this feature. <a href="#" data-dismiss="modal" onclick="showTab('other')" class="btn btn-sm btn-warning">Set the API key</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -205,46 +113,15 @@
 
                     <div class="modal-body">
                         <div class="form-group">
-                            <div class="map-container" id="contact-map-{{ $data->id }}"></div>
+                            <p class="mb-2">(drag the marker on the map, in the desired location)</p>
 
-                            <script>
-                                function initialize_{{ $data->id }}() {
-                                    var map_location_{{ $data->id }} = document.getElementById('contact-map-{{ $data->id }}');
-
-                                    var mapOptions_{{ $data->id }} = {
-                                        zoom: 12
-                                    };
-
-                                    var map_{{ $data->id }} = new google.maps.Map(map_location_{{ $data->id }}, mapOptions_{{ $data->id }});
-
-                                    var pos_{{ $data->id }} = new google.maps.LatLng({{ $data->latitude }}, {{ $data->longitude }});
-
-                                    var infowindow_{{ $data->id }} = new google.maps.InfoWindow({
-                                        content: '{{ $data->value }}'
-                                    });
-
-                                    var marker_{{ $data->id }} = new google.maps.Marker({
-                                        position: pos_{{ $data->id }},
-                                        map: map_{{ $data->id }},
-                                        title: '{{ $data->value }}',
-                                        draggable: true
-                                    });
-
-                                    map_{{ $data->id }}.setCenter(pos_{{ $data->id }});
-
-                                    google.maps.event.addListener(marker_{{ $data->id }}, 'click', function() {
-                                        infowindow_{{ $data->id }}.open(map_{{ $data->id }}, marker_{{ $data->id }});
-                                    });
-
-                                    google.maps.event.addListener(marker_{{ $data->id }}, 'dragend', function(evt){
-                                        _tnr_xhr.saveContactOptionMap({{ $data->id }}, evt.latLng.lat().toFixed(12), evt.latLng.lng().toFixed(12));
-                                    });
-                                }
-
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    google.maps.event.addDomListener(window, 'load', initialize_{{ $data->id }});
-                                });
-                            </script>
+                            @if(isset($_tnrs->google_maps_api_key))
+                                @include('backend.settings.blocks.contact.contact-data-option-map-edit', ['data' => $data])
+                            @else
+                                <div class="note note-warning">
+                                    You need to set the Google Maps API key in order to use this feature. <a href="#" data-dismiss="modal" onclick="showTab('other')" class="btn btn-sm btn-warning">Set the API key</a>
+                                </div>
+                            @endif
                         </div>
                     </div>
 

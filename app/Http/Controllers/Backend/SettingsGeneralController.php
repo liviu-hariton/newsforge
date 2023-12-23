@@ -87,12 +87,10 @@ class SettingsGeneralController extends Controller
         unset($validated['group']);
 
         foreach($validated as $key=>$value) {
-            if($value) {
-                $settings->updateOrCreate(
-                    ['key' => $key, 'group' => $settings_group],
-                    ['group' => $settings_group, 'value' => $value]
-                );
-            }
+            $settings->updateOrCreate(
+                ['key' => $key, 'group' => $settings_group],
+                ['group' => $settings_group, 'value' => $value]
+            );
         }
 
         // Clear the site specific settings cache

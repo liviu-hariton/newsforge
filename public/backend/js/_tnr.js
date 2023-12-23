@@ -42,6 +42,10 @@ function iconFormat(icon) {
     return '<i class="' + $(icon.element).data('icon') + ' mr-2"></i>' + icon.text;
 }
 
+function showTab(tab) {
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+}
+
 var Tnr = function () {
     const layoutInteractions = function() {
         const icon_select2 = function() {
@@ -149,6 +153,34 @@ var Tnr = function () {
             let _el = $('.' + css_class);
 
             $(_el).unblock();
+        },
+
+        inlineStatus: function(type, element) {
+            var _working = '<span class="text-info"><i class="font-weight-bold fas fa-spinner fa-spin ml-2"></i> Processing...</span>';
+            var _finished = '<span class="text-success"><i class="font-weight-bold bi bi-check-circle ml-2"></i> Saved!</span>';
+
+
+            if(type === 'working') {
+                $("." + element + "_status").html(_working);
+            }
+
+            if(type === 'finished') {
+                $("." + element + "_status").html(_finished);
+            }
+        },
+
+        inlineStatusIcon: function(type, element) {
+            var _working = '<span class="text-info"><i class="font-weight-bold fas fa-spinner fa-spin ml-2"></i></span>';
+            var _finished = '<span class="text-success"><i class="font-weight-bold bi bi-check-circle ml-2"></i></span>';
+
+
+            if(type === 'working') {
+                $("." + element + "_status").html(_working);
+            }
+
+            if(type === 'finished') {
+                $("." + element + "_status").html(_finished);
+            }
         },
 
         remove: function(obj) {

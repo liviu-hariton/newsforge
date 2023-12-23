@@ -103,7 +103,7 @@ class SettingsGeneralRequest extends FormRequest
             ...$this->socialNetworksValidationRules(),
 
             //-- Other --//
-            'google_maps_api_key' => ['nullable', 'string', 'max:255', new GoogleMapsApiKey],
+            'google_maps_api_key' => ['sometimes', 'nullable', 'string', 'max:255', new GoogleMapsApiKey],
 
             'latitude' => ['nullable', 'numeric', new Latitude],
             'longitude' => ['nullable', 'numeric', new Longitude],
