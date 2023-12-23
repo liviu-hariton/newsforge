@@ -24,7 +24,7 @@
             </ul>
             <div class="tab-content mt-5">
                 <div class="tab-pane fade show active" id="contact">
-                    <p>Contact</p>
+                    @include('backend.settings.sections.contact')
                 </div>
                 <div class="tab-pane fade" id="fiscal">
                     <p>Banking</p>
@@ -36,7 +36,7 @@
                     @include('backend.settings.sections.mailing')
                 </div>
                 <div class="tab-pane fade" id="other">
-                    <p>Other settings</p>
+                    @include('backend.settings.sections.other')
                 </div>
             </div>
         </div>

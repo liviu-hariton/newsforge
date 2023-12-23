@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Events\SettingsUpdated;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\ContactOptionRequest;
 use App\Http\Requests\Backend\SettingsGeneralRequest;
+use App\Models\ContactOption;
+use App\Models\ContactOptionType;
 use App\Models\Settings;
+use App\Rules\Latitude;
+use App\Rules\Longitude;
 use Composer\InstalledVersions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -32,6 +37,8 @@ class SettingsGeneralController extends Controller
             'mailers' => $settings->mailers(),
             'selected_mailer' =>  $this->loadMailerFormFields($request, $settings),
             'social_networks' => $settings->socialNetworks(),
+            'contact_methods' => ContactOptionType::all(),
+            'contact_options' => ContactOption::with('type')->orderBy('sort_order')->get(),
         ]);
     }
 
@@ -104,5 +111,47 @@ class SettingsGeneralController extends Controller
         event(new SettingsUpdated($settings));
 
         return redirect()->route('admin.settings.general')->with('warning', 'Settings reset successfully');
+    }
+
+    public function storeContactMethod(Request $request, ContactOption $contactOption)
+    {
+        // A custom Request class is not used in this case because we need to
+        // redirect the user back to the settings page with the modal form open
+        // (a custom flash session variable is used for this)
+        $validator = validator($request->all(), [
+            'latitude' => ['nullable', 'numeric', new Latitude],
+            'longitude' => ['nullable', 'numeric', new Longitude],
+            'contact_option_type_id' => 'required|exists:contact_option_types,id',
+            'value' => 'required|max:255',
+            'active' => 'nullable|boolean',
+        ]);
+
+        if($validator->fails()) {
+            session()->flash('open-new-contact-method-modal');
+
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        // If the contact option type is not 'Postal address',
+        // then we will unset the latitude and longitude
+        if($validated['contact_option_type_id'] !== '10') {
+            unset($validated['latitude'], $validated['longitude']);
+        }
+
+        $contactOption->create($validated);
+
+        return redirect()->route('admin.settings.general')->with('success', 'Contacting method added successfully');
+    }
+
+    public function deleteContactMethod(ContactOption $data)
+    {
+        $data->delete();
+
+        return response([
+            'status' => 'success',
+            'message' => 'Contacting method deleted successfully'
+        ]);
     }
 }

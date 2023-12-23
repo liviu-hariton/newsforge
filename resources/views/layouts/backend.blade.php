@@ -23,9 +23,12 @@
     <link href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/quill/quill.snow.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/toaster/toastr.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
 
     <link id="main-css-href" rel="stylesheet" href="{{ asset('backend/css/style.css') }}" />
-    <link id="main-css-href" rel="stylesheet" href="{{ asset('backend/css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('backend/css/components.css') }}" />
+    <link rel="stylesheet" href="{{ asset('backend/css/colors.css') }}" />
 
     @include('frontend.components.favicon')
 
@@ -35,6 +38,10 @@
     <![endif]-->
 
     <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
+
+    <script>
+        const _locale = '{{ str_replace('_', '-', app()->getLocale()) }}';
+    </script>
 </head>
 
 <body class="navbar-fixed sidebar-fixed" id="body">
@@ -59,6 +66,10 @@
     </div>
 </div>
 
+@if(isset($_tnrs->google_maps_api_key))
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ $_tnrs->google_maps_api_key }}"></script>
+@endif
+
 <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
 
 <script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
@@ -77,6 +88,8 @@
 <script src="{{ asset('backend/plugins/toaster/toastr.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/blockui/blockui.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/bootbox/bootbox.all.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/select2/js/select2.full.js') }}"></script>
+<script src="{{ asset('backend/plugins/select2/js/i18n/'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
 
 <script src="{{ asset('backend/js/mono.js') }}"></script>
 <script src="{{ asset('backend/js/_tnr.js') }}"></script>

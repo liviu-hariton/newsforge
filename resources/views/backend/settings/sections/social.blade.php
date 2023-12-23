@@ -2,7 +2,7 @@
     @csrf
     @method('PATCH')
 
-    <input type="hidden" name="group" id="group" value="social" />
+    <input type="hidden" name="group" id="group-social" value="social" />
 
     @foreach($social_networks as $social_network)
     <div class="form-group row">

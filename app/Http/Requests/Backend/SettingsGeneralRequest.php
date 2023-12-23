@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Backend;
 
 use App\Models\Settings;
+use App\Rules\GoogleMapsApiKey;
+use App\Rules\Latitude;
+use App\Rules\Longitude;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SettingsGeneralRequest extends FormRequest
@@ -98,6 +101,12 @@ class SettingsGeneralRequest extends FormRequest
 
             //-- Social --//
             ...$this->socialNetworksValidationRules(),
+
+            //-- Other --//
+            'google_maps_api_key' => ['nullable', 'string', 'max:255', new GoogleMapsApiKey],
+
+            'latitude' => ['nullable', 'numeric', new Latitude],
+            'longitude' => ['nullable', 'numeric', new Longitude],
         ];
     }
 
@@ -143,6 +152,11 @@ class SettingsGeneralRequest extends FormRequest
 
             //-- Social --//
             ...$this->socialNetworksValidationMessages(),
+
+            //-- Other --//
+            'google_maps_api_key' => 'The Google Maps API Key is not valid',
+            'latitude' => 'The latitude must be a valid value<br />(between -90 and 90 degrees, usually a <em class="text-black-50">48.200022871201654</em> format)',
+            'longitude' => 'The longitude must be a valid value<br />(between -180 and 180 degrees, usually a <em class="text-black-50">17.087633309325387</em> format)',
         ];
     }
 }

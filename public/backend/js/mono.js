@@ -342,4 +342,11 @@ $(document).ready(function () {
         break;
     }
   });
+
+    $('[data-popup="tooltip"]').tooltip({
+        container: "body",
+        template:
+            '<div class="tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>',
+    });
+    $('[data-popup="popover"]').popover();
 });

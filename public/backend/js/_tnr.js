@@ -34,9 +34,52 @@ if (activeTabs.length > 0) {
     });
 }
 
+function iconFormat(icon) {
+    if(!icon.id) {
+        return icon.text;
+    }
+
+    return '<i class="' + $(icon.element).data('icon') + ' mr-2"></i>' + icon.text;
+}
+
 var Tnr = function () {
     const layoutInteractions = function() {
+        const icon_select2 = function() {
+            if (!$().select2) {
+                console.warn('Warning - select2.js is not loaded.');
+                return;
+            }
 
+            $('.select-icons').select2({
+                language: _locale,
+                templateResult: iconFormat,
+                minimumResultsForSearch: Infinity,
+                templateSelection: iconFormat,
+                escapeMarkup: function(m) {
+                    return m;
+                }
+            });
+        }
+
+        icon_select2();
+
+        const toggleInlineEdit = function() {
+            $(".tnr-show-inline-edits").each(function() {
+                $(this).on("mouseover", function(){
+                    $(this).find('.inline-edit-trigger').each(function() {
+                        $(this).removeClass("d-none");
+                    });
+                });
+
+                $(this).on("mouseout", function(){
+                    $(this).find('.inline-edit-trigger').each(function() {
+                        $(this).addClass("d-none");
+                    });
+                });
+            });
+        };
+
+        toggleInlineEdit();
     }
 
     const xhrCalls = function() {
@@ -77,7 +120,7 @@ var Tnr = function () {
 
             if(parseInt(_dirty_form) === 0) {
                 $(_el).block({
-                    message: '<span class="font-weight-semibold"><i class="fas fa-spinner fa-spin mr-2"></i>&nbsp; Processing</span>',
+                    message: '<span class="font-weight-bold"><i class="fas fa-spinner fa-spin mr-2"></i>&nbsp; Processing</span>',
                     overlayCSS: {
                         backgroundColor: '#1b2024',
                         opacity: 0.6,
@@ -117,7 +160,8 @@ var Tnr = function () {
         },
 
         getUrlParams: function(param) {
-            return (window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)')) || [, null])[1];
+            // https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
+            return (window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)')) || [undefined, null])[1];
         },
 
         errorAlert: function(title, message) {

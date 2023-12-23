@@ -30,7 +30,8 @@
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Categories</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Media center</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Authors</span></a></li>
-                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">Go-wto persons</span></a></li>
+                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">Go-to persons</span></a></li>
+                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">Whispers</span></a></li>
                         </div>
                     </ul>
                 </li>

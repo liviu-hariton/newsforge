@@ -239,6 +239,51 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\ContactOption
+ *
+ * @property int $id
+ * @property int $contact_option_type_id
+ * @property string $value
+ * @property string|null $latitude
+ * @property string|null $longitude
+ * @property int $active
+ * @property int $sort_order
+ * @property-read \App\Models\ContactOptionType|null $type
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereContactOptionTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereSortOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOption whereValue($value)
+ */
+	class ContactOption extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ContactOptionType
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $icon
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContactOption> $options
+ * @property-read int|null $options_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType whereName($value)
+ */
+	class ContactOptionType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Settings
  *
  * @property int $id

@@ -24,6 +24,79 @@ class TnrXHR {
             }
         });
     }
+
+    setMapPositioning(obj) {
+        if(obj.val() === '10') {
+            $("#contact-map-container").removeClass("d-none");
+        } else {
+            $("#contact-map-container").addClass("d-none");
+        }
+    }
+
+    deleteContactOption(obj) {
+        bootbox.confirm({
+            locale: _locale,
+            buttons: {confirm: {className: 'btn-danger'}, cancel: {className: 'btn-outline-success'}},
+            title: '<i class="fas fa-exclamation-triangle"></i> Careful!',
+            message: 'You have chosen to delete this contact option. Are you sure?',
+            callback: function(result) {
+                if(result === true) {
+                    Tnr.block();
+
+                    $.ajax({
+                        url: obj.data('route'),
+                        type: 'DELETE',
+                        success: function(response) {
+                            Tnr.remove("#row-" + obj.data('id'));
+
+                            Tnr.unblock();
+
+                            toastr.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            Tnr.unblock();
+
+                            Tnr.errorAlert(xhr.responseJSON.message, error);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    changeAttribute(obj){
+        Tnr.block();
+
+        let _enabled = obj.is(':checked') === true ? '1' : '0';
+        let _id = obj.data('id');
+        let _attribute = obj.data('attribute');
+        let _model = obj.data('model');
+
+        $.ajax({
+            type: 'PATCH',
+            url: obj.data('route'),
+            data: {
+                "enabled" : _enabled,
+                "id": _id,
+                "attribute": _attribute,
+                "model": _model
+            },
+            success: function(data) {
+                Tnr.unblock();
+
+                if(data.status === 'success') {
+                    toastr.success(data.message);
+                } else {
+                    toastr.warning(data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                Tnr.unblock();
+
+                Tnr.errorAlert(xhr.responseJSON.message, error);
+            }
+        });
+    }
 }
 
 let _tnr_xhr  = new TnrXHR;
