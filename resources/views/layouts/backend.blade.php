@@ -24,6 +24,8 @@
     <link href="{{ asset('backend/plugins/quill/quill.snow.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/toaster/toastr.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/plugins/dragula/dragula.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/plugins/xeditable/css/bootstrap-editable.css') }}" rel="stylesheet" />
 
     <link id="main-css-href" rel="stylesheet" href="{{ asset('backend/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}" />
@@ -90,6 +92,8 @@
 <script src="{{ asset('backend/plugins/bootbox/bootbox.all.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/select2/js/select2.full.js') }}"></script>
 <script src="{{ asset('backend/plugins/select2/js/i18n/'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
+<script src="{{ asset('backend/plugins/dragula/dragula.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/xeditable/js/bootstrap-editable.js') }}"></script>
 
 <script src="{{ asset('backend/js/mono.js') }}"></script>
 <script src="{{ asset('backend/js/_tnr.js') }}"></script>

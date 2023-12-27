@@ -115,6 +115,35 @@ class TnrXHR {
             }
         });
     }
+
+    setSortOrder(_items, obj) {
+        Tnr.block(obj.data('container'));
+
+        let _model = obj.data('model');
+
+        $.ajax({
+            url: obj.data('route'),
+            type: 'PUT',
+            data: {
+                "items": _items,
+                "model": _model
+            },
+            success: function(data) {
+                Tnr.unblock(obj.data('container'));
+
+                if(data.status === 'success') {
+                    toastr.success(data.message);
+                } else {
+                    toastr.warning(data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                Tnr.unblock(obj.data('container'));
+
+                Tnr.errorAlert(xhr.responseJSON.message, error);
+            }
+        });
+    }
 }
 
 let _tnr_xhr  = new TnrXHR;

@@ -21,18 +21,52 @@ class BackendController extends Controller
         ]);
     }
 
-    public function saveContactOptionMap(Request $request)
+    public function setSortOrder(Request $request)
     {
-        $contact_option = ContactOption::findOrFail($request->id);
+        $model = str_replace("^", "\\", $request->model);
+        $items = $request->items;
 
-        $contact_option->update([
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude
-        ]);
+        // Remove the last empty item from the array
+        // as it is added by the Javascript Sortable library
+        unset($items[count($items) - 1]);
+
+        foreach($items as $item_order=>$item_id) {
+            $model::where('id', $item_id)
+                ->update([
+                    'sort_order' => $item_order
+                ]);
+        }
 
         return response([
             'status' => 'success',
-            'message' => 'Contact option map has been successfully updated!'
+            'message' => 'Order updated successfully'
+        ]);
+    }
+
+    public function inlineEdit(Request $request)
+    {
+        $model = str_replace("^", "\\", $request->model);
+
+        if($request->check_exists == "true") {
+            $object = $model::where($request->field, $request->value)
+                ->where('id', '!=', $request->id)
+                ->first();
+
+            if($object) {
+                return response([
+                    'status' => 'warning',
+                    'message' => 'The value already exists!'
+                ], 419);
+            }
+        }
+
+        $object = $model::findOrFail($request->id);
+        $object->{$request->field} = $request->value;
+        $object->save();
+
+        return response([
+            'status' => 'success',
+            'message' => 'The value has been successfully updated!'
         ]);
     }
 }

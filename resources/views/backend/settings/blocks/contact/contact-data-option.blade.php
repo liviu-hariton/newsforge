@@ -1,18 +1,20 @@
 <tr class="tnr-show-inline-edits" data-option-id="{{ $data->id }}" id="row-{{ $data->id }}">
     <td>
-        <i class="bi bi-arrow-down-up text-primary cursor-move"></i>
+        <i class="bi bi-arrow-down-up text-primary cursor-move tnr-sort-handle"></i>
     </td>
     <td class="text-center"><i class="{{ $data->type->icon }}" data-popup="tooltip" title="{{ $data->type->name }}"></i></td>
     <td>
         <span
             id="value-{{ $data->id }}"
             data-toggle="manual"
-            data-name="value"
-            data-pk="{{ $data->id }}"
-            data-entity="contact_options"
-            data-check-exists="false"
+            data-name="value" {{-- this is the table column name that will be updated with the new value --}}
+            data-pk="{{ $data->id }}" {{-- table row ID --}}
+            data-check-exists="true" {{-- check if the value already exists in the table --}}
             data-title="Value"
-            data-action="contactOptionInlineUpdate"
+            data-model="App^Models^ContactOption" {{-- this is the model that will be updated --}}
+            data-route="{{ route('admin.inline-edit') }}"
+            data-validation-type="required"
+            data-error-msg="This field is required"
         >
             {{ $data->value }}
         </span>
@@ -28,10 +30,10 @@
                 type="checkbox"
                 class="custom-control-input tnr-xhr"
                 data-call-method="change"
-                data-xhr="changeAttribute"
-                data-id="{{ $data->id }}"
-                data-attribute="active"
-                data-model="App^Models^ContactOption"
+                data-xhr="changeAttribute" {{-- this is the method that will be called --}}
+                data-id="{{ $data->id }}" {{-- table row ID --}}
+                data-attribute="active" {{-- this is the table column name that will be updated with the new value --}}
+                data-model="App^Models^ContactOption" {{-- this is the model that will be updated --}}
                 data-route="{{ route('admin.change-attribute') }}"
                 name="active"
                 id="active-{{ $data->id }}"

@@ -116,13 +116,20 @@ class SettingsGeneralController extends Controller
         // A custom Request class is not used in this case because we need to
         // redirect the user back to the settings page with the modal form open
         // (a custom flash session variable is used for this)
-        $validator = validator($request->all(), [
-            'latitude' => ['nullable', 'numeric', new Latitude],
-            'longitude' => ['nullable', 'numeric', new Longitude],
-            'contact_option_type_id' => 'required|exists:contact_option_types,id',
-            'value' => 'required|max:255',
-            'active' => 'nullable|boolean',
-        ]);
+        $validator = validator(
+            $request->all(),
+            [
+                'latitude' => ['nullable', 'numeric', new Latitude],
+                'longitude' => ['nullable', 'numeric', new Longitude],
+                'contact_option_type_id' => 'required|exists:contact_option_types,id',
+                'value' => 'required|max:255',
+                'active' => 'nullable|boolean',
+            ],
+            [
+                'contact_option_type_id' => 'The contact method is required',
+                'value' => 'The value is required',
+            ]
+        );
 
         if($validator->fails()) {
             session()->flash('open-new-contact-method-modal');
@@ -150,6 +157,21 @@ class SettingsGeneralController extends Controller
         return response([
             'status' => 'success',
             'message' => 'Contacting method deleted successfully'
+        ]);
+    }
+
+    public function saveContactOptionMap(Request $request)
+    {
+        $contact_option = ContactOption::findOrFail($request->id);
+
+        $contact_option->update([
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude
+        ]);
+
+        return response([
+            'status' => 'success',
+            'message' => 'Contact option map has been successfully updated!'
         ]);
     }
 }

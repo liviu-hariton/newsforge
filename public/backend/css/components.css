@@ -695,6 +695,9 @@ Customized Bootstrap Popover
     box-shadow: 5px 5px rgba(102, 102, 102, 0.1);
     padding: 0;
 }
+.popover-header {
+    font-size: 14px;
+}
 .popover .popover-title {
     margin: 0 !important;
 }

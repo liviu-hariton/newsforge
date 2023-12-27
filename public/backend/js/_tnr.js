@@ -84,6 +84,93 @@ var Tnr = function () {
         };
 
         toggleInlineEdit();
+
+        var sortOrder = function() {
+            if(typeof dragula == 'undefined') {
+                console.warn('Warning - dragula.min.js is not loaded.');
+                return;
+            }
+
+            const containers = $('.tnr-sortable').toArray();
+            const _obj = $("#tnr-sortable");
+
+            let drake = dragula(containers, {
+                mirrorContainer: document.querySelector('.tnr-sortable'),
+                moves: function (el, container, handle) {
+                    return handle.classList.contains('tnr-sort-handle');
+                }
+            });
+
+            drake.on('drop', function() {
+                let _new_order = [];
+
+                _obj.children().each(function() {
+                    _new_order.push($(this).data("option-id"));
+                });
+
+                _tnr_xhr['setSortOrder'](_new_order, _obj);
+            });
+        };
+
+        sortOrder();
+
+        var inlineEdit = function() {
+            $(".tnr-inline-edit").each(function() {
+                $(this).on("click", function(e){
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    const _target = $(this).data('target');
+                    const _route = $(_target).data('route');
+                    const _target_err = $(_target).data('error-msg');
+                    const _target_validation = $(_target).data('validation-type');
+                    const _check_exists = $(_target).data('check-exists');
+                    const _model = $(_target).data('model');
+
+                    $(_target).editable({
+                        ajaxOptions: {
+                            type: 'PUT'
+                        },
+                        url: _route,
+                        error: function(response) {
+                            if(response.status === 500) {
+                                toastr.warning('Service unavailable. Please try later.');
+                            } else {
+                                toastr.warning(response.responseJSON.message);
+                            }
+                        },
+                        success: function(data) {
+                            if(data.status === 'success') {
+                                toastr.success(data.message);
+                            } else {
+                                toastr.warning(data.message);
+                            }
+                        },
+                        params: function(params) {
+                            let data = {};
+
+                            data['id'] = params.pk;
+                            data['field'] = params.name;
+                            data['value'] = params.value;
+                            data['model'] = _model;
+                            data['check_exists'] = _check_exists;
+
+                            return data;
+                        },
+                        clear: false,
+                        validate: function(value) {
+                            if(_target_validation === 'required') {
+                                if(value === '') {
+                                    return _target_err;
+                                }
+                            }
+                        }
+                    }).editable('toggle');
+                });
+            });
+        };
+
+        inlineEdit();
     }
 
     const xhrCalls = function() {

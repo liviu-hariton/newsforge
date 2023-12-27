@@ -1,4 +1,4 @@
-<div class="card p-0">
+<div class="card p-0 tnr-sort-container">
     <div class="card-header px-3 pt-3 header-elements-inline">
         <h5 class="card-title text-primary">Contacting methods</h5>
         <div class="header-elements">
@@ -10,7 +10,13 @@
 
     <div class="card-body px-3">
         <table class="table table-hover table-striped">
-            <tbody class="contact-options-sortable" id="contact-options-sortable">
+            <tbody
+                class="tnr-sortable"
+                id="tnr-sortable"
+                data-container="tnr-sort-container"
+                data-model="App^Models^ContactOption"
+                data-route="{{ route('admin.update-sort-order') }}"
+            >
             @foreach($contact_options  as $contact_option)
                 @include('backend.settings.blocks.contact.contact-data-option', ['data' => $contact_option])
             @endforeach

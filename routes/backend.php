@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Route;
 /*
  * Ajax calls
  */
+Route::patch('change-attribute', [BackendController::class, 'changeAttribute'])->name('change-attribute');
+Route::put('update-sort-order', [BackendController::class, 'setSortOrder'])->name('update-sort-order');
+Route::put('inline-edit', [BackendController::class, 'inlineEdit'])->name('inline-edit');
 Route::post('load-mailer-form-fields', [SettingsGeneralController::class, 'loadMailerFormFields'])->name('load.mailer.form.fields');
 Route::delete('settings/delete-contact-method/{data}', [SettingsGeneralController::class, 'deleteContactMethod'])->name('settings.delete.contact.method');
-Route::patch('change-attribute', [BackendController::class, 'changeAttribute'])->name('change-attribute');
-Route::put('update-contact-option-map', [BackendController::class, 'saveContactOptionMap'])->name('update-contact-option-map');
+Route::put('update-contact-option-map', [SettingsGeneralController::class, 'saveContactOptionMap'])->name('update-contact-option-map');
 
 /*
  * Backend sections
