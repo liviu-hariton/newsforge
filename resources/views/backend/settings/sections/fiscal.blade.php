@@ -17,7 +17,7 @@
     <div class="form-group row">
         <label for="country_fiscal" class="col-sm-2 col-form-label">Country: <span class="text-danger">*</span></label>
         <div class="col-sm-4">
-            <select id="country_fiscal" name="country" class="form-control select2" data-placeholder="Choose your country" style="width:100%;">
+            <select id="country_fiscal" name="country" class="form-control select2list" data-placeholder="Choose your country" style="width:100%;">
                 <option value=""></option>
                 @foreach(config('tnr.countries') as $country_code => $country_data)
                     <option value="{{ $country_code }}" {{ old('country', $_tnrs->country ?? '') === $country_code ? 'selected="selected"' : '' }}>{{ $country_data['country'] }}</option>

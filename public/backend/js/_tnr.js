@@ -73,7 +73,7 @@ var Tnr = function () {
                 return;
             }
 
-            $('.select2').each(function(e){
+            $('.select2list').each(function(e){
                 $(this).select2({
                     language: _locale
                 });
