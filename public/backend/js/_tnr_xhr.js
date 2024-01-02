@@ -144,6 +144,37 @@ class TnrXHR {
             }
         });
     }
+
+    deleteContactField(obj) {
+        bootbox.confirm({
+            locale: _locale,
+            buttons: {confirm: {className: 'btn-danger'}, cancel: {className: 'btn-outline-success'}},
+            title: '<i class="fas fa-exclamation-triangle"></i> Careful!',
+            message: 'You have chosen to delete this contact form field. Are you sure?',
+            callback: function(result) {
+                if(result === true) {
+                    Tnr.block();
+
+                    $.ajax({
+                        url: obj.data('route'),
+                        type: 'DELETE',
+                        success: function(response) {
+                            Tnr.remove("#field-row-" + obj.data('id'));
+
+                            Tnr.unblock();
+
+                            toastr.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            Tnr.unblock();
+
+                            Tnr.errorAlert(xhr.responseJSON.message, error);
+                        }
+                    });
+                }
+            }
+        });
+    }
 }
 
 let _tnr_xhr  = new TnrXHR;

@@ -1,4 +1,4 @@
-<tr class="tnr-show-inline-edits" data-option-id="{{ $data->id }}" id="row-{{ $data->id }}">
+<tr class="tnr-show-inline-edits" data-entry-id="{{ $data->id }}" id="row-{{ $data->id }}">
     <td>
         <i class="bi bi-arrow-down-up text-primary cursor-move tnr-sort-handle"></i>
     </td>

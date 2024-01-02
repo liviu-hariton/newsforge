@@ -85,36 +85,7 @@ var Tnr = function () {
 
         toggleInlineEdit();
 
-        var sortOrder = function() {
-            if(typeof dragula == 'undefined') {
-                console.warn('Warning - dragula.min.js is not loaded.');
-                return;
-            }
-
-            const containers = $('.tnr-sortable').toArray();
-            const _obj = $("#tnr-sortable");
-
-            let drake = dragula(containers, {
-                mirrorContainer: document.querySelector('.tnr-sortable'),
-                moves: function (el, container, handle) {
-                    return handle.classList.contains('tnr-sort-handle');
-                }
-            });
-
-            drake.on('drop', function() {
-                let _new_order = [];
-
-                _obj.children().each(function() {
-                    _new_order.push($(this).data("option-id"));
-                });
-
-                _tnr_xhr['setSortOrder'](_new_order, _obj);
-            });
-        };
-
-        sortOrder();
-
-        var inlineEdit = function() {
+        const inlineEdit = function() {
             $(".tnr-inline-edit").each(function() {
                 $(this).on("click", function(e){
                     e.stopPropagation();
@@ -171,6 +142,106 @@ var Tnr = function () {
         };
 
         inlineEdit();
+
+        const ays = function() {
+            if(!$().areYouSure) {
+                console.warn('Warning - jquery.are-you-sure.js is not loaded.');
+                return;
+            }
+
+            const $tnrAys = $(".tnr-ays");
+
+            if($tnrAys.length) {
+                $tnrAys.each(function() {
+                    $(this).areYouSure({
+                        'message': 'You have not saved the data from the form. Are you sure you want to reload the page?'
+                    });
+                });
+            }
+        };
+
+        ays();
+
+        const show_hide = function() {
+            const $tnrToggle = $(".tnr-toggle");
+
+            if($tnrToggle.length) {
+                $tnrToggle.on("click", function(){
+                    if($(this).data('tnr-hide') !== '') {
+                        $($(this).data('tnr-hide')).addClass('d-none');
+                    }
+
+                    if($(this).data('tnr-show') !== '') {
+                        $($(this).data('tnr-show')).removeClass('d-none');
+                    }
+                });
+            }
+        }
+
+        show_hide();
+
+        const show_hide_alternate = function() {
+            const $tnrToggleAlternate = $(".tnr-toggle-alternate");
+
+            if($tnrToggleAlternate.length) {
+                $tnrToggleAlternate.on("click", function(){
+                    if($(this).data('alternate-1') !== '') {
+                        const $_alternate_1 = $("#" + $(this).data('alternate-1'));
+
+                        if($_alternate_1.hasClass("d-none")) {
+                            $_alternate_1.removeClass("d-none");
+                        } else {
+                            $_alternate_1.addClass("d-none");
+                        }
+                    }
+
+                    if($(this).data('alternate-2') !== '') {
+                        const $_alternate_2 = $("#" + $(this).data('alternate-2'));
+
+                        if($_alternate_2.hasClass("d-none")) {
+                            $_alternate_2.removeClass("d-none");
+                        } else {
+                            $_alternate_2.addClass("d-none");
+                        }
+                    }
+                });
+            }
+        }
+
+        show_hide_alternate();
+    }
+
+    const sortables = function() {
+        if(typeof dragula == 'undefined') {
+            console.warn('Warning - dragula.min.js is not loaded.');
+            return;
+        }
+
+        let sortOrder = function(value, index, array) {
+            const containers = $('.' + value).toArray();
+            const _obj = $("#" + value);
+
+            let drake = dragula(containers, {
+                mirrorContainer: document.querySelector('.' + value),
+                moves: function (el, container, handle) {
+                    return handle.classList.contains('tnr-sort-handle');
+                }
+            });
+
+            drake.on('drop', function() {
+                let _new_order = [];
+
+                _obj.children().each(function() {
+                    _new_order.push($(this).data("entry-id"));
+                });
+
+                _tnr_xhr['setSortOrder'](_new_order, _obj);
+            });
+        };
+
+        const _sortables = ['contact-methods-sortable', 'contact-fields-sortable'];
+
+        _sortables.forEach(sortOrder);
     }
 
     const xhrCalls = function() {
@@ -197,6 +268,7 @@ var Tnr = function () {
     return {
         initLayoutInteractions: function() {
             layoutInteractions();
+            sortables();
             xhrCalls();
         },
 
@@ -292,6 +364,23 @@ var Tnr = function () {
             };
 
             toastr.error(title, message);
+        },
+
+        setFieldMaxLength: function(value) {
+            // Show max length field only if the field type is
+            // "Text" (1), "Number" (5), "Phone" (8), "Password" (11) or "Textarea" (12)
+            if($.inArray(value, ['1', '5', '8', '11', '12']) > -1) {
+                $("#max-length-container").removeClass("d-none");
+            } else {
+                $("#max-length-container").addClass("d-none");
+            }
+
+            // Show extensions field only if the field type is "File" (10)
+            if(value === '10') {
+                $("#extensions-container").removeClass("d-none");
+            } else {
+                $("#extensions-container").addClass("d-none");
+            }
         }
     }
 }();

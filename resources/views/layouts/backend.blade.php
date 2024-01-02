@@ -94,6 +94,8 @@
 <script src="{{ asset('backend/plugins/select2/js/i18n/'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
 <script src="{{ asset('backend/plugins/dragula/dragula.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/xeditable/js/bootstrap-editable.js') }}"></script>
+<script src="{{ asset('backend/plugins/ays/jquery.are-you-sure.js') }}"></script>
+<script src="{{ asset('backend/plugins/ays/ays-beforeunload-shim.js') }}"></script>
 
 <script src="{{ asset('backend/js/mono.js') }}"></script>
 <script src="{{ asset('backend/js/_tnr.js') }}"></script>

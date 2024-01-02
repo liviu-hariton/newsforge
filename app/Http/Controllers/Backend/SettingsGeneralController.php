@@ -6,6 +6,8 @@ use App\Events\SettingsUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ContactOptionRequest;
 use App\Http\Requests\Backend\SettingsGeneralRequest;
+use App\Models\ContactFieldType;
+use App\Models\ContactForm;
 use App\Models\ContactOption;
 use App\Models\ContactOptionType;
 use App\Models\Settings;
@@ -39,6 +41,8 @@ class SettingsGeneralController extends Controller
             'social_networks' => $settings->socialNetworks(),
             'contact_methods' => ContactOptionType::all(),
             'contact_options' => ContactOption::with('type')->orderBy('sort_order')->get(),
+            'form_field_types' => ContactFieldType::all(),
+            'form_fields' => ContactForm::with('type')->orderBy('sort_order')->get(),
         ]);
     }
 
@@ -172,6 +176,59 @@ class SettingsGeneralController extends Controller
         return response([
             'status' => 'success',
             'message' => 'Contact option map has been successfully updated!'
+        ]);
+    }
+
+    public function storeContactField(Request $request, ContactForm $contactForm)
+    {
+        // A custom Request class is not used in this case because we need to
+        // redirect the user back to the settings page with the modal form open
+        // (a custom flash session variable is used for this)
+        $validator = validator(
+            $request->all(),
+            [
+                'name' => 'required|max:255',
+                'name_as_placeholder' => 'nullable|boolean',
+                'description' => 'nullable|max:255',
+                'columns' => 'required|integer',
+                'contact_field_type_id' => 'required|integer',
+                // Require max length field only if the field type is
+                // "Text" (1), "Number" (5), "Phone" (8), "Password" (11) or "Textarea" (12)
+                'max_length' => 'exclude_unless:contact_field_type_id,1,5,8,11,12|required|integer',
+                'required' => 'nullable|boolean',
+                // Require extensions field only if the field type is "File" (10)
+                'extensions' => 'exclude_unless:contact_field_type_id,10|required|string',
+                'active' => 'nullable|boolean',
+                'notes' => 'nullable|max:255',
+            ],
+            [
+                'contact_field_type_id' => 'The field type is required',
+                'name' => 'The field name is required',
+                'extensions' => 'You have to mentions the allowed file extensions',
+                'max_length' => 'You have to mentions the maximum length of the field',
+            ]
+        );
+
+        if($validator->fails()) {
+            session()->flash('open-new-form-field-modal');
+
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $contactForm->create($validated);
+
+        return redirect()->route('admin.settings.general')->with('success', 'Contact form field added successfully');
+    }
+
+    public function deleteContactField(ContactForm $data)
+    {
+        $data->delete();
+
+        return response([
+            'status' => 'success',
+            'message' => 'Contacting method deleted successfully'
         ]);
     }
 }

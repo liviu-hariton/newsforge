@@ -1,4 +1,4 @@
-<div class="card p-0 tnr-sort-container">
+<div class="card p-0 contact-methods-sort-container">
     <div class="card-header px-3 pt-3 header-elements-inline">
         <h5 class="card-title text-primary">Contacting methods</h5>
         <div class="header-elements">
@@ -11,9 +11,9 @@
     <div class="card-body px-3">
         <table class="table table-hover table-striped">
             <tbody
-                class="tnr-sortable"
-                id="tnr-sortable"
-                data-container="tnr-sort-container"
+                class="contact-methods-sortable"
+                id="contact-methods-sortable"
+                data-container="contact-methods-sort-container"
                 data-model="App^Models^ContactOption"
                 data-route="{{ route('admin.update-sort-order') }}"
             >
@@ -34,7 +34,7 @@
 <div id="new-contact-method" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="{{ route('admin.settings.add.contact.method') }}" name="f-new-contact-method" id="f-new-contact-method">
+            <form method="post" action="{{ route('admin.settings.add.contact.method') }}" name="f-new-contact-method" id="f-new-contact-method" class="tnr-ays">
                 @csrf
                 @method('PUT')
 
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label for="value-new-method">Value:</label>
-                        <input type="text" class="form-control" name="value" id="value-new-method" value="">
+                        <input type="text" class="form-control" name="value" id="value-new-method" value="{{ old('value') }}">
 
                         @error('value')
                         <div class="text-danger">{{ $message }}</div>
