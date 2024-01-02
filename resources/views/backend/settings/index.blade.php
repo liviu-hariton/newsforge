@@ -10,7 +10,7 @@
                     <a class="nav-link active" data-toggle="pill" href="#contact"><i class="bi bi-envelope"></i> Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#fiscal"><i class="bi bi-bank2"></i> Banking</a>
+                    <a class="nav-link" data-toggle="pill" href="#fiscal"><i class="bi bi-bank2"></i> Fiscal</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#social"><i class="bi bi-share-fill"></i> Social</a>
@@ -27,7 +27,7 @@
                     @include('backend.settings.sections.contact')
                 </div>
                 <div class="tab-pane fade" id="fiscal">
-                    <p>Banking</p>
+                    @include('backend.settings.sections.fiscal')
                 </div>
                 <div class="tab-pane fade" id="social">
                     @include('backend.settings.sections.social')

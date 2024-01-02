@@ -67,6 +67,30 @@ var Tnr = function () {
 
         icon_select2();
 
+        const select2List = function() {
+            if (!$().select2) {
+                console.warn('Warning - select2.js is not loaded.');
+                return;
+            }
+
+            $('.select2').each(function(e){
+                $(this).select2({
+                    language: _locale
+                });
+            });
+
+            $('.select2-search-modal').each(function(e){
+                var _dropdown_parent = $(this).data('modal_parent');
+
+                $(this).select2({
+                    language: _locale,
+                    dropdownParent: $('#' + _dropdown_parent)
+                });
+            });
+        }
+
+        select2List();
+
         const toggleInlineEdit = function() {
             $(".tnr-show-inline-edits").each(function() {
                 $(this).on("mouseover", function(){

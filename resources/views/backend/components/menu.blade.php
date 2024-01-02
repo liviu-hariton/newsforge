@@ -59,6 +59,7 @@
                     <ul class="collapse" id="ads" data-parent="#sidebar-menu">
                         <div class="sub-menu">
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Campaigns</span></a></li>
+                            <li><a class="sidenav-item-link" href="#"><span class="nav-text">Banners</span></a></li>
                             <li><a class="sidenav-item-link" href="#"><span class="nav-text">Clients</span></a></li>
                         </div>
                     </ul>

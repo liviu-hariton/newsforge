@@ -107,6 +107,17 @@ class SettingsGeneralRequest extends FormRequest
 
             'latitude' => ['nullable', 'numeric', new Latitude],
             'longitude' => ['nullable', 'numeric', new Longitude],
+
+            // Fiscal data
+            'company' => 'required_if:group,fiscal|string|max:255',
+            'country' => 'required_if:group,fiscal|string',
+            'region' => 'required_if:group,fiscal|string|max:255',
+            'locality' => 'required_if:group,fiscal|string|max:255',
+            'address_line_1' => 'required_if:group,fiscal|string|max:255',
+            'address_line_2' => 'nullable|string|max:255',
+            'postal_code' => 'nullable|string|max:255',
+            'vat_id' => 'nullable|string|max:255',
+            'other' => 'nullable|string',
         ];
     }
 
@@ -157,6 +168,13 @@ class SettingsGeneralRequest extends FormRequest
             'google_maps_api_key' => 'The Google Maps API Key is not valid',
             'latitude' => 'The latitude must be a valid value<br />(between -90 and 90 degrees, usually a <em class="text-black-50">48.200022871201654</em> format)',
             'longitude' => 'The longitude must be a valid value<br />(between -180 and 180 degrees, usually a <em class="text-black-50">17.087633309325387</em> format)',
+
+            // Fiscal data
+            'company' => 'You must enter your company name',
+            'country' => 'Choose a country of residence',
+            'region' => 'Choose a region of residence',
+            'locality' => 'Choose a locality of residence',
+            'address_line_1' => 'Fill in the address of residence',
         ];
     }
 }
