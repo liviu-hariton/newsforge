@@ -58,7 +58,3 @@
         </a>
     </td>
 </tr>
-
-@if($data->type->id === 10)
-
-@endif

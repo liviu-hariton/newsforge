@@ -15,6 +15,8 @@ Route::post('load-mailer-form-fields', [SettingsGeneralController::class, 'loadM
 Route::delete('settings/delete-contact-method/{data}', [SettingsGeneralController::class, 'deleteContactMethod'])->name('settings.delete.contact.method');
 Route::delete('settings/delete-contact-field/{data}', [SettingsGeneralController::class, 'deleteContactField'])->name('settings.delete.contact.field');
 Route::put('update-contact-option-map', [SettingsGeneralController::class, 'saveContactOptionMap'])->name('update-contact-option-map');
+Route::put('update-contact-map', [SettingsGeneralController::class, 'saveContactMap'])->name('update-contact-map');
+Route::patch('update-setting-value', [SettingsGeneralController::class, 'saveSettingValue'])->name('update-setting-value');
 
 /*
  * Backend sections

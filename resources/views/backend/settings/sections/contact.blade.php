@@ -7,3 +7,9 @@
         @include('backend.settings.blocks.contact.contact-form')
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-12 col-12">
+        @include('backend.settings.blocks.contact.contact-map')
+    </div>
+</div>

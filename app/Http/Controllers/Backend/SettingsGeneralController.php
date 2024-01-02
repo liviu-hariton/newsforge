@@ -231,4 +231,57 @@ class SettingsGeneralController extends Controller
             'message' => 'Contacting method deleted successfully'
         ]);
     }
+
+    public function saveContactMap(Request $request, Settings $settings)
+    {
+        $validator = validator(
+            $request->all(),
+            [
+                'latitude' => ['required', 'numeric', new Latitude],
+                'longitude' => ['required', 'numeric', new Longitude]
+            ]
+        );
+
+        if($validator->fails()) {
+            return response([
+                'status' => 'error',
+                'message' => 'Invalid latitude or longitude'
+            ]);
+        }
+
+        $validated = $validator->validated();
+
+        $settings_group = 'other';
+
+        foreach($validated as $key=>$value) {
+            $settings->updateOrCreate(
+                ['key' => $key, 'group' => $settings_group],
+                ['group' => $settings_group, 'value' => $value]
+            );
+        }
+
+        // Clear the site specific settings cache
+        event(new SettingsUpdated($settings));
+
+        return response([
+            'status' => 'success',
+            'message' => 'Contact map has been successfully updated!'
+        ]);
+    }
+
+    public function saveSettingValue(Request $request, Settings $settings)
+    {
+        $settings->updateOrCreate(
+            ['key' => $request->key, 'group' => $request->group],
+            ['group' => $request->group, 'value' => $request->value]
+        );
+
+        // Clear the site specific settings cache
+        event(new SettingsUpdated($settings));
+
+        return response([
+            'status' => 'success',
+            'message' => 'Setting value has been successfully updated!'
+        ]);
+    }
 }

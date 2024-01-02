@@ -162,23 +162,34 @@ var Tnr = function () {
 
         ays();
 
-        const show_hide = function() {
-            const $tnrToggle = $(".tnr-toggle");
+        const toggleTargetElement = function() {
+            $(".tnr-target-toggler").each(function(index) {
+                $(this).on("click", function(e){
+                    const _target_element = $(this).data('tnr-toggle-target');
+                    const _data_prevent = $(this).data('prevent');
 
-            if($tnrToggle.length) {
-                $tnrToggle.on("click", function(){
-                    if($(this).data('tnr-hide') !== '') {
-                        $($(this).data('tnr-hide')).addClass('d-none');
+                    if(_data_prevent !== undefined) {
+                        e.preventDefault();
                     }
 
-                    if($(this).data('tnr-show') !== '') {
-                        $($(this).data('tnr-show')).removeClass('d-none');
+                    if($("#" + _target_element).length) {
+                        if($("#" + _target_element).hasClass("d-none")) {
+                            $("#" + _target_element).removeClass("d-none");
+                        } else {
+                            $("#" + _target_element).addClass("d-none");
+                        }
+                    } else {
+                        if($("." + _target_element).hasClass("d-none")) {
+                            $("." + _target_element).removeClass("d-none");
+                        } else {
+                            $("." + _target_element).addClass("d-none");
+                        }
                     }
                 });
-            }
-        }
+            });
+        };
 
-        show_hide();
+        toggleTargetElement();
 
         const show_hide_alternate = function() {
             const $tnrToggleAlternate = $(".tnr-toggle-alternate");
@@ -218,25 +229,29 @@ var Tnr = function () {
         }
 
         let sortOrder = function(value, index, array) {
-            const containers = $('.' + value).toArray();
-            const _obj = $("#" + value);
+            const _sortable_el = $('.' + value);
 
-            let drake = dragula(containers, {
-                mirrorContainer: document.querySelector('.' + value),
-                moves: function (el, container, handle) {
-                    return handle.classList.contains('tnr-sort-handle');
-                }
-            });
+            if(_sortable_el.length) {
+                const containers = _sortable_el.toArray();
+                const _obj = $("#" + value);
 
-            drake.on('drop', function() {
-                let _new_order = [];
-
-                _obj.children().each(function() {
-                    _new_order.push($(this).data("entry-id"));
+                let drake = dragula(containers, {
+                    mirrorContainer: document.querySelector('.' + value),
+                    moves: function (el, container, handle) {
+                        return handle.classList.contains('tnr-sort-handle');
+                    }
                 });
 
-                _tnr_xhr['setSortOrder'](_new_order, _obj);
-            });
+                drake.on('drop', function() {
+                    let _new_order = [];
+
+                    _obj.children().each(function() {
+                        _new_order.push($(this).data("entry-id"));
+                    });
+
+                    _tnr_xhr['setSortOrder'](_new_order, _obj);
+                });
+            }
         };
 
         const _sortables = ['contact-methods-sortable', 'contact-fields-sortable'];
