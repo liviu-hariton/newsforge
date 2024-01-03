@@ -244,6 +244,64 @@ var Tnr = function () {
         }
 
         show_hide_alternate();
+
+        const countBulkSelected = function(set) {
+            let _items_count = 0;
+
+            $(set).each(function() {
+                if($(this).prop('checked')) {
+                    _items_count++;
+                }
+            });
+
+            return _items_count;
+        }
+
+        const bulk_select = function() {
+            const $tnrBulkSelect = $(".tnr-bulk-select");
+
+            if($tnrBulkSelect.length) {
+                const _table = $tnrBulkSelect.data('table');
+
+                $(_table).find('.tnr-bulk-select').change(function () {
+                    const set = $(this).data("set");
+                    const bulk_actions = $(this).data("bulk-actions");
+                    const checked = $(this).is(":checked");
+
+                    $(set).each(function () {
+                        if(checked) {
+                            $(this).prop("checked", true);
+                        } else {
+                            $(this).prop("checked", false);
+                        }
+                    });
+
+                    const _count = countBulkSelected(set);
+
+                    $("#tnr-bulk-count").html(_count);
+
+                    if(_count > 0) {
+                        $(bulk_actions).slideDown(500);
+                    } else {
+                        $(bulk_actions).slideUp(500);
+                    }
+                });
+
+                $(".tnr-bulk-item").click(function() {
+                    const _count = countBulkSelected(".tnr-bulk-item");
+
+                    $("#tnr-bulk-count").html(_count);
+
+                    if(_count > 0) {
+                        $('.bulk-actions').slideDown(500);
+                    } else {
+                        $('.bulk-actions').slideUp(500);
+                    }
+                });
+            }
+        }
+
+        bulk_select();
     }
 
     const sortables = function() {

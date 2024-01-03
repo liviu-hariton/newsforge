@@ -48,8 +48,6 @@
 
 <body class="navbar-fixed sidebar-fixed" id="body">
 
-<div id="toaster"></div>
-
 <div class="wrapper">
     @include('backend.components.menu')
 
@@ -68,8 +66,10 @@
     </div>
 </div>
 
+@yield('bulk-actions')
+
 @if(isset($_tnrs->google_maps_api_key))
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ $_tnrs->google_maps_api_key }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ $_tnrs->google_maps_api_key }}"></script>
 @endif
 
 <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
