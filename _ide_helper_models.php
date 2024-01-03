@@ -239,6 +239,63 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\ContactFieldType
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $type
+ * @property string|null $icon
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContactForm> $fields
+ * @property-read int|null $fields_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactFieldType whereType($value)
+ */
+	class ContactFieldType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ContactForm
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $name_as_placeholder
+ * @property string|null $description
+ * @property string|null $notes
+ * @property int $contact_field_type_id
+ * @property int $required
+ * @property int $max_length
+ * @property string|null $extensions
+ * @property int $columns
+ * @property int $active
+ * @property int $sort_order
+ * @property-read \App\Models\ContactFieldType $type
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereColumns($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereContactFieldTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereExtensions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereMaxLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereNameAsPlaceholder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereSortOrder($value)
+ */
+	class ContactForm extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ContactOption
  *
  * @property int $id
@@ -248,7 +305,7 @@ namespace App\Models{
  * @property string|null $longitude
  * @property int $active
  * @property int $sort_order
- * @property-read \App\Models\ContactOptionType|null $type
+ * @property-read \App\Models\ContactOptionType $type
  * @method static \Illuminate\Database\Eloquent\Builder|ContactOption newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactOption newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ContactOption query()
