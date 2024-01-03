@@ -21,3 +21,6 @@
     color: #fff;
 }
 
+.breadcrumb li, .breadcrumb li a {
+    font-size: 12px;
+}

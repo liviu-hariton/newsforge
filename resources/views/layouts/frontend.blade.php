@@ -47,6 +47,8 @@
 
 @include('frontend.components.main_menu')
 
+@yield('breadcrumbs')
+
 @yield('content')
 
 @include('frontend.components.footer')
