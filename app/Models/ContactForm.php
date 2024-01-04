@@ -11,7 +11,7 @@ class ContactForm extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'name_as_placeholder', 'description', 'notes', 'contact_field_type_id', 'required', 'max_length', 'extensions', 'columns', 'active', 'sort_order'
+        'name', 'slug', 'name_as_placeholder', 'description', 'notes', 'contact_field_type_id', 'required', 'max_length', 'extensions', 'columns', 'active', 'sort_order'
     ];
 
     public function type(): BelongsTo

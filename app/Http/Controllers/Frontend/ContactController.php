@@ -7,8 +7,15 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function contact()
+    public function index()
     {
-        return view('frontend.contact');
+        return view('frontend.contact.index', [
+            'breadcrumbs' => ['Contact']
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
     }
 }

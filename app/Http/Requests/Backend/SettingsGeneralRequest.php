@@ -118,6 +118,13 @@ class SettingsGeneralRequest extends FormRequest
             'postal_code' => 'nullable|string|max:255',
             'vat_id' => 'nullable|string|max:255',
             'other' => 'nullable|string',
+
+            // Contact form message structure
+            'contact_from_name' => 'required_if:group,contact|string|max:255',
+            'contact_from_email' => 'required_if:group,contact|string|max:255',
+            'contact_subject' => 'required_if:group,contact|string|max:255',
+            'contact_headers' => 'nullable|string',
+            'contact_message' => 'required_if:group,contact|string',
         ];
     }
 
@@ -175,6 +182,12 @@ class SettingsGeneralRequest extends FormRequest
             'region' => 'Choose a region of residence',
             'locality' => 'Choose a locality of residence',
             'address_line_1' => 'Fill in the address of residence',
+
+            // Contact form message structure
+            'contact_from_name' => 'The contact From name field is required',
+            'contact_from_email' => 'The contact From email field is required',
+            'contact_subject' => 'The contact Subject field is required',
+            'contact_message' => 'The contact Message field is required',
         ];
     }
 }

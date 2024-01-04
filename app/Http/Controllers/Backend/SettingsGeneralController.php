@@ -16,6 +16,7 @@ use App\Rules\Longitude;
 use Composer\InstalledVersions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 class SettingsGeneralController extends Controller
 {
@@ -216,6 +217,8 @@ class SettingsGeneralController extends Controller
         }
 
         $validated = $validator->validated();
+
+        $validated['slug'] = Str::slug($validated['name'], '_');
 
         $contactForm->create($validated);
 

@@ -46,6 +46,8 @@ function showTab(tab) {
     $('.nav-tabs a[href="#' + tab + '"]').tab('show');
 }
 
+var _last_focused_field;
+
 var Tnr = function () {
     const layoutInteractions = function() {
         const icon_select2 = function() {
@@ -67,7 +69,7 @@ var Tnr = function () {
 
         icon_select2();
 
-        const select2List = function() {
+        const select2_list = function() {
             if (!$().select2) {
                 console.warn('Warning - select2.js is not loaded.');
                 return;
@@ -89,9 +91,9 @@ var Tnr = function () {
             });
         }
 
-        select2List();
+        select2_list();
 
-        const toggleInlineEdit = function() {
+        const toggle_inline_edit = function() {
             $(".tnr-show-inline-edits").each(function() {
                 $(this).on("mouseover", function(){
                     $(this).find('.inline-edit-trigger').each(function() {
@@ -107,9 +109,9 @@ var Tnr = function () {
             });
         };
 
-        toggleInlineEdit();
+        toggle_inline_edit();
 
-        const inlineEdit = function() {
+        const inline_edit = function() {
             $(".tnr-inline-edit").each(function() {
                 $(this).on("click", function(e){
                     e.stopPropagation();
@@ -165,7 +167,7 @@ var Tnr = function () {
             });
         };
 
-        inlineEdit();
+        inline_edit();
 
         const ays = function() {
             if(!$().areYouSure) {
@@ -186,7 +188,7 @@ var Tnr = function () {
 
         ays();
 
-        const toggleTargetElement = function() {
+        const togle_target_element = function() {
             $(".tnr-target-toggler").each(function(index) {
                 $(this).on("click", function(e){
                     const _target_element = $(this).data('tnr-toggle-target');
@@ -213,7 +215,7 @@ var Tnr = function () {
             });
         };
 
-        toggleTargetElement();
+        togle_target_element();
 
         const show_hide_alternate = function() {
             const $tnrToggleAlternate = $(".tnr-toggle-alternate");
@@ -302,6 +304,42 @@ var Tnr = function () {
         }
 
         bulk_select();
+
+        const insert_at_cursor = function() {
+            $(".tnr-insert-at-cursor").each(function(index) {
+                $(this).on("click", function(e){
+                    const _data_content = $(this).data('content');
+                    const _data_prevent = $(this).data('prevent');
+
+                    if(_data_prevent !== undefined) {
+                        e.preventDefault();
+                    }
+
+                    // Insert the content at the cursor position
+                    if(_last_focused_field) {
+                        // Get the current value of the last focused field
+                        const _last_focused_field_val = $(_last_focused_field).val();
+
+                        // Get the start and end positions of the selection within the last focused field
+                        const _last_focused_field_start = _last_focused_field.selectionStart;
+                        const _last_focused_field_end = _last_focused_field.selectionEnd;
+
+                        // Create a new value by combining content before, new content, and content after the selection
+                        const _new_val = _last_focused_field_val.substring(0, _last_focused_field_start)
+                            + _data_content
+                            + _last_focused_field_val.substring(_last_focused_field_end);
+
+                        // Update the value of the last focused field with the newly created value
+                        $(_last_focused_field).val(_new_val);
+
+                        // Set the focus back to the last focused field
+                        $(_last_focused_field).focus();
+                    }
+                });
+            });
+        };
+
+        insert_at_cursor();
     }
 
     const sortables = function() {
@@ -483,5 +521,10 @@ var Tnr = function () {
 }();
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Keep track of the last focused element
+    $('input[type="text"], textarea').focus(function() {
+        _last_focused_field = this;
+    });
+
     Tnr.initCore();
 });

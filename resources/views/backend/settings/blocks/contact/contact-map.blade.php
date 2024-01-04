@@ -14,7 +14,7 @@
                     data-xhr="changeSettingsValue"
                     data-key="show_contact_map"
                     data-route="{{ route('admin.update-setting-value') }}"
-                    data-group="other"
+                    data-group="contact"
                     data-container="overall-contact-map-container"
                     name="show_contact_map"
                     id="show_contact_map"

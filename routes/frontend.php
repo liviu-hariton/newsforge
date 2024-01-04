@@ -5,16 +5,16 @@ use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+ * Ajax calls
+ */
 
+
+/*
+ * Frontend sections
+ */
+// Homepage
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+// Contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::put('/contact', [ContactController::class, 'store'])->name('contact.store');

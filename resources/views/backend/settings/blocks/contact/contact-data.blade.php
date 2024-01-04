@@ -3,7 +3,25 @@
         <h5 class="card-title text-primary">Contacting methods</h5>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="#new-contact-method" data-toggle="modal" class="list-icons-item text-dark" data-popup="tooltip" title="Add new method"><i class="bi bi-plus-circle"></i></a>
+                <div class="custom-control custom-switch custom-switch-square custom-control-info mr-2">
+                    <input
+                        type="checkbox"
+                        class="custom-control-input tnr-xhr"
+                        data-call-method="change"
+                        data-xhr="changeSettingsValue"
+                        data-key="show_contact_methods"
+                        data-route="{{ route('admin.update-setting-value') }}"
+                        data-group="contact"
+                        data-container="contact-methods-sort-container"
+                        name="show_contact_methods"
+                        id="show_contact_methods"
+                        value="1"
+                        {{ isset($_tnrs->show_contact_methods) ? 'checked' : '' }}
+                    >
+                    <label class="custom-control-label" for="show_contact_methods">show methods</label>
+                </div>
+                |
+                <a href="#new-contact-method" data-toggle="modal" class="list-icons-item text-success" data-popup="tooltip" title="Add new method"><i class="bi bi-plus-circle-fill"></i></a>
             </div>
         </div>
     </div>

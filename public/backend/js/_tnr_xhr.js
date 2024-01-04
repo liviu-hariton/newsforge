@@ -182,6 +182,7 @@ class TnrXHR {
                         type: 'DELETE',
                         success: function(response) {
                             Tnr.remove("#field-row-" + obj.data('id'));
+                            Tnr.remove("#field-as-tag-" + obj.data('id'));
 
                             Tnr.unblock();
 

@@ -1,28 +1,27 @@
 @extends('layouts.frontend')
 
 @section('breadcrumbs')
-    @breadcrumbs(['Test' => '/some-link', 'Other' => '/some-other', 'Contact'])
+    @breadcrumbs($breadcrumbs)
 @endsection
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h3 class="mt-4 mb-3">Contact us</h3>
-                        <p>
-                            Call or submit our online form to request an estimate or for general questions about Designed Publishing Inc. and our services. We look forward to serving you!
-                        </p>
-                    </div>
-                </div>
+                <form method="post" action="{{ route('contact.store') }}" name="f-contact" id="f-contact" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                <form id="contact-form" class="my-5">
                     <div class="row">
                         <div class="col-md-8">
+                            <h3 class="mb-3">Contact us</h3>
+                            <p>
+                                Call or submit our online form to request an estimate or for general questions about Designed Publishing Inc. and our services. We look forward to serving you!
+                            </p>
+
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Hello! Why are you contacting us today?</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
+                                <select class="form-control" id="exampleFormControlSelect1" name="exampleFormControlSelect1">
                                     <option>Please Select</option>
                                     <option>I need technical support</option>
                                     <option>I am finding issue in publishing article</option>
@@ -52,10 +51,11 @@
                                 <textarea class="form-control form-control-message" name="message" id="message" rows="7" required ></textarea>
                             </div>
 
-                            <button class="btn btn-primary solid blank mt-3" type="submit">Send Message</button>
+                            <button class="btn btn-primary solid blank mt-3" type="submit" id="go-contact">Send Message</button>
                         </div>
+
                         <div class="col-lg-4">
-                            <h4 class="text-black mb-4 mt-5 mt-lg-0">Hello! We’d like to make sure that your contact submission/feedback is directed to us. </h4>
+                            <h4 class="text-black mb-4">Hello! We’d like to make sure that your contact submission/feedback is directed to us. </h4>
                             <p class="lead">Please read through the following carefully before submitting below:</p>
 
                             <ul class="list-unstyled ">
@@ -64,9 +64,7 @@
                                 <li class="mb-3"> 2. If you would like to submit news, please see the “Submit News to Form” page that has more details. </li>
 
                                 <li class="mb-3">3. For more information on advertising, please see our  Advertising Information Page first.</li>
-
                             </ul>
-
                         </div>
                     </div>
                 </form>
