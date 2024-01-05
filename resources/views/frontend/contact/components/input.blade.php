@@ -47,7 +47,7 @@
 
         @if($data->type->type === 'checkbox')
             @foreach($data->input_options as $option)
-                <div class="custom-control custom-checkbox">
+                <div class="custom-control custom-checkbox checkbox-danger">
                     <input
                         class="custom-control-input"
                         type="{{ $data->type->type }}"
@@ -64,7 +64,7 @@
 
         @if($data->type->type === 'radio')
             @foreach($data->input_options as $option)
-                <div class="custom-control custom-radio">
+                <div class="custom-control custom-radio radio-danger">
                     <input
                         class="custom-control-input"
                         type="{{ $data->type->type }}"

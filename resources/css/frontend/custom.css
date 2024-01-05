@@ -34,3 +34,14 @@
     color: #8c8a8a !important;
     font-size: 12px !important;
 }
+
+.radio-danger .custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #fe5461;
+    background-color: #fe5461;
+}
+
+.checkbox-danger .custom-control-input:checked ~ .custom-control-label::before {
+    color: #ffffff;
+    background-color: #fe5461;
+    border-color: #fe5461;
+}
