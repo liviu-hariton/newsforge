@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\BreadcrumbsService;
 use Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
     {
         // Register any services or bindings if needed
         $this->app->bind('breadcrumbs', function () {
-            return new \App\Services\BreadcrumbsService();
+            return new BreadcrumbsService();
         });
     }
 

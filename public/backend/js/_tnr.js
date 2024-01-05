@@ -516,6 +516,13 @@ var Tnr = function () {
             } else {
                 $("#extensions-container").addClass("d-none");
             }
+
+            // Show options field only if the field type is "Checkbox" (13), "Radio" (14) or "Select" (15)
+            if($.inArray(value, ['13', '14', '15']) > -1) {
+                $("#input-options-container").removeClass("d-none");
+            } else {
+                $("#input-options-container").addClass("d-none");
+            }
         }
     }
 }();

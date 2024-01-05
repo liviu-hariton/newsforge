@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactOption;
+use App\Traits\ModelCache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BackendController extends Controller
 {
+    use ModelCache;
+
     public function changeAttribute(Request $request) {
         $model = str_replace("^", "\\", $request->model);
 
@@ -36,6 +40,8 @@ class BackendController extends Controller
                     'sort_order' => $item_order
                 ]);
         }
+
+        $this->forceClearCache($model);
 
         return response([
             'status' => 'success',

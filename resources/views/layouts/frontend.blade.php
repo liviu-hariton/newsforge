@@ -14,6 +14,12 @@
     @include('frontend.components.favicon')
 
     @vite(['resources/css/frontend.css'])
+
+    <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
+
+    <script>
+        const _locale = '{{ str_replace('_', '-', app()->getLocale()) }}';
+    </script>
 </head>
 <body>
 
@@ -54,5 +60,7 @@
 @include('frontend.components.footer')
 
 @vite(['resources/js/frontend.js'])
+
+@stack('scripts')
 </body>
 </html>

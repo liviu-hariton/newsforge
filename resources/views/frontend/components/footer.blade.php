@@ -1,5 +1,3 @@
-<div class="py-40"></div>
-
 <footer class="footer footer-main ">
     <div class="container">
         <div class="row justify-content-center">

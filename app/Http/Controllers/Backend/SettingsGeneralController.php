@@ -199,14 +199,16 @@ class SettingsGeneralController extends Controller
                 'required' => 'nullable|boolean',
                 // Require extensions field only if the field type is "File" (10)
                 'extensions' => 'exclude_unless:contact_field_type_id,10|required|string',
+                'input_options' => 'exclude_unless:contact_field_type_id,13,14,15|required|string',
                 'active' => 'nullable|boolean',
                 'notes' => 'nullable|max:255',
             ],
             [
                 'contact_field_type_id' => 'The field type is required',
                 'name' => 'The field name is required',
-                'extensions' => 'You have to mentions the allowed file extensions',
                 'max_length' => 'You have to mentions the maximum length of the field',
+                'extensions' => 'You have to mentions the allowed file extensions',
+                'input_options' => 'You have to mentions the available options for the field',
             ]
         );
 

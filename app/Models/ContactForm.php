@@ -2,20 +2,71 @@
 
 namespace App\Models;
 
+use App\Traits\ModelCache;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContactForm extends Model
 {
+    use ModelCache;
+
     // Disable timestamps
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'slug', 'name_as_placeholder', 'description', 'notes', 'contact_field_type_id', 'required', 'max_length', 'extensions', 'columns', 'active', 'sort_order'
+        'name', 'slug', 'name_as_placeholder', 'description', 'notes', 'contact_field_type_id', 'required', 'max_length', 'extensions', 'input_options', 'columns', 'active', 'sort_order'
     ];
+
+    protected $casts = [
+        // Cast to array as it is declared as a JSON field, so we can use it in the blade template as an array
+        'input_options' => 'array',
+    ];
+
+    // Set the cache key name
+    static public string $cache_key = 'contact_form_fields';
 
     public function type(): BelongsTo
     {
         return $this->belongsTo(ContactFieldType::class, 'contact_field_type_id');
+    }
+
+    protected function inputOptions(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => $this->prepareInputOptions($value),
+        );
+    }
+
+    /**
+     * Prepare the input options for the radio, checkbox or select field type
+     *
+     * <br>Sample input:
+     * <br>1,Option 1
+     * <br>2,Option 2
+     * <br>3,Option 3
+     *
+     * @param string $value
+     * @return bool|string|null
+     */
+    private function prepareInputOptions(string $value): bool|string|null
+    {
+        $result = [];
+
+        $sets = preg_split('/\r?\n/', $value);
+        $sets = array_filter($sets);
+
+        foreach($sets as $set) {
+            $pair = explode(',', $set);
+
+            if(!empty($pair[0]) && !empty($pair[1])) {
+                $result[] = [
+                    'value' => $pair[0],
+                    'label' => $pair[1],
+                ];
+            }
+        }
+
+        return count($result) > 0 ? json_encode($result) : null;
     }
 }

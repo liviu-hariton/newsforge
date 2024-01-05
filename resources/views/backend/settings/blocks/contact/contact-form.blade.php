@@ -240,29 +240,43 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="custom-control custom-switch custom-switch-square custom-control-info mt-2">
-                                    <input type="checkbox" class="custom-control-input" name="required" id="required" value="1" {{ old('required') !== null && (int) old('required') === 1 ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="required">required field</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-square custom-control-info mt-2">
+                                        <input type="checkbox" class="custom-control-input" name="required" id="required" value="1" {{ old('required') !== null && (int) old('required') === 1 ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="required">required field</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-square custom-control-info mt-2">
+                                        <input type="checkbox" class="custom-control-input" name="active" id="field-active" value="1" {{ old('active') !== null && (int) old('active') === 1 ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="field-active">active</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <div id="extensions-container" class="{{ (int) old('contact_field_type_id') === 10 ? '' : 'd-none'}}">
                                     <input type="text" class="form-control" name="extensions" id="extensions" value="{{ old('extensions') }}">
-                                    <span class="form-text text-muted">Supported extensions, comma separated. Example: pdf, txt</span>
+                                    <span class="form-text text-muted">Supported extensions, comma separated. Example: .pdf,.txt,image/*</span>
 
                                     @error('extensions')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-square custom-control-info mt-2">
-                            <input type="checkbox" class="custom-control-input" name="active" id="field-active" value="1" {{ old('active') !== null && (int) old('active') === 1 ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="field-active">active</label>
+                                <div id="input-options-container" class="{{ in_array((int) old('contact_field_type_id'), ['13', '14', '15']) ? '' : 'd-none' }}">
+                                    <div class="form-group">
+                                        <label for="input-options">Options:</label>
+                                        <textarea rows="3" class="form-control" name="input_options" id="input-options" placeholder="value,label&#10;value,label&#10;value,label&#10;">{{ old('input_options') }}</textarea>
+                                        <span class="form-text text-muted">One set per line. Set example: <em class="text-danger">value,label</em></span>
+                                    </div>
+
+                                    @error('input_options')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
 

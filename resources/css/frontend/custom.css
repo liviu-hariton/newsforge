@@ -24,3 +24,13 @@
 .breadcrumb li, .breadcrumb li a {
     font-size: 12px;
 }
+
+.contact-map {
+    height: 600px;
+    width: 100%;
+}
+
+.text-muted {
+    color: #8c8a8a !important;
+    font-size: 12px !important;
+}
