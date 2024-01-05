@@ -4,7 +4,7 @@
         <label for="{{ $data->slug }}">{{ $data->name }}</label>
         @endif
 
-        @if(!in_array($data->type->type, ['file', 'textarea']))
+        @if(!in_array($data->type->type, ['file', 'textarea', 'checkbox', 'radio', 'select']))
         <input
             class="form-control"
             name="{{ $data->slug }}"
@@ -43,6 +43,56 @@
             <label class="custom-file-label" for="customFile">Choose file</label>
             @endif
         </div>
+        @endif
+
+        @if($data->type->type === 'checkbox')
+            @foreach($data->input_options as $option)
+                <div class="custom-control custom-checkbox">
+                    <input
+                        class="custom-control-input"
+                        type="{{ $data->type->type }}"
+                        name="{{ $data->slug }}[]"
+                        id="{{ $data->slug }}-{{ $option['value'] }}"
+                        value="{{ $option['value'] }}"
+                        {{ $data->required === 1 ? 'required' : '' }}
+                        {{ old($data->slug) ? (in_array($option['value'], old($data->slug)) ? 'checked' : '') : '' }}
+                    >
+                    <label class="custom-control-label" for="{{ $data->slug }}-{{ $option['value'] }}">{{ $option['label'] }}</label>
+                </div>
+            @endforeach
+        @endif
+
+        @if($data->type->type === 'radio')
+            @foreach($data->input_options as $option)
+                <div class="custom-control custom-radio">
+                    <input
+                        class="custom-control-input"
+                        type="{{ $data->type->type }}"
+                        name="{{ $data->slug }}"
+                        id="{{ $data->slug }}-{{ $option['value'] }}"
+                        value="{{ $option['value'] }}"
+                        {{ $data->required === 1 ? 'required' : '' }}
+                        {{ old($data->slug) ? (old($data->slug) === $option['value'] ? 'checked' : '') : '' }}
+                    >
+                    <label class="custom-control-label" for="{{ $data->slug }}-{{ $option['value'] }}">{{ $option['label'] }}</label>
+                </div>
+            @endforeach
+        @endif
+
+        @if($data->type->type === 'select')
+        <select
+            class="form-control"
+            name="{{ $data->slug }}"
+            id="{{ $data->slug }}"
+            {{ $data->required === 1 ? 'required' : '' }}
+        >
+            @foreach($data->input_options as $option)
+            <option
+                value="{{ $option['value'] }}"
+                {{ old($data->slug) ? (old($data->slug) === $option['value'] ? 'selected' : '') : '' }}
+            >{{ $option['label'] }}</option>
+            @endforeach
+        </select>
         @endif
 
         @if($data->description)
