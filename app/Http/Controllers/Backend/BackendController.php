@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\ContactOption;
+use App\Traits\ModelCache;
 use App\Traits\UniqueSlug;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class BackendController extends Controller
 {
-    use UniqueSlug;
+    use UniqueSlug, ModelCache;
 
     public function changeAttribute(Request $request) {
         $model = str_replace("^", "\\", $request->model);
