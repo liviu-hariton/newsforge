@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Contact extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = [
+        'from_name',
+        'from_email',
+        'subject',
+        'message',
+        'headers',
+        'attachments',
+        'ipv4',
+    ];
 }

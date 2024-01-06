@@ -86,6 +86,7 @@
             id="{{ $data->slug }}"
             {{ $data->required === 1 ? 'required' : '' }}
         >
+            <option value="">Choose {{ $data->name }}</option>
             @foreach($data->input_options as $option)
             <option
                 value="{{ $option['value'] }}"

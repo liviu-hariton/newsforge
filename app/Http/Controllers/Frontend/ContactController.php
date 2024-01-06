@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\ContactForm;
 use App\Models\ContactOption;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class ContactController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Contact $contact)
     {
         dd($request->all());
     }

@@ -506,8 +506,10 @@ var Tnr = function () {
             // "Text" (1), "Number" (5), "Phone" (8), "Password" (11) or "Textarea" (12)
             if($.inArray(value, ['1', '5', '8', '11', '12']) > -1) {
                 $("#max-length-container").removeClass("d-none");
+                $("#min-length-container").removeClass("d-none");
             } else {
                 $("#max-length-container").addClass("d-none");
+                $("#min-length-container").addClass("d-none");
             }
 
             // Show extensions field only if the field type is "File" (10)

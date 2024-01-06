@@ -16,7 +16,7 @@ class ContactForm extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'slug', 'name_as_placeholder', 'description', 'notes', 'contact_field_type_id', 'required', 'max_length', 'extensions', 'input_options', 'columns', 'active', 'sort_order'
+        'name', 'slug', 'name_as_placeholder', 'description', 'notes', 'contact_field_type_id', 'required', 'min_length', 'max_length', 'extensions', 'input_options', 'columns', 'active', 'sort_order'
     ];
 
     protected $casts = [

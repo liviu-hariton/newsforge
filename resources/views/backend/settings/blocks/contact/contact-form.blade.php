@@ -71,15 +71,17 @@
 
                     <div class="contact-form-fields-container">
                         @foreach($form_fields  as $form_field)
+                        @if($form_field->type->type !== 'file')
                         <span
-                            class="badge badge-square {{ in_array($form_field->slug, $message_placeholders) ? 'badge-success' : 'badge-danger' }} tnr-insert-at-cursor clickable"
-                            data-popup="tooltip"
-                            title="{{ in_array($form_field->slug, $message_placeholders) ? 'Used' : 'Not used' }}"
-                            id="field-as-tag-{{ $form_field->id }}"
-                            data-content="[+{{ $form_field->slug }}+]"
-                        >
+                                class="badge badge-square {{ in_array($form_field->slug, $message_placeholders) ? 'badge-success' : 'badge-danger' }} tnr-insert-at-cursor clickable"
+                                data-popup="tooltip"
+                                title="{{ in_array($form_field->slug, $message_placeholders) ? 'Used' : 'Not used' }}"
+                                id="field-as-tag-{{ $form_field->id }}"
+                                data-content="[+{{ $form_field->slug }}+]"
+                            >
                             {{ $form_field->name }}
                         </span>
+                        @endif
                         @endforeach
                     </div>
 
@@ -220,9 +222,9 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <label for="field-type">&nbsp;</label>
-                                <select data-placeholder="Choose the field type" class="form-control select-icons" name="contact_field_type_id" id="field-type" style="width:100%;" onchange="Tnr.setFieldMaxLength(this.value)">
+                                <select data-placeholder="Choose field type" class="form-control select-icons" name="contact_field_type_id" id="field-type" style="width:100%;" onchange="Tnr.setFieldMaxLength(this.value)">
                                     <option value=""></option>
                                     @foreach($form_field_types as $field_type)
                                     <option value="{{ $field_type->id }}" data-icon="{{ $field_type->icon }}" {{ (int) old('contact_field_type_id') === $field_type->id ? 'selected="selected"' : '' }}>{{ $field_type->name }}</option>
@@ -233,10 +235,20 @@
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div id="min-length-container" class="{{ in_array((int) old('contact_field_type_id'), ['1', '5', '8', '11', '12']) ? '' : 'd-none' }}">
+                                    <label for="min_length">Character limit (min):</label>
+                                    <input type="text" class="form-control" name="min_length" id="min_length" value="{{ old('min_length') ?? '1' }}">
+
+                                    @error('min_length')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div id="max-length-container" class="{{ in_array((int) old('contact_field_type_id'), ['1', '5', '8', '11', '12']) ? '' : 'd-none' }}">
                                     <label for="max_length">Character limit (max):</label>
-                                    <input type="text" class="form-control" name="max_length" id="max_length" value="{{ old('max_length') }}">
+                                    <input type="text" class="form-control" name="max_length" id="max_length" value="{{ old('max_length') ?? '100' }}">
 
                                     @error('max_length')
                                     <div class="text-danger">{{ $message }}</div>
@@ -266,7 +278,7 @@
                             <div class="col-md-9">
                                 <div id="extensions-container" class="{{ (int) old('contact_field_type_id') === 10 ? '' : 'd-none'}}">
                                     <input type="text" class="form-control" name="extensions" id="extensions" value="{{ old('extensions') }}">
-                                    <span class="form-text text-muted">Supported extensions, comma separated. Example: .pdf,.txt,image/*</span>
+                                    <span class="form-text text-muted">Supported <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" data-popup="tooltip" title="See all available options">Mime types <i class="fas fa-external-link-alt"></i></a>, comma separated. Example: image/*,audio/*</span>
 
                                     @error('extensions')
                                     <div class="text-danger">{{ $message }}</div>

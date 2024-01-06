@@ -213,6 +213,7 @@ class SettingsGeneralController extends Controller
                 'contact_field_type_id' => 'required|integer',
                 // Require max length field only if the field type is
                 // "Text" (1), "Number" (5), "Phone" (8), "Password" (11) or "Textarea" (12)
+                'min_length' => 'exclude_unless:contact_field_type_id,1,5,8,11,12|required|integer',
                 'max_length' => 'exclude_unless:contact_field_type_id,1,5,8,11,12|required|integer',
                 'required' => 'nullable|boolean',
                 // Require extensions field only if the field type is "File" (10)
@@ -224,6 +225,7 @@ class SettingsGeneralController extends Controller
             [
                 'contact_field_type_id' => 'The field type is required',
                 'name' => 'The field name is required',
+                'min_length' => 'You have to mentions the minimum length of the field',
                 'max_length' => 'You have to mentions the maximum length of the field',
                 'extensions' => 'You have to mentions the allowed file extensions',
                 'input_options' => 'You have to mentions the available options for the field',
