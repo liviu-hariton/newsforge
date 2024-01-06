@@ -238,7 +238,7 @@ class SettingsGeneralController extends Controller
 
         $validated = $validator->validated();
 
-        $validated['slug'] = Str::slug($validated['name'], '_');
+        $validated['slug'] = Str::slug($validated['name']);
 
         $contactForm->create($validated);
 
