@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Translation\PotentiallyTranslatedString;
 
 class Longitude implements ValidationRule
 {
@@ -11,7 +12,7 @@ class Longitude implements ValidationRule
      * Match valid longitude values within the range of -180 to 179.999...
      * degrees for values less than 180, with optional decimals
      *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param Closure(string): PotentiallyTranslatedString $fail
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
