@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 
 trait ModelCache
 {
-    // Clear the cache when the model is created, updated, or deleted
+    // Clear the cache after the model is created, updated, or deleted
     public static function bootModelCache(): void
     {
         $cache_key = self::$cache_key;
