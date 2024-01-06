@@ -44,7 +44,25 @@ class SettingsGeneralController extends Controller
             'contact_options' => ContactOption::with('type')->orderBy('sort_order')->get(),
             'form_field_types' => ContactFieldType::all(),
             'form_fields' => ContactForm::with('type')->orderBy('sort_order')->get(),
+            'message_placeholders' => $this->getContactMessagePlaceholders($settings),
         ]);
+    }
+
+    public function getContactMessagePlaceholders(Settings $settings)
+    {
+        return $settings::whereGroup('contact')
+            ->pluck('value') // Get only the value column
+            // Apply the regex pattern to each value and flatten the resulting array
+            ->flatMap(function($value) {
+                // The regex pattern will match all the strings between the [+ and +]
+                // for example: [+some_placeholder_name+] will match 'some_placeholder_name'
+                preg_match_all("/\[\+(.*)\+\]/", $value, $matches);
+
+                return $matches[1];
+            })
+            ->unique() // Remove duplicates
+            ->values() // Re-index the array
+            ->all();
     }
 
     public function loadMailerFormFields(Request $request, Settings $settings)

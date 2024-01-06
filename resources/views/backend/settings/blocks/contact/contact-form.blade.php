@@ -71,7 +71,15 @@
 
                     <div class="contact-form-fields-container">
                         @foreach($form_fields  as $form_field)
-                        <span class="badge badge-square badge-secondary tnr-insert-at-cursor clickable" id="field-as-tag-{{ $form_field->id }}" data-content="[+{{ $form_field->slug }}+]">{{ $form_field->name }}</span>
+                        <span
+                            class="badge badge-square {{ in_array($form_field->slug, $message_placeholders) ? 'badge-success' : 'badge-danger' }} tnr-insert-at-cursor clickable"
+                            data-popup="tooltip"
+                            title="{{ in_array($form_field->slug, $message_placeholders) ? 'Used' : 'Not used' }}"
+                            id="field-as-tag-{{ $form_field->id }}"
+                            data-content="[+{{ $form_field->slug }}+]"
+                        >
+                            {{ $form_field->name }}
+                        </span>
                         @endforeach
                     </div>
 

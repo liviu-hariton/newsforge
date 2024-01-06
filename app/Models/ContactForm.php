@@ -47,26 +47,23 @@ class ContactForm extends Model
      * <br>3,Option 3
      *
      * @param string $value
-     * @return bool|string|null
+     * @return string|null
      */
-    private function prepareInputOptions(string $value): bool|string|null
+    private function prepareInputOptions(string $value): ?string
     {
-        $result = [];
-
+        // Split the input string into sets using newline as the delimiter
         $sets = preg_split('/\r?\n/', $value);
-        $sets = array_filter($sets);
 
-        foreach($sets as $set) {
+        // Use array_map to process each set and filter out invalid pairs
+        $result = array_map(function ($set) {
+            // Split each set into a pair using comma as the delimiter
             $pair = explode(',', $set);
 
-            if(!empty($pair[0]) && !empty($pair[1])) {
-                $result[] = [
-                    'value' => $pair[0],
-                    'label' => $pair[1],
-                ];
-            }
-        }
+            // Check if both elements of the pair are non-empty
+            return !empty($pair[0]) && !empty($pair[1]) ? ['value' => $pair[0], 'label' => $pair[1]] : null;
+        }, array_filter($sets));
 
-        return count($result) > 0 ? json_encode($result) : null;
+        // Check if there are valid pairs and encode the result to JSON
+        return $result ? json_encode(array_values($result)) : null;
     }
 }
