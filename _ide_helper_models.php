@@ -239,6 +239,44 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Contact
+ *
+ * @property int $id
+ * @property string $from_name
+ * @property string $from_email
+ * @property string $subject
+ * @property string $message
+ * @property string|null $headers
+ * @property string|null $attachments
+ * @property string $ipv4
+ * @property int $is_read
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereAttachments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereFromEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereFromName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereHeaders($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereIpv4($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereIsRead($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereSubject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact withoutTrashed()
+ */
+	class Contact extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ContactFieldType
  *
  * @property int $id
@@ -264,6 +302,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property int $name_as_placeholder
  * @property string|null $description
  * @property string|null $notes
@@ -271,6 +310,7 @@ namespace App\Models{
  * @property int $required
  * @property int $max_length
  * @property string|null $extensions
+ * @property array|null $input_options
  * @property int $columns
  * @property int $active
  * @property int $sort_order
@@ -284,11 +324,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereExtensions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereInputOptions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereMaxLength($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereNameAsPlaceholder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereNotes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereSortOrder($value)
  */
 	class ContactForm extends \Eloquent {}

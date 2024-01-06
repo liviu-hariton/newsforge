@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ModelCache;
 use App\Traits\UniqueSlug;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContactForm extends Model
 {
-    use UniqueSlug;
+    use UniqueSlug, ModelCache;
 
     // Disable timestamps
     public $timestamps = false;
