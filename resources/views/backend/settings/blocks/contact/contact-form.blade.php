@@ -136,6 +136,24 @@
                         @enderror
                     </div>
 
+                    <div class="custom-control custom-switch custom-switch-square custom-control-info mr-2">
+                        <input
+                            type="checkbox"
+                            class="custom-control-input tnr-xhr"
+                            data-call-method="change"
+                            data-xhr="changeSettingsValue"
+                            data-key="send_contact_copy"
+                            data-route="{{ route('admin.update-setting-value') }}"
+                            data-group="contact"
+                            data-container="contact-fields-sort-container"
+                            name="send_contact_copy"
+                            id="send_contact_copy"
+                            value="1"
+                            {{ isset($_tnrs->send_contact_copy) ? 'checked' : '' }}
+                        >
+                        <label class="custom-control-label" for="send_contact_copy">send a copy to the sender</label>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-pill mr-2 mt-5">
                         Save <i class="fas fa-chevron-right"></i>
                     </button>
@@ -278,7 +296,7 @@
                             <div class="col-md-9">
                                 <div id="extensions-container" class="{{ (int) old('contact_field_type_id') === 10 ? '' : 'd-none'}}">
                                     <input type="text" class="form-control" name="extensions" id="extensions" value="{{ old('extensions') }}">
-                                    <span class="form-text text-muted">Supported <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" data-popup="tooltip" title="See all available options">Mime types <i class="fas fa-external-link-alt"></i></a>, comma separated. Example: image/*,audio/*</span>
+                                    <span class="form-text text-muted">Supported <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" data-popup="tooltip" title="See all available options">Mime types <i class="fas fa-external-link-alt"></i></a>, comma separated. Example: image/*,audio/*<br />Enter * for everything</span>
 
                                     @error('extensions')
                                     <div class="text-danger">{{ $message }}</div>

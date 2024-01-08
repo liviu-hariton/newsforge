@@ -10,7 +10,9 @@ trait UniqueSlug
     public static function bootUniqueSlug(): void
     {
         static::saving(function($model) {
-            $model->slug = $model->generateUniqueSlug($model->slug);
+            $slug_separator = self::$slug_separator ?? '-';
+
+            $model->slug = $model->generateUniqueSlug($model->slug, $slug_separator);
         });
     }
 
@@ -20,19 +22,19 @@ trait UniqueSlug
      * @param  string $slug
      * @return string
      */
-    public function generateUniqueSlug(string $slug): string
+    public function generateUniqueSlug(string $slug, string $slug_separator): string
     {
-        $slugNumber = $this->extractSlugNumber($slug);
+        $slugNumber = $this->extractSlugNumber($slug, $slug_separator);
 
         $existingSlugs = $this->getExistingSlugs($slug);
 
         // If the current slug is not in use, return it
         if(!$this->slugInUse($slug, $existingSlugs)) {
-            return $slug.($slugNumber ? "-".$slugNumber : '');
+            return $slug.($slugNumber ? $slug_separator.$slugNumber : '');
         }
 
         // Find the first available unique slug
-        return $this->findUniqueSlug($slug, $existingSlugs, $slugNumber);
+        return $this->findUniqueSlug($slug, $existingSlugs, $slugNumber, $slug_separator);
     }
 
     /**
@@ -41,12 +43,12 @@ trait UniqueSlug
      * @param  string $slug
      * @return int|null
      */
-    private function extractSlugNumber(string &$slug): ?int
+    private function extractSlugNumber(string &$slug, string $slug_separator): ?int
     {
         // Extract the trailing number from the slug if it has one
-        if(preg_match('/-(\d+)$/', $slug, $matches)) {
+        if(preg_match('/'.$slug_separator.'(\d+)$/', $slug, $matches)) {
             // Remove the trailing number from the slug
-            $slug = Str::replaceLast("-".$matches[1], '', $slug);
+            $slug = Str::replaceLast($slug_separator.$matches[1], '', $slug);
 
             return (int) $matches[1];
         }
@@ -74,12 +76,12 @@ trait UniqueSlug
      * @param  int|null $slugNumber
      * @return string
      */
-    private function findUniqueSlug(string $slug, array $existingSlugs, ?int $slugNumber): string
+    private function findUniqueSlug(string $slug, array $existingSlugs, ?int $slugNumber, string $slug_separator): string
     {
         $i = $slugNumber ? ($slugNumber + 1) : 1;
 
         // Iterate to find the first available unique slug
-        while(in_array($newSlug = $slug."-".$i, $existingSlugs)) {
+        while(in_array($newSlug = $slug.$slug_separator.$i, $existingSlugs)) {
             $i++;
         }
 

@@ -18,4 +18,9 @@ class Contact extends Model
         'attachments',
         'ipv4',
     ];
+
+    protected $casts = [
+        // Cast to array as it is declared as a JSON field, so we can use it as an array
+        'attachments' => 'array',
+    ];
 }

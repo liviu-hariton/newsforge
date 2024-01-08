@@ -99,5 +99,9 @@
         @if($data->description)
         <span class="form-text text-muted">{{ $data->description }}</span>
         @endif
+
+        @error($data->slug)
+        <div class="validation-invalid-label">{{ $message }}</div>
+        @enderror
     </div>
 </div>

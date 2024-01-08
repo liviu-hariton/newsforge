@@ -27,6 +27,9 @@ class ContactForm extends Model
     // Set the cache key name
     static public string $cache_key = 'contact_form_fields';
 
+    // Set the unique slug separator
+    static public string $slug_separator = '_';
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(ContactFieldType::class, 'contact_field_type_id');

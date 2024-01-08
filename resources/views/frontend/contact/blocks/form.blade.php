@@ -69,7 +69,7 @@
                         maxlength: "{{ $contact_form_field->max_length }}",
                         @endif
 
-                        @if($contact_form_field->type->type === 'file')
+                        @if($contact_form_field->type->type === 'file' && $contact_form_field->extensions !== '*')
                         accept: "{{ $contact_form_field->extensions }}",
                         @endif
                     },
@@ -78,10 +78,10 @@
                 },
                 messages: {
                     @foreach($contact_form_fields as $contact_form_field)
-                    @if($contact_form_field->type->type === 'file')
+                    @if($contact_form_field->type->type === 'file' && $contact_form_field->extensions !== '*')
                     {{ $contact_form_field->slug }}: {
                         accept: "Please select files of type {{ $contact_form_field->extensions }}",
-                    }
+                    },
                     @endif
                     @endforeach
                 }
