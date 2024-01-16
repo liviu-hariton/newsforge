@@ -26,8 +26,8 @@ class ContactCopy extends Mailable
         public string $the_subject,
         public string $the_message,
         public string $recipient_name,
-        public array $the_attachments,
-        public string $the_headers,
+        public ?array $the_attachments = [],
+        public string $the_headers = '',
     )
     {
         //
@@ -105,10 +105,12 @@ class ContactCopy extends Mailable
     {
         $attachments = [];
 
-        foreach($this->the_attachments as $attachment) {
-            $attachments[] = Attachment::fromPath(
-                Storage::disk('public')->path($attachment)
-            );
+        if(is_array($this->the_attachments)) {
+            foreach($this->the_attachments as $attachment) {
+                $attachments[] = Attachment::fromPath(
+                    Storage::disk('public')->path($attachment)
+                );
+            }
         }
 
         return $attachments;

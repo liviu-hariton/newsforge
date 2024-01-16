@@ -1,4 +1,4 @@
-@if($_tnrs->show_contact_methods)
+@if(isset($_tnrs->show_contact_methods))
     <div class="col-lg-4">
         <h4 class="text-black mb-4">Contact us</h4>
         <p class="lead">These are the methods for contacting us</p>

@@ -94,6 +94,21 @@ return new class extends Migration
                 'type' => 'textarea',
                 'icon' => 'fas fa-paragraph',
             ],
+            [
+                'name' => 'Radio',
+                'type' => 'radio',
+                'icon' => 'far fa-dot-circle',
+            ],
+            [
+                'name' => 'Checkbox',
+                'type' => 'checkbox',
+                'icon' => 'far fa-check-square',
+            ],
+            [
+                'name' => 'Select list',
+                'type' => 'select',
+                'icon' => 'fas fa-stream',
+            ],
         ];
 
         foreach($data as $item) {

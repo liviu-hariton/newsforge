@@ -32,13 +32,14 @@ class FormService {
                 }
 
                 // Process select, checkbox, or radio fields
-                if (in_array($field_data->type->type, ['checkbox', 'radio', 'select'])) {
+                if(in_array($field_data->type->type, ['checkbox', 'radio', 'select'])) {
                     $options = [];
 
                     $k = 0;
 
                     // Handle array values (as multiple values can be selected for a checkbox by the user)
                     if(is_array($field_value)) {
+
                         foreach($field_data->input_options as $input_option_value) {
                             if(in_array($input_option_value['value'], $field_value)) {
                                 $options[] = $field_data->input_options[$k]['label'];
@@ -61,7 +62,7 @@ class FormService {
                     }
 
                     // Replace placeholder with the processed options
-                    $output = str_replace('[+' . $field_name . '+]', implode(', ', $options), $output);
+                    $output = str_replace('[+'.$field_name.'+]', implode(', ', $options), $output);
                 }
             }
         }

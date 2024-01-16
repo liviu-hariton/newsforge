@@ -35,7 +35,7 @@
             <select id="mailer_type" name="mailer_type" class="form-control tnr-xhr" data-call-method="change" data-xhr="loadMailerFormFields" data-route="{{ route('admin.load.mailer.form.fields') }}" data-target="mailer-form-fields-container">
                 <option value="">-- Select --</option>
                 @foreach($mailers as $mailer_key => $mailer_name)
-                <option value="{{ $mailer_key }}" {!! old('mailer_type', $_tnrs->mailer_type) === $mailer_key ? 'selected="selected"' : '' !!}>{{ $mailer_name }}</option>
+                <option value="{{ $mailer_key }}" {!! old('mailer_type', $_tnrs->mailer_type ?? '') === $mailer_key ? 'selected="selected"' : '' !!}>{{ $mailer_name }}</option>
                 @endforeach
             </select>
         </div>

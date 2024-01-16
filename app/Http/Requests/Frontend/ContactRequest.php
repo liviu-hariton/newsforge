@@ -34,6 +34,8 @@ class ContactRequest extends FormRequest
 
                 if($field_properties->required) {
                     $field_rules[] = 'required';
+                } else {
+                    $field_rules[] = 'nullable';
                 }
 
                 if(in_array($field_properties->type->type, ['text', 'password', 'textarea', 'datetime-local', 'time', 'tel'])) {

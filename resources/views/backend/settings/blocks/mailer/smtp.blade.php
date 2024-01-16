@@ -44,7 +44,7 @@
         <select id="smtp_encryption" name="smtp_encryption" class="form-control">
             <option value="">-- none --</option>
             @foreach($encryption_methods as $encryption_method_id => $encryption_method_name)
-                <option value="{{ $encryption_method_id }}" {!! old('smtp_encryption', $_tnrs->smtp_encryption) === $encryption_method_id ? 'selected="selected"' : '' !!}>{{ $encryption_method_name }}</option>
+                <option value="{{ $encryption_method_id }}" {!! old('smtp_encryption', $_tnrs->smtp_encryption ?? '') === $encryption_method_id ? 'selected="selected"' : '' !!}>{{ $encryption_method_name }}</option>
             @endforeach
         </select>
     </div>

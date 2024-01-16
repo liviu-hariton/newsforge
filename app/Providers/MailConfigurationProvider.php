@@ -23,9 +23,11 @@ class MailConfigurationProvider extends ServiceProvider
 
         $email_config = (object) config('_tnrs');
 
-        Config::set('mail.mailer', $email_config->mailer_type);
+        if(isset($email_config->mailer_type)) {
+            Config::set('mail.mailer', $email_config->mailer_type);
 
-        $this->setMailerConfig($email_config);
+            $this->setMailerConfig($email_config);
+        }
     }
 
     private function setMailerConfig(object $email_config): void

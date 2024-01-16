@@ -4,9 +4,12 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
+
 /*
  * Ajax calls
  */
+
 
 
 /*

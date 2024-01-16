@@ -12,7 +12,9 @@ trait UniqueSlug
         static::saving(function($model) {
             $slug_separator = self::$slug_separator ?? '-';
 
-            $model->slug = $model->generateUniqueSlug($model->slug, $slug_separator);
+            if(isset($model->slug)) {
+                $model->slug = $model->generateUniqueSlug($model->slug, $slug_separator);
+            }
         });
     }
 

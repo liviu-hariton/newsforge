@@ -13,6 +13,7 @@ use App\Models\ContactOptionType;
 use App\Models\Settings;
 use App\Rules\Latitude;
 use App\Rules\Longitude;
+use App\Traits\ModelCache;
 use Composer\InstalledVersions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;

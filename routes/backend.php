@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\SettingsGeneralController;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
+
 /*
  * Ajax calls
  */
