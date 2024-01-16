@@ -171,6 +171,7 @@ return [
 
         \App\Providers\SettingsServiceProvider::class,
         \App\Providers\BreadcrumbsServiceProvider::class,
+        \App\Providers\MailConfigurationProvider::class,
 
     ])->toArray(),
 

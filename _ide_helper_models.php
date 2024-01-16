@@ -247,9 +247,11 @@ namespace App\Models{
  * @property string $subject
  * @property string $message
  * @property string|null $headers
- * @property string|null $attachments
+ * @property array|null $attachments
  * @property string $ipv4
  * @property int $is_read
+ * @property int $copy_sent
+ * @property string|null $sent_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -258,6 +260,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contact onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact query()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereAttachments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereCopySent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereFromEmail($value)
@@ -267,6 +270,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereIpv4($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereIsRead($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereSentAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact withTrashed()
@@ -308,6 +312,7 @@ namespace App\Models{
  * @property string|null $notes
  * @property int $contact_field_type_id
  * @property int $required
+ * @property int $min_length
  * @property int $max_length
  * @property string|null $extensions
  * @property array|null $input_options
@@ -326,6 +331,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereInputOptions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereMaxLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereMinLength($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereNameAsPlaceholder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContactForm whereNotes($value)

@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ContactRequest;
+use App\Jobs\SendContactCopy;
+use App\Mail\ContactCopy;
 use App\Models\Contact;
 use App\Models\ContactForm;
 use App\Models\ContactOption;
+use App\Services\FormService;
 use App\Traits\FileUpload;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
     use FileUpload;
+
+    public function __construct(private readonly FormService $formService){}
 
     public function index()
     {
@@ -36,12 +41,13 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
 
-        $contact_data['from_name'] = $this->setFieldValue($validated, 'contact_from_name');
-        $contact_data['from_email'] = $this->setFieldValue($validated, 'contact_from_email');
-        $contact_data['subject'] = $this->setFieldValue($validated, 'contact_subject');
-        $contact_data['message'] = $this->setFieldValue($validated, 'contact_message');
-        $contact_data['headers'] = $this->setFieldValue($validated, 'contact_headers');
+        $contact_data['from_name'] = $this->formService->setFieldValue($validated, 'contact_from_name');
+        $contact_data['from_email'] = $this->formService->setFieldValue($validated, 'contact_from_email');
+        $contact_data['subject'] = $this->formService->setFieldValue($validated, 'contact_subject');
+        $contact_data['message'] = $this->formService->setFieldValue($validated, 'contact_message');
+        $contact_data['headers'] = $this->formService->setFieldValue($validated, 'contact_headers');
 
+        // Handle attachments uploads, if any
         $attachments = [];
 
         foreach($request->file() as $file_field=>$file) {
@@ -54,72 +60,27 @@ class ContactController extends Controller
 
         $contact_data['ipv4'] = $request->ip();
 
-        $contact->create($contact_data);
+        // Create a new contact record
+        $contact_entry = $contact->create($contact_data);
+
+        // notify admin via email and Notification system
+
+
+        if(_tnrs('send_contact_copy')) {
+            $this->sendCopy($contact_entry);
+        }
 
         return redirect()->route('contact')->with('success', 'Your message has been sent successfully.');
     }
 
     /**
-     * Set field values in a template based on provided data.
+     * Send a copy to the user, if the option is enabled
      *
-     * @param array  $data Associative array of field names and values.
-     * @param string $field_placeholder Placeholder pattern in the template.
-     *
-     * @return string|null Processed template with replaced field values.
+     * @param Contact $contact_entry
+     * @return void
      */
-    private function setFieldValue(array $data, string $field_placeholder): ?string
+    public function sendCopy(Contact $contact_entry)
     {
-        // Retrieve the initial template with placeholders
-        $output = _tnrs($field_placeholder);
-
-        // Iterate through provided data
-        foreach($data as $field_name => $field_value) {
-            // Skip processing if the field value is an UploadedFile instance
-            if(!($field_value instanceof UploadedFile)) {
-                // Retrieve field data from the database based on the field slug (or field name as passed from the form)
-                $field_data = ContactForm::with('type')->where('slug', $field_name)->first();
-
-                // Replace placeholder with the field value if it's not an array and not a select, checkbox, or radio field
-                if (!is_array($field_value) && !in_array($field_data->type->type, ['checkbox', 'radio', 'select'])) {
-                    $output = str_replace('[+'.$field_name.'+]', $field_value, $output);
-                }
-
-                // Process select, checkbox, or radio fields
-                if (in_array($field_data->type->type, ['checkbox', 'radio', 'select'])) {
-                    $options = [];
-
-                    $k = 0;
-
-                    // Handle array values (as multiple values can be selected for a checkbox by the user)
-                    if(is_array($field_value)) {
-                        foreach($field_data->input_options as $input_option_value) {
-                            if(in_array($input_option_value['value'], $field_value)) {
-                                $options[] = $field_data->input_options[$k]['label'];
-                            }
-
-                            $k++;
-                        }
-                    } else {
-                        // Handle non-array values (for radio and select fields)
-                        // @todo: Handle select fields with multiple values
-                        foreach($field_data->input_options as $input_option_value) {
-                            foreach ($input_option_value as $pair_key => $pair_value) {
-                                if($pair_value === $field_value) {
-                                    $options[] = $field_data->input_options[$k]['label'];
-                                }
-                            }
-
-                            $k++;
-                        }
-                    }
-
-                    // Replace placeholder with the processed options
-                    $output = str_replace('[+' . $field_name . '+]', implode(', ', $options), $output);
-                }
-            }
-        }
-
-        // Return the final processed template
-        return $output;
+        dispatch(new SendContactCopy($contact_entry));
     }
 }
