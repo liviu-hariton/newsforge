@@ -74,7 +74,13 @@
                         </li>
 
                         <li class="dropdown-footer">
-                            <a class="dropdown-link-item" href="sign-in.html"> <i class="mdi mdi-logout"></i> Log Out
+                            <a
+                                class="dropdown-link-item prevent-default"
+                                href="{{ route('admin.logout') }}"
+                                onclick="$('#logout-form').submit();"
+                                {{-- The #logout-form is rendered in /resources/views/layouts/backend.blade.php --}}
+                            >
+                                <i class="mdi mdi-logout"></i> Log Out
                             </a>
                         </li>
                     </ul>

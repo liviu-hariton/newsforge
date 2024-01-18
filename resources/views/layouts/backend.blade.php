@@ -68,6 +68,12 @@
 
 @yield('bulk-actions')
 
+@auth()
+    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@endauth
+
 @if(isset($_tnrs->google_maps_api_key))
 <script src="https://maps.googleapis.com/maps/api/js?key={{ $_tnrs->google_maps_api_key }}"></script>
 @endif

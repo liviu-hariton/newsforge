@@ -626,3 +626,8 @@ Bootstrap Alerts
 .alert-danger .alert-link {
     color: #843534;
 }
+
+.login-signup {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

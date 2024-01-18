@@ -59,6 +59,12 @@
 
 @include('frontend.components.footer')
 
+@auth()
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@endauth
+
 @vite([
     'resources/js/frontend.js',
     'resources/js/frontend/plugins/jquery-validation/dist/localization/messages_'.str_replace('_', '-', app()->getLocale()).'.js'])

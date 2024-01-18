@@ -340,6 +340,16 @@ var Tnr = function () {
         };
 
         insert_at_cursor();
+
+        const prevent_default = function() {
+            $(".prevent-default").each(function(index) {
+                $(this).on("click", function(e){
+                    e.preventDefault();
+                });
+            });
+        }
+
+        prevent_default();
     }
 
     const sortables = function() {
