@@ -12,6 +12,42 @@
 
 namespace App\Models{
 /**
+ * App\Models\AdminProfile
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $firstname
+ * @property string $lastname
+ * @property string|null $phone
+ * @property string|null $avatar
+ * @property string|null $public_name
+ * @property string|null $public_email
+ * @property string|null $public_phone
+ * @property string|null $public_avatar
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile wherePublicAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile wherePublicEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile wherePublicName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile wherePublicPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AdminProfile whereUserId($value)
+ */
+	class AdminProfile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Article
  *
  * @property int $id
@@ -469,6 +505,7 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\AdminProfile|null $adminProfile
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticlePhotoGallery> $articlePhotoGalleries
  * @property-read int|null $article_photo_galleries_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ArticlePhotoGalleryImage> $articlePhotoGalleryImages
@@ -483,6 +520,7 @@ namespace App\Models{
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ * @property-read \App\Models\UserProfile|null $userProfile
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -496,6 +534,34 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\UserProfile
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $firstname
+ * @property string $lastname
+ * @property string|null $phone
+ * @property string|null $avatar
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserProfile whereUserId($value)
+ */
+	class UserProfile extends \Eloquent {}
 }
 
