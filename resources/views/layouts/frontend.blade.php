@@ -55,6 +55,8 @@
 
 @yield('breadcrumbs')
 
+@include('frontend.components.header-alerts')
+
 @yield('content')
 
 @include('frontend.components.footer')

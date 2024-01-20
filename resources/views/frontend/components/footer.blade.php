@@ -1,9 +1,9 @@
 <footer class="footer footer-main ">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-sm-12 col-lg-6 text-center">
+            <div class="col-md-8 col-sm-12 col-lg-7 text-center">
                 <a href="index.html"><img src="{{ asset('frontend/images/logos/footer-logo.png') }}" alt="" class="img-fluid"></a>
-                <p class="mt-4">We perfectly balances the simplicity of a clean, eye-catching blog with the flexibility to create unique page layouts.</p>
+                <p class="mt-4">Unveiling Perspectives, Igniting Insight: Your Daily Scroll through Tomorrow's News Today!</p>
 
                 <ul class="list-inline footer-social">
                     <li class="li list-inline-item"><a href="https://www.facebook.com/themefisher"><i class="fab fa-facebook"></i></a></li>
@@ -15,7 +15,7 @@
                 </ul>
 
                 <div class="copyright-text text-center">
-                    <p class="mb-0">© All Copyright Reserved to - <a href="https://themefisher.com/" target="_blank">Themefisher</a></p>
+                    <p class="mb-0">Crafted with <a href="https://newsforge.eu/" target="_blank">NewsForge CMS</a>, using <a href="https://github.com/themefisher/newsbit-bootstrap" target="_blank">Newsbit</a> - a free theme by <a href="https://themefisher.com/" target="_blank">Themefisher</a></p>
                 </div>
             </div>
 

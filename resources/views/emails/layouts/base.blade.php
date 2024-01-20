@@ -54,40 +54,22 @@
             body {
                 background-color: #f6f6f6;
             }
-            .ExternalClass {
-                width: 100%;
-            }
-            .ExternalClass,
-            .ExternalClass p,
-            .ExternalClass span,
-            .ExternalClass font,
-            .ExternalClass td,
-            .ExternalClass div {
-                line-height: 100%;
-            }
-            .apple-link a {
-                color: inherit !important;
-                font-family: inherit !important;
-                font-size: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-                text-decoration: none !important;
-            }
-            #MessageViewBody a {
-                color: inherit;
-                text-decoration: none;
-                font-size: inherit;
-                font-family: inherit;
-                font-weight: inherit;
-                line-height: inherit;
-            }
-            .btn-primary table td:hover {
-                background-color: #34495e !important;
-            }
-            .btn-primary a:hover {
-                background-color: #34495e !important;
-                border-color: #34495e !important;
-            }
+
+
+        }
+
+        h1, h2, h3, h4, h5, p, hr {
+            margin-top: 5px !important;
+            margin-bottom: 5px !important;
+            padding: 0 !important;
+        }
+
+        p {
+            line-height: 14px !important;
+        }
+
+        hr {
+            border-color: #ffffff;
         }
     </style>
 </head>

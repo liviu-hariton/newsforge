@@ -631,3 +631,28 @@ Bootstrap Alerts
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+/***
+User account
+***/
+.user-account-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.user-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+.user-img img{
+    width: 100%;
+}
+.user-name {
+    text-align: center;
+    font-size: 22px;
+    margin: 15px 0px 10px;
+}

@@ -20,25 +20,27 @@ class MailConfigurationProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->setMailerConfig();
+    }
 
+    private function setMailerConfig(): void
+    {
         $email_config = (object) config('_tnrs');
 
         if(isset($email_config->mailer_type)) {
             Config::set('mail.mailer', $email_config->mailer_type);
 
-            $this->setMailerConfig($email_config);
-        }
-    }
+            Config::set('mail.from.address', $email_config->from_address);
+            Config::set('mail.from.name', $email_config->from_name);
 
-    private function setMailerConfig(object $email_config): void
-    {
-        match ($email_config->mailer_type) {
-            'mailgun' => $this->setMailgun($email_config),
-            'ses' => $this->setSES($email_config),
-            'postmark' => $this->setPostmark($email_config),
-            'sendmail' => $this->setSendmail($email_config),
-            default => $this->setSMTP($email_config),
-        };
+            match ($email_config->mailer_type) {
+                'mailgun' => $this->setMailgun($email_config),
+                'ses' => $this->setSES($email_config),
+                'postmark' => $this->setPostmark($email_config),
+                'sendmail' => $this->setSendmail($email_config),
+                default => $this->setSMTP($email_config),
+            };
+        }
     }
 
     private function setSMTP(object $email_config): void

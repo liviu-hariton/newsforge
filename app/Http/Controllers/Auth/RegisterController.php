@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -40,6 +41,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function redirectTo()
+    {
+        return route('user.dashboard');
+    }
+
     public function showRegistrationForm()
     {
         return view('auth.frontend-register');
@@ -68,10 +74,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Add the default role (user) to created account
+        $user->roles()->attach(
+            Role::where('name', 'user')->first()
+        );
+
+        return $user;
     }
 }

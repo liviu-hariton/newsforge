@@ -1097,3 +1097,44 @@ a.list-icons-item.collapsed i {
 .backend-login {
     margin-top: 100px;
 }
+
+.validation-invalid-label,
+.validation-valid-label {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    display: block;
+    color: #ef5350;
+    position: relative;
+    padding-left: 1.625rem;
+    font-size: .875rem;
+}
+
+.validation-valid-label {
+    color: #25b372
+}
+
+.validation-invalid-label:before,
+.validation-valid-label:before {
+    font-family: "bootstrap-icons";
+    font-size: 1rem;
+    position: absolute;
+    top: .1875rem;
+    left: 0;
+    display: inline-block;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.validation-invalid-label:empty,
+.validation-valid-label:empty {
+    display: none
+}
+
+.validation-invalid-label:before {
+    content: "\F623"
+}
+
+.validation-valid-label:before {
+    content: "\F26E"
+}
