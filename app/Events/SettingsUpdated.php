@@ -15,7 +15,7 @@ class SettingsUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $settings;
+    public Settings $settings;
 
     /**
      * Create a new event instance.

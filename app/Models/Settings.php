@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ModelCache;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 

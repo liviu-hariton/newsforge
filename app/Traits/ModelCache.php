@@ -9,19 +9,21 @@ trait ModelCache
     // Clear the cache after the model is created, updated, or deleted
     public static function bootModelCache(): void
     {
-        $cache_key = self::$cache_key;
+        if(property_exists(get_called_class(), "cache_key")) {
+            $cache_key = self::$cache_key;
 
-        static::created(function() use ($cache_key) {
-            Cache::forget($cache_key);
-        });
+            static::created(function() use ($cache_key) {
+                Cache::forget($cache_key);
+            });
 
-        static::updated(function() use ($cache_key) {
-            Cache::forget($cache_key);
-        });
+            static::updated(function() use ($cache_key) {
+                Cache::forget($cache_key);
+            });
 
-        static::deleted(function() use ($cache_key) {
-            Cache::forget($cache_key);
-        });
+            static::deleted(function() use ($cache_key) {
+                Cache::forget($cache_key);
+            });
+        }
     }
 
     /**
