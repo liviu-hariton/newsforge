@@ -1138,3 +1138,17 @@ a.list-icons-item.collapsed i {
 .validation-valid-label:before {
     content: "\F26E"
 }
+
+.my-profile-image {
+    width: 100%;
+}
+.my-profile-image img {
+    width: 60%;
+}
+
+.public-profile-preview {
+    margin-bottom: 50px;
+}
+.public-profile-preview .media-sm-wrapper img {
+    width: 50px;
+}

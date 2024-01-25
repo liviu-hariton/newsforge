@@ -350,6 +350,17 @@ var Tnr = function () {
         }
 
         prevent_default();
+
+        const file_input = function() {
+            if(!bsCustomFileInput) {
+                console.warn('Warning - bs-custom-file-input.min.js is not loaded.');
+                return;
+            }
+
+            bsCustomFileInput.init();
+        };
+
+        file_input();
     }
 
     const sortables = function() {

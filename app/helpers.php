@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminProfileController;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 
@@ -87,5 +88,18 @@ if(!function_exists('consecutiveNumbers')) {
         }
 
         return $numbers;
+    }
+}
+
+if(!function_exists('adminUserProfileSections')) {
+    /**
+     * Get the available sections for the admin user profile
+     * as defined in the AdminProfileController
+     *
+     * @return array
+     */
+    function adminUserProfileSections(): array
+    {
+        return AdminProfileController::profileSections();
     }
 }

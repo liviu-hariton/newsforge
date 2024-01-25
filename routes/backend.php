@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\SettingsGeneralController;
@@ -39,4 +40,13 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::delete('settings/general', [SettingsGeneralController::class, 'reset'])->name('settings.general.reset');
     Route::put('settings/add-contact-method', [SettingsGeneralController::class, 'storeContactMethod'])->name('settings.add.contact.method');
     Route::put('settings/add-contact-field', [SettingsGeneralController::class, 'storeContactField'])->name('settings.add.contact.field');
+
+    // Admin user profile
+    Route::controller(AdminProfileController::class)->group(function() {
+        foreach(AdminProfileController::profileSections() as $profile_section_key=>$profile_section_properties) {
+            Route::get('profile/'.$profile_section_key, $profile_section_key)->name('profile.'.$profile_section_key);
+        }
+
+        Route::put('profile', 'updateProfile')->name('profile.update');
+    });
 });

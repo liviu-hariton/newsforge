@@ -43,35 +43,29 @@
 
                 <li class="dropdown user-menu">
                     <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <img src="{{ asset('backend/images/user/user-xs-01.jpg') }}" class="user-image rounded-circle"
-                             alt="User Image"/>
-                        <span class="d-none d-lg-inline-block">John Doe</span>
+                        <img
+                            @if(auth()->user()->adminProfile->avatar)
+                            src="{{ url('storage/'.auth()->user()->adminProfile->avatar) }}"
+                            @else
+                            src="https://placehold.co/100"
+                            @endif
+                            class="user-image rounded-circle"
+                            alt="{{ auth()->user()->adminProfile->firstname }} {{ auth()->user()->adminProfile->lastname }}"
+                        />
+                        <span class="d-none d-lg-inline-block">{{ auth()->user()->adminProfile->firstname }} {{ auth()->user()->adminProfile->lastname }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
+                        @foreach(adminUserProfileSections() as $profile_section_key=>$profile_section_properties)
                         <li>
-                            <a class="dropdown-link-item" href="user-profile.html">
-                                <i class="mdi mdi-account-outline"></i>
-                                <span class="nav-text">My Profile</span>
+                            <a
+                                class="dropdown-link-item"
+                                href="{{ route('admin.profile.'.$profile_section_key) }}"
+                            >
+                                {!! $profile_section_properties['icon'] !!}
+                                <span class="nav-text">{{ $profile_section_properties['name'] }}</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-link-item" href="email-inbox.html">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span class="nav-text">Message</span>
-                                <span class="badge badge-pill badge-primary">24</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-link-item" href="user-activities.html">
-                                <i class="mdi mdi-diamond-stone"></i>
-                                <span class="nav-text">Activitise</span></a>
-                        </li>
-                        <li>
-                            <a class="dropdown-link-item" href="user-account-settings.html">
-                                <i class="mdi mdi-settings"></i>
-                                <span class="nav-text">Account Setting</span>
-                            </a>
-                        </li>
+                        @endforeach
 
                         <li class="dropdown-footer">
                             <a

@@ -102,6 +102,7 @@
 <script src="{{ asset('backend/plugins/xeditable/js/bootstrap-editable.js') }}"></script>
 <script src="{{ asset('backend/plugins/ays/jquery.are-you-sure.js') }}"></script>
 <script src="{{ asset('backend/plugins/ays/ays-beforeunload-shim.js') }}"></script>
+<script src="{{ asset('backend/plugins/bs-custom-file-input.min.js') }}"></script>
 
 <script src="{{ asset('backend/js/mono.js') }}"></script>
 <script src="{{ asset('backend/js/_tnr.js') }}"></script>
