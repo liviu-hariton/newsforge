@@ -7,7 +7,7 @@
     <div class="media-body">
         <a href="{{ $data['action'] }}">
             <span class="title mb-0">{{ $data['title'] }}</span>
-            <span class="discribe">{{ $data['description'] }}</span>
+            <span class="describe">{{ $data['description'] }}</span>
             <span class="time">
                 <time>{{ $data['created_ago'] }}</time>
             </span>
