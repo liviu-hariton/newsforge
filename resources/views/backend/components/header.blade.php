@@ -37,8 +37,26 @@
                 <li class="custom-dropdown">
                     <button class="notify-toggler custom-dropdown-toggler">
                         <i class="mdi mdi-bell-outline icon"></i>
-                        <span class="badge badge-xs rounded-circle">21</span>
+                        <span class="badge badge-xs rounded-circle">{{ auth()->user()->unreadNotifications()->count() }}</span>
                     </button>
+
+                    <div class="dropdown-notify">
+                        <header class="border-bottom py-2 px-4">
+                            <h5>Notifications</h5>
+                        </header>
+
+                        <div data-simplebar style="height: 325px;">
+                            @foreach($unread_notifications as $unread_notification)
+                                @include('backend.components.header-notification', ['data' => $unread_notification])
+                            @endforeach
+                        </div>
+
+                        <footer class="border-top dropdown-notify-footer">
+                            <div class="d-flex justify-content-between align-items-center py-2 px-4">
+                                <a href="#">view all notifications</a>
+                            </div>
+                        </footer>
+                    </div>
                 </li>
 
                 <li class="dropdown user-menu">

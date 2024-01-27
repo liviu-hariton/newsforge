@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\SettingsGeneralController;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
 
         Route::put('profile', 'updateProfile')->name('profile.update');
     });
+
+    // Contacts
+    Route::resource('contact', ContactController::class)->except(['create', 'store', 'edit']);
 });

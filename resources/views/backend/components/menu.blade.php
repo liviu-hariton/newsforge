@@ -149,8 +149,8 @@
                         </div>
                     </ul>
                 </li>
-                <li>
-                    <a class="sidenav-item-link" href="#">
+                <li class="{{ menuItemActive(['admin.contact.*']) ? 'active' : '' }}">
+                    <a class="sidenav-item-link" href="{{ route('admin.contact.index') }}">
                         <i class="bi bi-envelope"></i>
                         <span class="nav-text">Contacts</span>
                     </a>

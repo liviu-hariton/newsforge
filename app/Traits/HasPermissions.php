@@ -130,10 +130,10 @@ trait HasPermissions
     /**
      * Check if the user has a specific permission.
      *
-     * @param  string  $permission
+     * @param object $permission
      * @return bool
      */
-    protected function hasPermission($permission): bool
+    protected function hasPermission(object $permission): bool
     {
         return (bool) $this->permissions->where('name', $permission->name)->count();
     }
