@@ -77,6 +77,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ArticlePhotoGalleryImage::class);
     }
 
+    public function contactLabels(): HasMany
+    {
+        return $this->hasMany(ContactLabel::class);
+    }
+
     public function sendPasswordResetNotification($token): void
     {
         Mail::to($this->email)->send(

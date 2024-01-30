@@ -1,12 +1,5 @@
 <footer class="footer mt-auto">
     <div class="copyright bg-white">
-        <p>
-            &copy; <span id="copy-year"></span> Copyright Mono Dashboard Bootstrap Template by <a class="text-primary" href="http://www.iamabdus.com/" target="_blank" >Abdus</a>.
-        </p>
+        <p>Crafted with <a href="https://newsforge.eu/" target="_blank">NewsForge CMS</a>, using <a href="https://mono.iamabdus.com/" target="_blank">Mono</a> - a free theme by <a href="https://www.iamabdus.com/" target="_blank">Abdus Salam</a></p>
     </div>
-    <script>
-        var d = new Date();
-        var year = d.getFullYear();
-        document.getElementById("copy-year").innerHTML = year;
-    </script>
 </footer>

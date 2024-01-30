@@ -27,6 +27,8 @@
     <link href="{{ asset('backend/plugins/dragula/dragula.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/xeditable/css/bootstrap-editable.css') }}" rel="stylesheet" />
 
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <link id="main-css-href" rel="stylesheet" href="{{ asset('backend/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/css/components.css') }}" />
@@ -103,6 +105,9 @@
 <script src="{{ asset('backend/plugins/ays/jquery.are-you-sure.js') }}"></script>
 <script src="{{ asset('backend/plugins/ays/ays-beforeunload-shim.js') }}"></script>
 <script src="{{ asset('backend/plugins/bs-custom-file-input.min.js') }}"></script>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="{{ asset('backend/plugins/dropzone/dropzone.js') }}"></script>
 
 <script src="{{ asset('backend/js/mono.js') }}"></script>
 <script src="{{ asset('backend/js/_tnr.js') }}"></script>

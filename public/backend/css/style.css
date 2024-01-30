@@ -15404,7 +15404,7 @@ table.dataTable thead .sorting {
 }
 @media (min-width: 1500px) {
     .table.table-email tr td .text-default {
-        width: 650px;
+        width: 750px;
     }
 }
 .table.table-email tr.unread {

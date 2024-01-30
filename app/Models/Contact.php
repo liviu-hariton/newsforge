@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
@@ -23,4 +25,23 @@ class Contact extends Model
         // Cast to array as it is declared as a JSON field, so we can use it as an array
         'attachments' => 'array',
     ];
+
+    protected array $dates = [
+        'created_at',
+    ];
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(ContactReply::class);
+    }
+
+    public function labels(): BelongsToMany
+    {
+        return $this->belongsToMany(ContactLabel::class, 'contact_label');
+    }
+
+    public function history(): HasMany
+    {
+        return $this->hasMany(ContactHistory::class);
+    }
 }

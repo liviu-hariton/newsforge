@@ -53,4 +53,5 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
 
     // Contacts
     Route::resource('contact', ContactController::class)->except(['create', 'store', 'edit']);
+    Route::post('contact/add-label', [ContactController::class, 'createContactLabel'])->name('add-contact-label');
 });

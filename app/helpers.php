@@ -103,3 +103,33 @@ if(!function_exists('adminUserProfileSections')) {
         return AdminProfileController::profileSections();
     }
 }
+
+if(!function_exists('cleanOutput')) {
+    /**
+     * Sanitize and prepare a given input string for safe display in HTML
+     *
+     * @param $input
+     * @return string
+     */
+    function cleanOutput($input): string
+    {
+        // Escape special characters in the input
+        $output = htmlspecialchars($input, ENT_QUOTES);
+
+        // Split the output into words
+        $words = explode(" ", $output);
+
+        // Check if any word exceeds 200 characters
+        $allow = true;
+
+        foreach($words as $word) {
+            if(strlen($word) > 200) {
+                // If a long word is found, disallow it and exit the loop
+                $allow = false;
+                break;
+            }
+        }
+
+        return $allow ? stripslashes($output) : '';
+    }
+}

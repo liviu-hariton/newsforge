@@ -183,66 +183,6 @@ Bootstrap Alerts
     color: #843534;
 }
 
-/***
-Custom Bootstrap Badges
-***/
-.badge {
-    font-size: 11px !important;
-    font-weight: 300;
-    text-align: center;
-    height: 18px;
-    padding: 3px 6px 3px 6px;
-    -webkit-border-radius: 12px !important;
-    -moz-border-radius: 12px !important;
-    border-radius: 12px !important;
-    text-shadow: none !important;
-    text-align: center;
-    vertical-align: middle;
-}
-.badge.badge-roundless {
-    -webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    border-radius: 0 !important;
-}
-.badge.badge-empty {
-    display: inline-block;
-    padding: 0;
-    min-width: 8px;
-    height: 8px;
-    width: 8px;
-}
-
-/* Badge variants */
-.badge-default {
-    background-color: #c6c6c6;
-    background-image: none;
-}
-
-.badge-primary {
-    background-color: #428bca;
-    background-image: none;
-}
-
-.badge-info {
-    background-color: #89C4F4;
-    background-image: none;
-}
-
-.badge-success {
-    background-color: #45B6AF;
-    background-image: none;
-}
-
-.badge-danger {
-    background-color: #F3565D;
-    background-image: none;
-}
-
-.badge-warning {
-    background-color: #dfba49;
-    background-image: none;
-}
-
 /* Fix badge position for navs */
 .nav.nav-pills > li > a > .badge,
 .nav.nav-stacked > li > a > .badge {
@@ -730,4 +670,117 @@ name .popover .popover-content,
 name .popover .popover-content,
 .popover.name .popover-content {
     color: #F3565D;
+}
+
+/***
+Dropdown submenus
+***/
+
+.dropdown-menu>.dropdown-submenu {
+    position: relative
+}
+
+.dropdown-menu>.dropdown-submenu>.dropdown-item {
+    padding-right: 2.5rem
+}
+
+.dropdown-menu>.dropdown-submenu>.dropdown-item:after {
+    content: "\F135";
+    font-family: "bootstrap-icons";
+    position: absolute;
+    top: 50%;
+    margin-top: -.5rem;
+    right: 1rem;
+    font-size: 1rem;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.dropdown-menu>.dropdown-submenu.show>.dropdown-item,
+.dropdown-menu>.dropdown-submenu:hover>.dropdown-item {
+    background-color: #eee;
+    color: #333
+}
+
+.dropdown-menu>.dropdown-submenu:focus>.dropdown-item:not(.dropdown-toggle)~.dropdown-menu,
+.dropdown-menu>.dropdown-submenu:hover>.dropdown-item:not(.dropdown-toggle)~.dropdown-menu {
+    display: block
+}
+
+.dropdown-menu>.dropdown-submenu.disabled>.dropdown-menu {
+    display: none
+}
+
+.dropdown-menu>.dropdown-submenu.disabled>.dropdown-item {
+    background-color: transparent;
+    color: #999;
+    cursor: default
+}
+
+.dropdown-menu>.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -.5625rem
+}
+
+.dropdown-menu>.dropdown-submenu.dropdown-submenu-left>.dropdown-menu {
+    left: auto;
+    right: 100%
+}
+
+@media (max-width:1199.98px) {
+    .dropdown-menu>.dropdown-submenu .dropdown-toggle:after {
+        content: ""
+    }
+
+    .dropdown-menu>.dropdown-submenu .dropdown-menu,
+    .dropdown-menu>.dropdown-submenu.dropdown-submenu-left .dropdown-menu {
+        position: static;
+        margin: 0 !important;
+        border-width: 0;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0
+    }
+
+    .dropdown-menu>.dropdown-submenu>.dropdown-menu>.dropdown-item,
+    .dropdown-menu>.dropdown-submenu>.dropdown-menu>.dropdown-submenu>.dropdown-item {
+        padding-left: 2rem
+    }
+
+    .dropdown-menu>.dropdown-submenu>.dropdown-menu>.dropdown-submenu>.dropdown-menu>.dropdown-item,
+    .dropdown-menu>.dropdown-submenu>.dropdown-menu>.dropdown-submenu>.dropdown-menu>.dropdown-submenu>.dropdown-item {
+        padding-left: 3rem
+    }
+}
+.dropdown-menu .dropdown-submenu+.dropdown-submenu {
+    margin-top: 1px
+}
+.dropleft .dropdown-submenu .dropdown-toggle::before {
+    content: none
+}
+.dropdown-menu-custom>.dropdown-submenu>.dropdown-item {
+    color: #fff
+}
+.dropdown-menu-custom>.dropdown-submenu>.dropdown-item:focus,
+.dropdown-menu-custom>.dropdown-submenu>.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, .1)
+}
+.dropdown-menu-custom>.dropdown-submenu>.dropdown-item.active {
+    background-color: rgba(255, 255, 255, .2)
+}
+.dropdown-menu-custom>.dropdown-submenu>.dropdown-item.disabled {
+    background-color: transparent;
+    color: rgba(255, 255, 255, .6)
+}
+.dropdown-menu-custom>.dropdown-submenu.show>.dropdown-item,
+.dropdown-menu-custom>.dropdown-submenu:hover>.dropdown-item {
+    background-color: rgba(255, 255, 255, .1);
+    color: #fff
+}
+
+.dropdown-menu-custom>.dropdown-submenu.disabled>.dropdown-item {
+    background-color: transparent;
+    color: rgba(255, 255, 255, .6)
 }

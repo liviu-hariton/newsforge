@@ -13,14 +13,14 @@ use App\Models\ContactOption;
 use App\Models\User;
 use App\Notifications\NewContact;
 use App\Services\FormService;
-use App\Traits\FileUpload;
+use App\Traits\FileDelete;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
 class ContactController extends Controller
 {
-    use FileUpload;
+    use FileDelete;
 
     public function __construct(private readonly FormService $formService){}
 

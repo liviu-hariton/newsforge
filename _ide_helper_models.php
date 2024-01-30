@@ -291,6 +291,10 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContactLabel> $labels
+ * @property-read int|null $labels_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContactReply> $replies
+ * @property-read int|null $replies_count
  * @method static \Illuminate\Database\Eloquent\Builder|Contact newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact onlyTrashed()
@@ -380,6 +384,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\ContactLabel
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property string|null $color
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contact> $contacts
+ * @property-read int|null $contacts_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactLabel whereUserId($value)
+ */
+	class ContactLabel extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ContactOption
  *
  * @property int $id
@@ -421,6 +451,37 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContactOptionType whereName($value)
  */
 	class ContactOptionType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ContactReply
+ *
+ * @property int $id
+ * @property int $contact_id
+ * @property int $user_id
+ * @property string $reply
+ * @property array|null $attachments
+ * @property int $is_draft
+ * @property string|null $sent_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Contact $contact
+ * @property-read \App\Models\User|null $sender
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereAttachments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereIsDraft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereReply($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereSentAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactReply whereUserId($value)
+ */
+	class ContactReply extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -512,6 +573,8 @@ namespace App\Models{
  * @property-read int|null $article_photo_gallery_images_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Article> $articles
  * @property-read int|null $articles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContactLabel> $contactLabels
+ * @property-read int|null $contact_labels_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Permission> $permissions

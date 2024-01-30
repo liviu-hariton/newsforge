@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\AdminProfileRequest;
 use App\Models\User;
-use App\Traits\FileUpload;
+use App\Traits\FileDelete;
 use Illuminate\Http\Request;
 
 class AdminProfileController extends Controller
 {
-    use FileUpload;
+    use FileDelete;
 
     /**
      * Get the available sections for the admin user profile

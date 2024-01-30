@@ -361,6 +361,24 @@ var Tnr = function () {
         };
 
         file_input();
+
+        const quill_editor = function() {
+            var quillHook = document.getElementById("editor");
+
+            if (quillHook !== null) {
+                var quill = new Quill(quillHook, {
+                    modules: {
+                        formula: false,
+                        syntax: false,
+                        toolbar: "#toolbar",
+                    },
+                    placeholder: "Enter Text ...",
+                    theme: "snow",
+                });
+            }
+        };
+
+        quill_editor();
     }
 
     const sortables = function() {

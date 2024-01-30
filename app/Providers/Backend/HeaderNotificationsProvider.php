@@ -43,15 +43,17 @@ class HeaderNotificationsProvider extends ServiceProvider
         foreach($unread_notifications as $unread_notification) {
             $notification_details = $this->getNotificationDetails($unread_notification);
 
-            $notifications[] = [
-                'id' => $unread_notification->id,
-                'entity_id' => $unread_notification->data['contact_id'],
-                'title' => $notification_details['title'],
-                'description' => $notification_details['description'],
-                'action' => $notification_details['action'],
-                'icon' => $notification_details['icon'],
-                'created_ago' => Carbon::parse($unread_notification->created_at)->ago()
-            ];
+            if(count($notification_details) > 0) {
+                $notifications[] = [
+                    'id' => $unread_notification->id,
+                    'entity_id' => $unread_notification->data['contact_id'],
+                    'title' => $notification_details['title'],
+                    'description' => $notification_details['description'],
+                    'action' => $notification_details['action'],
+                    'icon' => $notification_details['icon'],
+                    'created_ago' => Carbon::parse($unread_notification->created_at)->ago()
+                ];
+            }
         }
 
         return $notifications;
