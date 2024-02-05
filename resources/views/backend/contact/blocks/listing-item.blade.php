@@ -1,4 +1,4 @@
-<tr class="{{ $data->is_read ? 'read' : 'unread' }}" id="field-row-{{ $data->id }}">
+<tr class="{{ $data->is_read ? 'read' : 'unread' }}" id="contact-row-{{ $data->id }}">
     <td class="mark-mail">
         <div class="custom-control custom-checkbox d-inline-block">
             <input type="checkbox" class="custom-control-input contact-bulk-item" id="bulk-{{ $data->id }}" value="{{ $data->id }}">
@@ -48,7 +48,7 @@
                         data-model="App^Models^Contact"
                         data-route="{{ route('admin.change-attribute') }}"
                         data-value="1"
-                        data-css-toggle="unread|read|#field-row-{{ $data->id }}"
+                        data-css-toggle="unread|read|#contact-row-{{ $data->id }}"
                     >
                         <i class="far fa-envelope-open"></i> Mark as read
                     </a>
@@ -63,7 +63,7 @@
                         data-model="App^Models^Contact"
                         data-route="{{ route('admin.change-attribute') }}"
                         data-value="0"
-                        data-css-toggle="read|unread|#field-row-{{ $data->id }}"
+                        data-css-toggle="read|unread|#contact-row-{{ $data->id }}"
                     >
                         <i class="far fa-envelope"></i> Mark as unread
                     </a>

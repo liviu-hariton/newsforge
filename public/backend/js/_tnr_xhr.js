@@ -318,6 +318,63 @@ class TnrXHR {
             }
         });
     }
+
+    bulkMarkAsRead(obj) {
+        let _ids = [];
+
+        $(obj.data('targets')).each(function() {
+            if($(this).prop('checked')) {
+                _ids.push($(this).val());
+            }
+        });
+
+        if(_ids.length > 0) {
+            Tnr.block();
+
+            const _data_value = obj.data('value');
+            let _attribute = obj.data('attribute');
+            let _model = obj.data('model');
+
+            let _css_toggle = obj.data('css-toggle');
+
+            $.ajax({
+                type: 'PATCH',
+                url: obj.data('route'),
+                data: {
+                    "enabled" : _data_value,
+                    "id": _ids,
+                    "attribute": _attribute,
+                    "model": _model
+                },
+                success: function(data) {
+                    Tnr.unblock();
+
+                    if(data.status === 'success') {
+                        toastr.success(data.message);
+
+                        if(_css_toggle !== undefined) {
+                            const _css_toggle_parts = _css_toggle.split("|");
+
+                            _ids.forEach((_id) => {
+                                Tnr.toggleCSSClass(_css_toggle_parts[0], _css_toggle_parts[1], '#contact-row-' + _id);
+                            });
+                        }
+                    } else {
+                        toastr.warning(data.message);
+                    }
+
+                    Tnr.endBulkActions(obj);
+                },
+                error: function(xhr, status, error) {
+                    Tnr.unblock();
+
+                    Tnr.errorAlert(xhr.responseJSON.message, error);
+                }
+            });
+        } else {
+            Tnr.warningAlert('Warning', 'Please select the elements that you want to manage');
+        }
+    }
 }
 
 let _tnr_xhr  = new TnrXHR;

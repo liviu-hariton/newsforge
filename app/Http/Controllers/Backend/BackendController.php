@@ -14,9 +14,17 @@ class BackendController extends Controller
     public function changeAttribute(Request $request) {
         $model = str_replace("^", "\\", $request->model);
 
-        $object = $model::findOrFail($request->id);
-        $object->{$request->attribute} = $request->enabled;
-        $object->save();
+        if(is_array($request->id) && count($request->id) > 0) {
+            foreach($request->id as $id) {
+                $object = $model::findOrFail($id);
+                $object->{$request->attribute} = $request->enabled;
+                $object->save();
+            }
+        } else {
+            $object = $model::findOrFail($request->id);
+            $object->{$request->attribute} = $request->enabled;
+            $object->save();
+        }
 
         return response([
             'status' => 'success',

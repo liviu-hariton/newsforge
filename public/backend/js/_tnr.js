@@ -521,7 +521,7 @@ var Tnr = function () {
             return (window.location.search.match(new RegExp('[?&]' + param + '=([^&]+)')) || [undefined, null])[1];
         },
 
-        errorAlert: function(title, message) {
+        errorAlert: function(message, title) {
             toastr.options = {
                 positionClass: "toast-top-full-width",
                 progressBar: true,
@@ -530,6 +530,17 @@ var Tnr = function () {
             };
 
             toastr.error(title, message);
+        },
+
+        warningAlert: function(message, title) {
+            toastr.options = {
+                positionClass: "toast-top-full-width",
+                progressBar: true,
+                timeOut: 7000,
+                closeButton: true,
+            };
+
+            toastr.warning(title, message);
         },
 
         setFieldMaxLength: function(value) {
@@ -558,6 +569,13 @@ var Tnr = function () {
             }
         },
 
+        /**
+         * Toggle CSS classes for the specified element
+         *
+         * @param removeCSS CSS class to be removed
+         * @param addCSS CSS class to be added
+         * @param el The DOM element (provided as #id or .class)
+         */
         toggleCSSClass: function(removeCSS, addCSS, el) {
             const $el = $(el);
 
@@ -565,6 +583,14 @@ var Tnr = function () {
                 $el.removeClass(removeCSS);
                 $el.addClass(addCSS);
             }
+        },
+
+        endBulkActions: function(obj) {
+            $(obj.data('targets')).each(function() {
+                $(this).prop('checked', false);
+            });
+
+            $('.tnr-bulk-select').prop('checked', false);
         }
     }
 }();

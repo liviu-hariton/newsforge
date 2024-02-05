@@ -2,11 +2,12 @@
     <td colspan="6" class="disable-row-hover">
         <div class="email-right-header mb-5">
             <div class="head-left-options">
+                {{-- Select all checkbox --}}
                 <div class="form-check">
                     <div class="custom-checkbox">
                         <input
                             type="checkbox"
-                            class="custom-control-input contact-bulk-item tnr-bulk-select"
+                            class="custom-control-input tnr-bulk-select"
                             data-set=".contact-bulk-item"
                             data-table="#contacts-bulk-set"
                             id="bulk-all"
@@ -15,11 +16,40 @@
                     </div>
                 </div>
 
+                {{-- Bulk actions on the selected items --}}
                 <div class="dropdown">
                     <button class="btn dropdown-toggle border rounded-pill" type="button" id="dropdownMenuButton" data-toggle="dropdown">Actions</button>
                     <div class="dropdown-menu dropdown-menu-button">
-                        <a class="dropdown-item" href="#"><i class="far fa-envelope-open"></i> Mark as read</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-envelope"></i> Mark as unread</a>
+                        <a
+                            class="dropdown-item tnr-xhr"
+                            href="#"
+                            data-prevent
+                            data-targets=".contact-bulk-item"
+                            data-call-method="click"
+                            data-xhr="bulkMarkAsRead"
+                            data-value="1"
+                            data-attribute="is_read"
+                            data-model="App^Models^Contact"
+                            data-css-toggle="unread|read"
+                            data-route="{{ route('admin.change-attribute') }}"
+                        >
+                            <i class="far fa-envelope-open"></i> Mark as read
+                        </a>
+                        <a
+                            class="dropdown-item tnr-xhr"
+                            href="#"
+                            data-prevent
+                            data-targets=".contact-bulk-item"
+                            data-call-method="click"
+                            data-xhr="bulkMarkAsRead"
+                            data-value="0"
+                            data-attribute="is_read"
+                            data-model="App^Models^Contact"
+                            data-css-toggle="read|unread"
+                            data-route="{{ route('admin.change-attribute') }}"
+                        >
+                            <i class="far fa-envelope"></i> Mark as unread
+                        </a>
                         <div class="dropdown-submenu">
                             <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline"></i> Set label</a>
                             <div class="dropdown-menu">
