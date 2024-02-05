@@ -1159,3 +1159,19 @@ a.list-icons-item.collapsed i {
     margin-left: 0 !important;
     margin-right: -1px !important;
 }
+.dropdown-menu-button {
+    position: absolute;
+    transform: translate3d(0px, 40px, 0px);
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.disable-row-hover {
+    background: #fff;
+    cursor: default;
+}
+
+.table-hover:hover .custom-control-input:checked ~ .custom-control-label::before {
+    background: #9e6de0 url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23ffffff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") no-repeat 50% 50% !important;
+}

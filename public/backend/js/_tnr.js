@@ -277,28 +277,6 @@ var Tnr = function () {
                             $(this).prop("checked", false);
                         }
                     });
-
-                    const _count = countBulkSelected(set);
-
-                    $("#tnr-bulk-count").html(_count);
-
-                    if(_count > 0) {
-                        $(bulk_actions).slideDown(500);
-                    } else {
-                        $(bulk_actions).slideUp(500);
-                    }
-                });
-
-                $(".tnr-bulk-item").click(function() {
-                    const _count = countBulkSelected(".tnr-bulk-item");
-
-                    $("#tnr-bulk-count").html(_count);
-
-                    if(_count > 0) {
-                        $('.bulk-actions').slideDown(500);
-                    } else {
-                        $('.bulk-actions').slideUp(500);
-                    }
                 });
             }
         }
@@ -577,6 +555,15 @@ var Tnr = function () {
                 $("#input-options-container").removeClass("d-none");
             } else {
                 $("#input-options-container").addClass("d-none");
+            }
+        },
+
+        toggleCSSClass: function(removeCSS, addCSS, el) {
+            const $el = $(el);
+
+            if($el.length) {
+                $el.removeClass(removeCSS);
+                $el.addClass(addCSS);
             }
         }
     }

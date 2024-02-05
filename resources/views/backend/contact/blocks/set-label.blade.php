@@ -8,5 +8,5 @@
     data-xhr="setContactFormLabel"
     data-route="{{ route('admin.set-contact-form-label') }}"
 >
-    <i class="mdi mdi-checkbox-blank-circle-outline mr-3" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}
+    <i class="mdi mdi-checkbox-blank-circle-outline" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}
 </a>

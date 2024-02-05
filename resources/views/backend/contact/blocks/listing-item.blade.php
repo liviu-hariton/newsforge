@@ -1,9 +1,9 @@
 <tr class="{{ $data->is_read ? 'read' : 'unread' }}" id="field-row-{{ $data->id }}">
     <td class="mark-mail">
-        <label class="control control-checkbox mb-0">
-            <input type="checkbox"/>
-            <div class="control-indicator"></div>
-        </label>
+        <div class="custom-control custom-checkbox d-inline-block">
+            <input type="checkbox" class="custom-control-input contact-bulk-item" id="bulk-{{ $data->id }}" value="{{ $data->id }}">
+            <label class="custom-control-label" for="bulk-{{ $data->id }}">&nbsp;</label>
+        </div>
     </td>
     <td class="sender-name text-dark goto {{ $data->is_read ? '' : 'font-weight-bold' }}"
         data-url="{{ route('admin.contact.show', $data) }}">
@@ -33,14 +33,42 @@
     <td class="text-center">
         <div class="list-icons">
             <div class="dropdown" data-boundary="window">
-                <a class="list-icons-item dropdown-toggle text-primary" data-toggle="dropdown" href="#"><i
-                        class="fas fa-ellipsis-v"></i></a>
+                <a class="list-icons-item dropdown-toggle text-primary" data-toggle="dropdown" href="#"><i class="fas fa-ellipsis-v"></i></a>
 
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="{{ route('admin.contact.show', $data) }}" class="dropdown-item"><i
-                            class="fas fa-search-plus"></i> View</a>
+                    <a href="{{ route('admin.contact.show', $data) }}" class="dropdown-item"><i class="fas fa-search-plus"></i> View</a>
+                    <a
+                        class="dropdown-item tnr-xhr"
+                        href="#"
+                        data-prevent
+                        data-id="{{ $data->id }}"
+                        data-call-method="click"
+                        data-xhr="changeAttribute"
+                        data-attribute="is_read"
+                        data-model="App^Models^Contact"
+                        data-route="{{ route('admin.change-attribute') }}"
+                        data-value="1"
+                        data-css-toggle="unread|read|#field-row-{{ $data->id }}"
+                    >
+                        <i class="far fa-envelope-open"></i> Mark as read
+                    </a>
+                    <a
+                        class="dropdown-item tnr-xhr"
+                        href="#"
+                        data-prevent
+                        data-id="{{ $data->id }}"
+                        data-call-method="click"
+                        data-xhr="changeAttribute"
+                        data-attribute="is_read"
+                        data-model="App^Models^Contact"
+                        data-route="{{ route('admin.change-attribute') }}"
+                        data-value="0"
+                        data-css-toggle="read|unread|#field-row-{{ $data->id }}"
+                    >
+                        <i class="far fa-envelope"></i> Mark as unread
+                    </a>
                     <div class="dropdown-submenu">
-                        <a href="#" class="dropdown-item">Set label</a>
+                        <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline"></i> Set label</a>
                         <div class="dropdown-menu dropdown-submenu-left">
                             @foreach($contact_labels as $contact_label)
                                 @include('backend.contact.blocks.set-label', ['contact' => $data, 'contact_label' => $contact_label])

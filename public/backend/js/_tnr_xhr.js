@@ -67,10 +67,22 @@ class TnrXHR {
     changeAttribute(obj){
         Tnr.block();
 
-        let _enabled = obj.is(':checked') === true ? '1' : '0';
+        // this acts as a value to update if the `obj` is a link
+        let _enabled;
+
+        const _data_value = obj.data('value');
+
+        if(_data_value !== undefined) { // a specific value is set
+            _enabled = _data_value;
+        } else { // the `obj` is a checkbox
+            _enabled = obj.is(':checked') === true ? '1' : '0';
+        }
+
         let _id = obj.data('id');
         let _attribute = obj.data('attribute');
         let _model = obj.data('model');
+
+        let _css_toggle = obj.data('css-toggle');
 
         $.ajax({
             type: 'PATCH',
@@ -86,6 +98,12 @@ class TnrXHR {
 
                 if(data.status === 'success') {
                     toastr.success(data.message);
+
+                    if(_css_toggle !== undefined) {
+                        let _css_toggle_parts = _css_toggle.split("|");
+
+                        Tnr.toggleCSSClass(_css_toggle_parts[0], _css_toggle_parts[1], _css_toggle_parts[2]);
+                    }
                 } else {
                     toastr.warning(data.message);
                 }

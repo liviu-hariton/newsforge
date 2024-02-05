@@ -36,7 +36,7 @@
                                 </div>
 
                                 <div class="email-details-content-header-right">
-                                    <time class="p-1 p-xl-2">{{ $contact->created_at->format('d M') }}</time>
+                                    <time class="p-1 p-xl-2">{{ $contact->created_at->format('j F Y - H:i:s') }}</time>
 
                                     <div class="list-icons">
                                         <div class="dropdown">
