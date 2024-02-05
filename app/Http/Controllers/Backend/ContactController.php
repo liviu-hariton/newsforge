@@ -53,11 +53,6 @@ class ContactController extends Controller
         return redirect()->route('admin.contact.index')->with('success', 'Contact label created successfully');
     }
 
-    private function labelsIds($ids)
-    {
-        return is_array($ids) ? $ids : [$ids];
-    }
-
     private function parseLabels($contact_id)
     {
         $output = '';
@@ -88,7 +83,7 @@ class ContactController extends Controller
             ]);
         }
 
-        $labels_ids = $this->labelsIds($request->label_id);
+        $labels_ids = is_array($request->label_id) ? $request->label_id : [$request->label_id];
 
         if(!$contact->labels()->whereIn('contact_label.contact_label_id', $labels_ids)->where('contact_label.user_id', auth()->user()->id)->exists()) {
             // Alternatively, we can use syncWithoutDetaching() here but we'll stick with manual verification for now.
