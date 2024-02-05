@@ -272,6 +272,34 @@ class TnrXHR {
             }
         });
     }
+
+    setContactFormLabel(obj) {
+        Tnr.block();
+
+        const _form_id = obj.data('id');
+        const _label_id = obj.data('label-id');
+
+        $.ajax({
+            url: obj.data('route'),
+            type: 'PUT',
+            data: {
+                "form_id": _form_id,
+                "label_id": _label_id,
+            },
+            success: function(response) {
+                $("#labels-" + _form_id).html(response.labels);
+
+                Tnr.unblock();
+
+                toastr.success(response.message);
+            },
+            error: function(xhr, status, error) {
+                Tnr.unblock();
+
+                Tnr.errorAlert(xhr.responseJSON.message, error);
+            }
+        });
+    }
 }
 
 let _tnr_xhr  = new TnrXHR;

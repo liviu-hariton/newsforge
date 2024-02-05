@@ -37,7 +37,8 @@ class Contact extends Model
 
     public function labels(): BelongsToMany
     {
-        return $this->belongsToMany(ContactLabel::class, 'contact_label');
+        return $this->belongsToMany(ContactLabel::class, 'contact_label')
+            ->where('contact_label.user_id', auth()->user()->id);
     }
 
     public function history(): HasMany

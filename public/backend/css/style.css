@@ -15669,15 +15669,15 @@ table.dataTable thead .sorting {
 /*===== PAGINATION =====*/
 .pagination .page-link {
     color: #8a909d;
-    font-size: 0.75rem;
-    padding: 8px 12px;
+    font-size: 14px;
+    padding: 4px 12px;
 }
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
     .pagination .page-link {
         padding: 1rem 1.3125rem;
         font-size: 0.94rem;
     }
-}
+}*/
 .pagination .page-link .mdi::before {
     line-height: 1;
 }

@@ -1152,3 +1152,10 @@ a.list-icons-item.collapsed i {
 .public-profile-preview .media-sm-wrapper img {
     width: 50px;
 }
+
+.dropdown-submenu-left {
+    left: auto !important;
+    right: 100% !important;
+    margin-left: 0 !important;
+    margin-right: -1px !important;
+}

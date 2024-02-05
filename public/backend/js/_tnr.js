@@ -379,6 +379,20 @@ var Tnr = function () {
         };
 
         quill_editor();
+
+        const goto = function() {
+            $(".goto").each(function() {
+                $(this).on("click", function() {
+                    let _url = $(this).data('url');
+
+                    Tnr.block();
+
+                    window.location = _url;
+                });
+            });
+        };
+
+        goto();
     }
 
     const sortables = function() {

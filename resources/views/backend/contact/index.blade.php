@@ -10,9 +10,7 @@
             </div>
             <div class="col-lg-8 col-xl-9 col-xxl-10">
                 <div class="email-right-column p-4 p-xl-5">
-                    <!-- Email Right Header -->
                     <div class="email-right-header mb-5">
-                        <!-- head left option -->
                         <div class="head-left-options">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="defaultCheck1">
@@ -62,6 +60,10 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="mt-5">
+                        {{ $contacts->links() }}
                     </div>
                 </div>
             </div>

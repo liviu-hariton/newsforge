@@ -28,6 +28,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::put('update-contact-option-map', [SettingsGeneralController::class, 'saveContactOptionMap'])->name('update-contact-option-map');
     Route::put('update-contact-map', [SettingsGeneralController::class, 'saveContactMap'])->name('update-contact-map');
     Route::patch('update-setting-value', [SettingsGeneralController::class, 'saveSettingValue'])->name('update-setting-value');
+    Route::put('set-contact-form-label', [ContactController::class, 'setContactFormLabel'])->name('set-contact-form-label');
 
     /*
      * Backend sections

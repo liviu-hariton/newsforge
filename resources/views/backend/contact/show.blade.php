@@ -14,9 +14,11 @@
                         <div class="email-details-header">
                             <h4 class="text-dark">{{ $contact->subject }}</h4>
 
-                            @foreach($contact->labels as $label)
-                            <span class="badge badge-primary">New</span>
-                            @endforeach
+                            <div class="labels" id="labels-{{ $contact->id }}">
+                                @foreach($contact->labels as $label)
+                                    @include('backend.contact.blocks.label', ['label' => $label])
+                                @endforeach
+                            </div>
                         </div>
 
                         <div class="email-details-content">
@@ -38,11 +40,12 @@
 
                                     <div class="list-icons">
                                         <div class="dropdown">
-                                            <a class="list-icons-item dropdown-toggle text-primary" data-toggle="dropdown" href="#"><i class="fas fa-ellipsis-v"></i></a>
+                                            <a class="list-icons-item dropdown-toggle text-primary"
+                                               data-toggle="dropdown" href="#"><i class="fas fa-ellipsis-v"></i></a>
 
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 @foreach($contact_labels as $contact_label)
-                                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline mr-3" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}</a>
+                                                    @include('backend.contact.blocks.set-label', ['contact' => $contact, 'contact_label' => $contact_label])
                                                 @endforeach
                                                 <div class="dropdown-divider"></div>
                                                 <a
@@ -71,7 +74,8 @@
                             @if($contact->attachments)
                                 <p class="pt-4 mt-4 border-top">
                                     <i class="fa fa-paperclip ml-2"></i>
-                                    <span class="text-dark">{{ count($contact->attachments) }} {{ Str::plural('Attachment', count($contact->attachments)) }}</span>
+                                    <span
+                                        class="text-dark">{{ count($contact->attachments) }} {{ Str::plural('Attachment', count($contact->attachments)) }}</span>
                                 </p>
                                 <div
                                     class="email-img d-inline-block rounded overflow-hidden mt-3 mt-lg-4 mr-2 mr-md-3 mr-lg-4">
