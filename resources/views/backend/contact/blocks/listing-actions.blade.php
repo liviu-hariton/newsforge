@@ -26,7 +26,7 @@
                             data-prevent
                             data-targets=".contact-bulk-item"
                             data-call-method="click"
-                            data-xhr="bulkMarkAsRead"
+                            data-xhr="bulkMarkContactsAsRead"
                             data-value="1"
                             data-attribute="is_read"
                             data-model="App^Models^Contact"
@@ -41,7 +41,7 @@
                             data-prevent
                             data-targets=".contact-bulk-item"
                             data-call-method="click"
-                            data-xhr="bulkMarkAsRead"
+                            data-xhr="bulkMarkContactsAsRead"
                             data-value="0"
                             data-attribute="is_read"
                             data-model="App^Models^Contact"
@@ -54,12 +54,22 @@
                             <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline"></i> Set label</a>
                             <div class="dropdown-menu">
                                 @foreach($contact_labels as $contact_label)
-                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}</a>
+                                <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}</a>
                                 @endforeach
                             </div>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt"></i> Delete</a>
+                        <a
+                            class="dropdown-item text-danger tnr-xhr"
+                            href="#"
+                            data-prevent
+                            data-targets=".contact-bulk-item"
+                            data-call-method="click"
+                            data-xhr="bulkDeleteContacts"
+                            data-route="{{ route('admin.bulk-delete-contacts') }}"
+                        >
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
                     </div>
                 </div>
             </div>

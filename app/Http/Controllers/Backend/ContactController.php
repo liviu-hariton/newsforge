@@ -118,6 +118,22 @@ class ContactController extends Controller
         //
     }
 
+    public function bulkDestroy(Request $request)
+    {
+        foreach($request->ids as $id) {
+            $contact = Contact::find($id);
+
+            if($contact) {
+                $this->destroy($request, $contact);
+            }
+        }
+
+        return response([
+            'status' => 'success',
+            'message' => 'Selected contacts were deleted successfully'
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -134,7 +150,7 @@ class ContactController extends Controller
 
         // delete the associated details
         $contact->replies()->delete();
-        $contact->labels()->delete();
+        $contact->labels()->detach();
         $contact->history()->delete();
 
         $contact->delete();
@@ -142,13 +158,13 @@ class ContactController extends Controller
         if($request->input('redirect')) {
             // set a confirmation message in case of deleting with redirect (via Ajax)
             session()->flash('success', 'Submitted contact form data deleted successfully');
+
+            return true;
         } else {
             return response([
                 'status' => 'success',
                 'message' => 'Submitted contact form data deleted successfully'
             ]);
         }
-
-        return true;
     }
 }

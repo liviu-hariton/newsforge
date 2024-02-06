@@ -273,7 +273,7 @@ class TnrXHR {
                             if(_data_redirect !== undefined) {
                                 window.location = _data_redirect;
                             } else {
-                                Tnr.remove("#field-row-" + obj.data('id'));
+                                Tnr.remove("#contact-row-" + obj.data('id'));
 
                                 Tnr.unblock();
 
@@ -319,7 +319,7 @@ class TnrXHR {
         });
     }
 
-    bulkMarkAsRead(obj) {
+    bulkMarkContactsAsRead(obj) {
         let _ids = [];
 
         $(obj.data('targets')).each(function() {
@@ -369,6 +369,56 @@ class TnrXHR {
                     Tnr.unblock();
 
                     Tnr.errorAlert(xhr.responseJSON.message, error);
+                }
+            });
+        } else {
+            Tnr.warningAlert('Warning', 'Please select the elements that you want to manage');
+        }
+    }
+
+    bulkDeleteContacts(obj) {
+        let _ids = [];
+
+        $(obj.data('targets')).each(function() {
+            if($(this).prop('checked')) {
+                _ids.push($(this).val());
+            }
+        });
+
+        if(_ids.length > 0) {
+            bootbox.confirm({
+                locale: _locale,
+                buttons: {confirm: {className: 'btn-danger'}, cancel: {className: 'btn-outline-success'}},
+                title: '<i class="fas fa-exclamation-triangle"></i> Careful!',
+                message: 'You have chosen to delete this selected contacts. Are you sure?',
+                callback: function(result) {
+                    if(result === true) {
+                        Tnr.block();
+
+                        $.ajax({
+                            url: obj.data('route'),
+                            type: 'DELETE',
+                            data: {
+                                "ids": _ids,
+                            },
+                            success: function(response) {
+                                _ids.forEach((_id) => {
+                                    Tnr.remove("#contact-row-" + _id);
+                                });
+
+                                Tnr.unblock();
+
+                                toastr.success(response.message);
+                            },
+                            error: function(xhr, status, error) {
+                                Tnr.unblock();
+
+                                Tnr.errorAlert(xhr.responseJSON.message, error);
+                            }
+                        });
+                    }
+
+                    Tnr.endBulkActions(obj);
                 }
             });
         } else {

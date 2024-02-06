@@ -12,10 +12,14 @@ class BackendController extends Controller
     use UniqueSlug, ModelCache;
 
     public function changeAttribute(Request $request) {
+        // Convert the model name received in the request, replacing "^" with "\"
         $model = str_replace("^", "\\", $request->model);
 
+        // If the 'id' in the request is an array, use it; otherwise, create an array with a single element
         $ids = is_array($request->id) ? $request->id : [$request->id];
 
+        // Update records in the database where the 'id' is in the provided array
+        // Set the specified attribute to the provided 'enabled' value
         $model::whereIn('id', $ids)
             ->update([$request->attribute => $request->enabled]);
 
@@ -24,6 +28,7 @@ class BackendController extends Controller
             'message' => 'Attribute has been successfully updated!'
         ]);
     }
+
 
     public function setSortOrder(Request $request)
     {
