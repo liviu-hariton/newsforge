@@ -54,7 +54,18 @@
                             <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline"></i> Set label</a>
                             <div class="dropdown-menu">
                                 @foreach($contact_labels as $contact_label)
-                                <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle-outline" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}</a>
+                                <a
+                                    class="dropdown-item tnr-xhr"
+                                    href="#"
+                                    data-prevent
+                                    data-targets=".contact-bulk-item"
+                                    data-call-method="click"
+                                    data-xhr="bulkSetContactFormLabel"
+                                    data-label-id="{{ $contact_label->id }}"
+                                    data-route="{{ route('admin.bulk-set-contact-form-label') }}"
+                                >
+                                    <i class="mdi mdi-checkbox-blank-circle-outline" style="color: {{ $contact_label->color }};"></i> {{ $contact_label->name }}
+                                </a>
                                 @endforeach
                             </div>
                         </div>

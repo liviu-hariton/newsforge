@@ -291,91 +291,6 @@ class TnrXHR {
         });
     }
 
-    setContactFormLabel(obj) {
-        Tnr.block();
-
-        const _form_id = obj.data('id');
-        const _label_id = obj.data('label-id');
-
-        $.ajax({
-            url: obj.data('route'),
-            type: 'PUT',
-            data: {
-                "form_id": _form_id,
-                "label_id": _label_id,
-            },
-            success: function(response) {
-                $("#labels-" + _form_id).html(response.labels);
-
-                Tnr.unblock();
-
-                toastr.success(response.message);
-            },
-            error: function(xhr, status, error) {
-                Tnr.unblock();
-
-                Tnr.errorAlert(xhr.responseJSON.message, error);
-            }
-        });
-    }
-
-    bulkMarkContactsAsRead(obj) {
-        let _ids = [];
-
-        $(obj.data('targets')).each(function() {
-            if($(this).prop('checked')) {
-                _ids.push($(this).val());
-            }
-        });
-
-        if(_ids.length > 0) {
-            Tnr.block();
-
-            const _data_value = obj.data('value');
-            let _attribute = obj.data('attribute');
-            let _model = obj.data('model');
-
-            let _css_toggle = obj.data('css-toggle');
-
-            $.ajax({
-                type: 'PATCH',
-                url: obj.data('route'),
-                data: {
-                    "enabled" : _data_value,
-                    "id": _ids,
-                    "attribute": _attribute,
-                    "model": _model
-                },
-                success: function(data) {
-                    Tnr.unblock();
-
-                    if(data.status === 'success') {
-                        toastr.success(data.message);
-
-                        if(_css_toggle !== undefined) {
-                            const _css_toggle_parts = _css_toggle.split("|");
-
-                            _ids.forEach((_id) => {
-                                Tnr.toggleCSSClass(_css_toggle_parts[0], _css_toggle_parts[1], '#contact-row-' + _id);
-                            });
-                        }
-                    } else {
-                        toastr.warning(data.message);
-                    }
-
-                    Tnr.endBulkActions(obj);
-                },
-                error: function(xhr, status, error) {
-                    Tnr.unblock();
-
-                    Tnr.errorAlert(xhr.responseJSON.message, error);
-                }
-            });
-        } else {
-            Tnr.warningAlert('Warning', 'Please select the elements that you want to manage');
-        }
-    }
-
     bulkDeleteContacts(obj) {
         let _ids = [];
 
@@ -421,6 +336,144 @@ class TnrXHR {
                     Tnr.endBulkActions(obj);
                 }
             });
+        } else {
+            Tnr.warningAlert('Warning', 'Please select the elements that you want to manage');
+        }
+    }
+
+    setContactFormLabel(obj) {
+        Tnr.block();
+
+        const _form_id = obj.data('id');
+        const _label_id = obj.data('label-id');
+
+        $.ajax({
+            url: obj.data('route'),
+            type: 'PUT',
+            data: {
+                "form_id": _form_id,
+                "label_id": _label_id,
+            },
+            success: function(response) {
+                $("#labels-" + _form_id).html(response.labels);
+
+                Tnr.unblock();
+
+                toastr.success(response.message);
+            },
+            error: function(xhr, status, error) {
+                Tnr.unblock();
+
+                Tnr.errorAlert(xhr.responseJSON.message, error);
+            }
+        });
+    }
+
+    bulkSetContactFormLabel(obj) {
+        let _ids = [];
+        const _label_id = obj.data('label-id');
+        const $targets = $(obj.data('targets'));
+
+        $targets.each(function() {
+            if ($(this).prop('checked')) {
+                _ids.push($(this).val());
+            }
+        });
+
+        if(_ids.length > 0) {
+            Tnr.block();
+
+            $.ajax({
+                url: obj.data('route'),
+                type: 'PUT',
+                data: {
+                    "form_id": _ids,
+                    "label_id": _label_id,
+                },
+                success: function(response) {
+                    // Iterate over each label in the 'response.labels' array and transform them into a new array of objects
+                    const labelsHtml = response.labels.map(label => {
+                        // Convert each label object into an array of its key-value pairs
+                        const _entries = Object.entries(label);
+                        // Return a new object containing the first key-value pair from the label object
+                        return { id: _entries[0][0], value: _entries[0][1] };
+                    });
+
+                    // Iterate over each object in the created 'labelsHtml' array
+                    labelsHtml.forEach(label => {
+                        // Update the HTML content of elements with IDs matching 'labels-{label.id}'
+                        $("#labels-" + label.id).html(label.value);
+                    });
+
+                    Tnr.unblock();
+
+                    toastr.success(response.message);
+                },
+                error: function(xhr, status, error) {
+                    Tnr.unblock();
+
+                    Tnr.errorAlert(xhr.responseJSON.message, error);
+                }
+            });
+
+            Tnr.endBulkActions(obj);
+        } else {
+            Tnr.warningAlert('Warning', 'Please select the elements that you want to manage');
+        }
+    }
+
+    bulkMarkContactsAsRead(obj) {
+        let _ids = [];
+
+        $(obj.data('targets')).each(function() {
+            if($(this).prop('checked')) {
+                _ids.push($(this).val());
+            }
+        });
+
+        if(_ids.length > 0) {
+            Tnr.block();
+
+            const _data_value = obj.data('value');
+            let _attribute = obj.data('attribute');
+            let _model = obj.data('model');
+
+            let _css_toggle = obj.data('css-toggle');
+
+            $.ajax({
+                type: 'PATCH',
+                url: obj.data('route'),
+                data: {
+                    "enabled" : _data_value,
+                    "id": _ids,
+                    "attribute": _attribute,
+                    "model": _model
+                },
+                success: function(data) {
+                    Tnr.unblock();
+
+                    if(data.status === 'success') {
+                        toastr.success(data.message);
+
+                        if(_css_toggle !== undefined) {
+                            const _css_toggle_parts = _css_toggle.split("|");
+
+                            _ids.forEach((_id) => {
+                                Tnr.toggleCSSClass(_css_toggle_parts[0], _css_toggle_parts[1], '#contact-row-' + _id);
+                            });
+                        }
+                    } else {
+                        toastr.warning(data.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Tnr.unblock();
+
+                    Tnr.errorAlert(xhr.responseJSON.message, error);
+                }
+            });
+
+            Tnr.endBulkActions(obj);
         } else {
             Tnr.warningAlert('Warning', 'Please select the elements that you want to manage');
         }

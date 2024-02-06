@@ -30,6 +30,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::patch('update-setting-value', [SettingsGeneralController::class, 'saveSettingValue'])->name('update-setting-value');
     Route::put('set-contact-form-label', [ContactController::class, 'setContactFormLabel'])->name('set-contact-form-label');
     Route::delete('bulk-delete-contacts', [ContactController::class, 'bulkDestroy'])->name('bulk-delete-contacts');
+    Route::put('bulk-set-contact-form-label', [ContactController::class, 'bulkSetContactFormLabel'])->name('bulk-set-contact-form-label');
 
     /*
      * Backend sections

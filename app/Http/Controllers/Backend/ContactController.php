@@ -72,6 +72,30 @@ class ContactController extends Controller
         return $output;
     }
 
+    public function bulkSetContactFormLabel(Request $request)
+    {
+        $response_labels = [];
+
+        foreach($request->form_id as $id) {
+            $request = Request::create('/', 'POST', [
+                'form_id' => $id,
+                'label_id' => $request->label_id
+            ]);
+
+            $this->setContactFormLabel($request);
+
+            $response_labels[] = [
+                $id => $this->parseLabels($id)
+            ];
+        }
+
+        return response([
+            'status' => 'success',
+            'message' => 'Labels were updated successfully!',
+            'labels' => $response_labels
+        ]);
+    }
+
     public function setContactFormLabel(Request $request)
     {
         $contact = Contact::find($request->form_id);
