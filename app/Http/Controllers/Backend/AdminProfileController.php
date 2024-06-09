@@ -74,15 +74,16 @@ class AdminProfileController extends Controller
         return redirect()->route('admin.profile.'.$request->section)->with('success', 'Details updated successfully');
     }
 
-    private function updateAvatar($request, $avatarName, $adminProfile, &$validated_array)
+    private function updateAvatar($request, $avatar_type, $adminProfile, &$validated_array)
     {
-        $validated_array[$avatarName] = $this->uploadFile($request, $avatarName, 'avatars', 'public');
+        $validated_array[$avatar_type] = $this->uploadFile($request, $avatar_type, 'avatars', 'public');
 
-        if($validated_array[$avatarName]) {
-            $avatarPath = $adminProfile->$avatarName;
+        if($validated_array[$avatar_type]) {
+            $avatar_path = $adminProfile->$avatar_type;
 
-            if($adminProfile && $avatarPath && Storage::disk('public')->exists($avatarPath)) {
-                $this->deleteFile($avatarPath, 'public');
+            // delete previous avatar image file, if is set and exists
+            if($adminProfile && $avatar_path && Storage::disk('public')->exists($avatar_path)) {
+                $this->deleteFile($avatar_path, 'public');
             }
         }
     }
