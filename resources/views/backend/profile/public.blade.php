@@ -74,6 +74,10 @@
                                     <input type="file" name="public_avatar" id="public_avatar" class="custom-file-input">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
+
+                                @error('public_avatar')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

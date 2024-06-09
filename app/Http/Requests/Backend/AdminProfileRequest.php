@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class AdminProfileRequest extends FormRequest
 {
@@ -25,10 +26,18 @@ class AdminProfileRequest extends FormRequest
             'firstname' => 'required_if:section,personal|string',
             'lastname' => 'required_if:section,personal|string',
             'phone' => 'required_if:section,personal|string',
+            'avatar' => [
+                'sometimes',
+                File::image()->max(2048)->extensions(['jpg', 'jpeg', 'png']),
+            ],
 
             'public_name' => 'required_if:section,public|string',
             'public_email' => 'required_if:section,public|email',
             'public_phone' => 'required_if:section,public|string',
+            'public_avatar' => [
+                'sometimes',
+                File::image()->max(2048)->extensions(['jpg', 'jpeg', 'png']),
+            ],
         ];
     }
 

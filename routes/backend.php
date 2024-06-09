@@ -47,11 +47,13 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
 
     // Admin user profile
     Route::controller(AdminProfileController::class)->group(function() {
+        Route::put('profile', 'updateProfile')->name('profile.update');
+
         foreach(AdminProfileController::profileSections() as $profile_section_key=>$profile_section_properties) {
             Route::get('profile/'.$profile_section_key, $profile_section_key)->name('profile.'.$profile_section_key);
         }
 
-        Route::put('profile', 'updateProfile')->name('profile.update');
+
     });
 
     // Contacts

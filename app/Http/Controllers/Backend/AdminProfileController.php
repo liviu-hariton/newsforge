@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\AdminProfileRequest;
 use App\Models\User;
 use App\Traits\FileDelete;
-use Illuminate\Http\Request;
+use App\Traits\FileUpload;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProfileController extends Controller
 {
-    use FileDelete;
+    use FileDelete, FileUpload;
 
     /**
      * Get the available sections for the admin user profile
@@ -57,18 +58,32 @@ class AdminProfileController extends Controller
     {
         $validated = $request->validated();
 
+        $user = auth()->user();
+        $admin_profile = $user->adminProfile;
+
         if($request->hasFile('avatar')) {
-            $validated['avatar'] = $this->uploadFile($request, 'avatar', 'avatars', 'public');
+            $this->updateAvatar($request, 'avatar', $admin_profile, $validated);
         }
 
         if($request->hasFile('public_avatar')) {
-            $validated['public_avatar'] = $this->uploadFile($request, 'public_avatar', 'avatars', 'public');
+            $this->updateAvatar($request, 'public_avatar', $admin_profile, $validated);
         }
 
-        $user = User::find(auth()->user()->id);
-
-        $user->adminProfile()->updateOrCreate([], $validated);
+        $admin_profile->updateOrCreate([], $validated);
 
         return redirect()->route('admin.profile.'.$request->section)->with('success', 'Details updated successfully');
+    }
+
+    private function updateAvatar($request, $avatarName, $adminProfile, &$validated_array)
+    {
+        $validated_array[$avatarName] = $this->uploadFile($request, $avatarName, 'avatars', 'public');
+
+        if($validated_array[$avatarName]) {
+            $avatarPath = $adminProfile->$avatarName;
+
+            if($adminProfile && $avatarPath && Storage::disk('public')->exists($avatarPath)) {
+                $this->deleteFile($avatarPath, 'public');
+            }
+        }
     }
 }
