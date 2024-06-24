@@ -7,7 +7,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>The Newsroom - Admin</title>
+    <title>NEWSFORGE - Admin</title>
 
     <meta name="theme-name" content="thenewsroom" />
 

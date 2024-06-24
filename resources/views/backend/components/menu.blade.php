@@ -4,7 +4,7 @@
         <div class="app-brand">
             <a href="{{ route('admin.dashboard') }}">
                 <img src="{{ asset('backend/images/logo.png') }}" alt="Mono">
-                <span class="brand-name">The Newsroom</span>
+                <span class="brand-name">NEWSFORGE</span>
             </a>
         </div>
 
