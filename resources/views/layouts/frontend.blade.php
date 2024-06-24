@@ -11,13 +11,21 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link href="https://fonts.googleapis.com/css?family=Barlow:300,400,700|Libre+Franklin:400,600,700|Poppins:400,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('frontend/plugins/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/plugins/bootstrap-icons/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/plugins/slick-carousel/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/plugins/slick-carousel/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
+
     @include('frontend.components.favicon')
 
     <script>
         const _locale = '{{ str_replace('_', '-', app()->getLocale()) }}';
     </script>
-
-    @vite(['resources/css/frontend.css'])
 
     <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
 </head>
@@ -67,9 +75,18 @@
     </form>
 @endauth
 
-@vite([
-    'resources/js/frontend.js',
-    'resources/js/frontend/plugins/jquery-validation/dist/localization/messages_'.str_replace('_', '-', app()->getLocale()).'.js'])
+<script src="{{ asset('frontend/plugins/jquery/jquery.js') }}"></script>
+
+<script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
+
+<script src="{{ asset('frontend/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/slick-carousel/slick.min.js') }}"></script>
+
+<script src="{{ asset('frontend/plugins/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/jquery-validation/dist/additional-methods.js') }}"></script>
+<script src="{{ asset('frontend/plugins/jquery-validation/dist/localization/messages_'.str_replace('_', '-', app()->getLocale()).'.js') }}"></script>
+
+<script src="{{ asset('frontend/js/custom.js') }}"></script>
 
 @stack('scripts')
 </body>
