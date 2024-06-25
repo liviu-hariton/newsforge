@@ -1,5 +1,8 @@
-<IfModule mod_pagespeed.c>
+<IfModule pagespeed_module>
+    #AddOutputFilterByType MOD_PAGESPEED_OUTPUT_FILTER text/html
+    #ModPagespeed on
     ModPagespeed unplugged
+    #ModPagespeedDisallow "some/path/"
 </IfModule>
 
 <IfModule mod_rewrite.c>
