@@ -23,6 +23,8 @@ class BackendController extends Controller
         $model::whereIn('id', $ids)
             ->update([$request->attribute => $request->enabled]);
 
+        $this->forceClearCache($model);
+
         return response([
             'status' => 'success',
             'message' => 'Attribute has been successfully updated!'
