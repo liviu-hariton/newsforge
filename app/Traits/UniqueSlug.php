@@ -10,7 +10,7 @@ trait UniqueSlug
     public static function bootUniqueSlug(): void
     {
         static::saving(function($model) {
-            $slug_separator = self::$slug_separator ?? '-';
+            $slug_separator = self::$slug_separator ?? '_';
 
             if(isset($model->slug)) {
                 $model->slug = $model->generateUniqueSlug($model->slug, $slug_separator);
