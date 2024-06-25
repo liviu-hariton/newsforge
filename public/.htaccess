@@ -1,4 +1,6 @@
-ModPagespeed unplugged
+<IfModule mod_pagespeed.c>
+    ModPagespeed unplugged
+</IfModule>
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
